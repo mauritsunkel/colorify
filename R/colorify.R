@@ -1,3 +1,4 @@
+# TODO check FINAL 
 # TODO recreate
 # RColorBrewer::brewer.pal.info
 ## TODO enable showing palettes based on types etc 
@@ -45,18 +46,23 @@
 
 
 # TODO tolower() to palette_mapping()
-# TODO circlize::colorRamp2 style
 
+# TODO check how ggplot scale_continuous returns colors
+#' TODO add @param colors_breakpoints & @param ... to pass arguments to grDevices::colorRamp(Palette)
+# TODO circlize::colorRamp2 style
 # TODO gradient_n
 ## single: gradient
 ## length(colors) - 1: paired gradients
 ## length(colors) == length(gradient) Breakpoints mapping
-# TODO use ... to set gradient_space and gradient_interpolate, make notes in documentation, maybe same for rev/alpha
-# TODO check how ggplot scale_continuous returns colors
-#' TODO add @param colors_breakpoints & @param ... to pass arguments to grDevices::colorRamp(Palette)
 
 
-# TODO make order of calling RGB/HSL values/factors matter 
+
+
+
+
+
+
+
 
 
 #' Create and/or modify color/gradient palettes
@@ -68,8 +74,6 @@
 #' @param colors_lock default: rep(FALSE, length(colors), numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n %% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern
 #'
 #' @param gradient_n default: n, else integer, amount of colors to output as gradient, after completing palette for n colors
-#' @param gradient_space default: "rgb", else "Lab", see ?grDevices::colorRamp()
-#' @param gradient_interpolate default: "linear", else "spline", see ? grDevices::colorRamp()
 #' 
 #' @param hf hue factor, default: 1, multiply values by factor, proportional to base value of 1
 #' @param sf saturation factor, default: 1, multiply values by factor, proportional to base value of 1
@@ -120,6 +124,10 @@
 #' 
 #' All grDevices plotting functions are provided as palettes, simply use colors = "rainbow", "heat", "terrain", "topo" or "cm".
 #' 
+#' Use ... to set space and interpolate for colorRampPalette()
+#' 
+#' NOTE colorify call order matters: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
+#' 
 #' TODO add description
 #'
 #'
@@ -141,7 +149,7 @@
 #' colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = T, n = 10)
 #' 
 #' ## no adjustments to locked indices 
-#' TODO more examples
+#' FINAL more examples
 #' colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = -300)
 #' colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = 300)
 #' 
@@ -167,11 +175,10 @@
 #' colorify(10, plot = TRUE, order = -3) # negative shift
 #' colorify(10, plot = TRUE, order = 12) # > n
 #' 
-#' TODO rgb, hsl examples
-#' TODO all parameter examples
+#' FINAL rgb, hsl examples
+#' FINAL all parameter examples
 colorify <- function(
-    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_breakpoints = numeric(0),
-    gradient_n = n, gradient_space = c("rgb", "Lab"), gradient_interpolate = c("linear", "spline"),
+    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_breakpoints = numeric(0), gradient_n = n,
     hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
     hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
     hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
@@ -187,8 +194,6 @@ colorify <- function(
     is.logical(export) | is.character(plot),
     is.null(colors_lock) | is.logical(colors_lock) | is.numeric(colors_lock)
   )
-  gradient_space <- match.arg(gradient_space, choices = c("rgb", "Lab"))
-  gradient_interpolate <- match.arg(gradient_interpolate, choices = c("linear", "spline"))
   
   ## set generation seed
   set.seed(round(seed))
@@ -233,7 +238,7 @@ colorify <- function(
   }
   
   ## create gradient of set and/or generated colors
-  if (gradient_n > n & ! length(colors_breakpoints) > 0) colors <- grDevices::colorRampPalette(colors, space = gradient_space, interpolate = gradient_interpolate, ...)(gradient_n)
+  if (gradient_n > n & ! length(colors_breakpoints) > 0) colors <- grDevices::colorRampPalette(colors, ...)(gradient_n)
   
   if (length(colors) == 0) stop("Input starting colors, palette name, or n colors to generate.")
   
@@ -257,75 +262,49 @@ colorify <- function(
   }
   colors_lock_i <- ! colors_lock_i
   
-  # TODO make order of calling RGB/HSL values/factors matter 
-  # call_order <- names(as.list(sys.call()))
-  # print(call_order)
-  
-  ## switch case
-  ### TODO think if need initialize of hsv_values, or just change if not NULL 
-  ### TODO think if between conversion rgb -> hsv and hsv -> goes well, also, ask and check hsv2rgb function again
-  # Initialize HSV values (lazy conversion)
-  # hsv_values <- NULL
-  # 
-  # # Process each argument in the order it was passed
-  # for (param in call_names) {
-  #   switch(param,
-  #          # RGB Adjustments
-  #          "rv" = { rgb_values[1, ] <- pmax(rmin, pmin(rmax, rgb_values[1, ] + rv)) },
-  #          "gv" = { rgb_values[2, ] <- pmax(gmin, pmin(gmax, rgb_values[2, ] + gv)) },
-  #          "bv" = { rgb_values[3, ] <- pmax(bmin, pmin(bmax, rgb_values[3, ] + bv)) },
-  #          "rf" = { rgb_values[1, ] <- pmax(rmin, pmin(rmax, rgb_values[1, ] * rf)) },
-  #          "gf" = { rgb_values[2, ] <- pmax(gmin, pmin(gmax, rgb_values[2, ] * gf)) },
-  #          "bf" = { rgb_values[3, ] <- pmax(bmin, pmin(bmax, rgb_values[3, ] * bf)) },
-  #          
-  #          # HSV Adjustments
-  #          {
-  #            # Ensure HSV values are calculated if they are modified
-  #            if (is.null(hsv_values)) {
-  #              hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 100) * 100
-  #            }
-  #            
-  #            switch(param,
-  #                   "hv" = { hsv_values["h", ] <- pmax(hmin, pmin(hmax, hsv_values["h", ] + hv)) },
-  #                   "sv" = { hsv_values["s", ] <- pmax(smin, pmin(smax, hsv_values["s", ] + sv)) },
-  #                   "lv" = { hsv_values["v", ] <- pmax(lmin, pmin(lmax, hsv_values["v", ] + lv)) },
-  #                   "hf" = { hsv_values["h", ] <- pmax(hmin, pmin(hmax, hsv_values["h", ] * hf)) },
-  #                   "sf" = { hsv_values["s", ] <- pmax(smin, pmin(smax, hsv_values["s", ] * sf)) },
-  #                   "lf" = { hsv_values["v", ] <- pmax(lmin, pmin(lmax, hsv_values["v", ] * lf)) }
-  #            )
-  #            
-  #            # After any HSV modification, update RGB values
-  #            rgb_values <- hsv2rgb(hsv_values["h", ], hsv_values["s", ], hsv_values["v", ]) * 255
-  #          }
-  #   )
-  # }
-  # 
-  # # Convert HSV back to HEX color
-  # hsv_values <- hsv_values / 100  # Normalize back to 0-1
-  # colors <- hsv(hsv_values["h", ], hsv_values["s", ], hsv_values["v", ], alpha = alpha)
-  
-  
-  ## convert hex or R color names to RGB to HSV
+  ## initialize color space
   rgb_values <- col2rgb(colors) / 255 * 100 # scale values intuitively between 0-100 
-  ## adjust values within RGB range
-  if (rv != 0) rgb_values[1, ][colors_lock_i] <- pmax(rmin, pmin(rmax, rgb_values[1, ][colors_lock_i] + rv))
-  if (gv != 0) rgb_values[2, ][colors_lock_i] <- pmax(gmin, pmin(gmax, rgb_values[2, ][colors_lock_i] + gv))
-  if (bv != 0) rgb_values[3, ][colors_lock_i] <- pmax(bmin, pmin(bmax, rgb_values[3, ][colors_lock_i] + bv))
-  if (rf != 1) rgb_values[1, ][colors_lock_i] <- pmax(rmin, pmin(rmax, rgb_values[1, ][colors_lock_i] * rf))
-  if (gf != 1) rgb_values[2, ][colors_lock_i] <- pmax(gmin, pmin(gmax, rgb_values[2, ][colors_lock_i] * gf))
-  if (bf != 1) rgb_values[3, ][colors_lock_i] <- pmax(bmin, pmin(bmax, rgb_values[3, ][colors_lock_i] * bf))
-  ## RGB to HSV
-  hsv_values <- rgb2hsv(rgb_values[1,], rgb_values[2,], rgb_values[3,], maxColorValue = 100) * 100 # scale values intuitively between 0-100 
-  ## adjust values within HSV range
-  if (hv != 0) hsv_values["h", ][colors_lock_i] <- pmax(hmin, pmin(hmax, hsv_values["h", ][colors_lock_i] + hv))
-  if (sv != 0) hsv_values["s", ][colors_lock_i] <- pmax(smin, pmin(smax, hsv_values["s", ][colors_lock_i] + sv))
-  if (lv != 0) hsv_values["v", ][colors_lock_i] <- pmax(lmin, pmin(lmax, hsv_values["v", ][colors_lock_i] + lv))
-  if (hf != 1) hsv_values["h", ][colors_lock_i] <- pmax(hmin, pmin(hmax, hsv_values["h", ][colors_lock_i] * hf))
-  if (sf != 1) hsv_values["s", ][colors_lock_i] <- pmax(smin, pmin(smax, hsv_values["s", ][colors_lock_i] * sf))
-  if (lf != 1) hsv_values["v", ][colors_lock_i] <- pmax(lmin, pmin(lmax, hsv_values["v", ][colors_lock_i] * lf))
-  ## convert back to hex
-  hsv_values <- hsv_values / 100 # scale values back between 0-1 for hsv() expected values
-  colors <- hsv(hsv_values["h",], hsv_values["s",], hsv_values["v",], alpha = alpha)
+  call_mode <- "rgb"
+  call_order <- names(as.list(sys.call()))
+  call_order <- call_order[nzchar(call_order)]
+  ## colorify call order matters: for each call, convert color space when switching modes, then apply value changes
+  for (call in call_order) {
+    if (call %in% c("rv", "gv", "bv", "rf", "gf", "bf")) {
+      if (call_mode == "hsv") {
+        call_mode <- "rgb"
+        rgb_values <- hsv2rgb(hsv_values["h", ], hsv_values["s", ], hsv_values["v", ], maxColorValue = 100)
+      }
+      switch(call,
+             "rv" = rgb_values[1, ][colors_lock_i] <- pmax(rmin, pmin(rmax, rgb_values[1, ][colors_lock_i] + rv)),
+             "gv" = rgb_values[2, ][colors_lock_i] <- pmax(gmin, pmin(gmax, rgb_values[2, ][colors_lock_i] + gv)),
+             "bv" = rgb_values[3, ][colors_lock_i] <- pmax(bmin, pmin(bmax, rgb_values[3, ][colors_lock_i] + bv)),
+             "rf" = rgb_values[1, ][colors_lock_i] <- pmax(rmin, pmin(rmax, rgb_values[1, ][colors_lock_i] * rf)),
+             "gf" = rgb_values[2, ][colors_lock_i] <- pmax(gmin, pmin(gmax, rgb_values[2, ][colors_lock_i] * gf)),
+             "bf" = rgb_values[3, ][colors_lock_i] <- pmax(bmin, pmin(bmax, rgb_values[3, ][colors_lock_i] * bf))
+      )
+    } else if (call %in% c("hv", "sv", "lv", "hf", "sf", "lf")) {
+      if (call_mode == "rgb") {
+        call_mode <- "hsv"
+        hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 100) * 100 # scale values intuitively between 0-100 
+      }
+      switch(call,
+             "hv" = hsv_values["h", ][colors_lock_i] <- pmax(hmin, pmin(hmax, hsv_values["h", ][colors_lock_i] + hv)),
+             "sv" = hsv_values["s", ][colors_lock_i] <- pmax(smin, pmin(smax, hsv_values["s", ][colors_lock_i] + sv)),
+             "lv" = hsv_values["v", ][colors_lock_i] <- pmax(lmin, pmin(lmax, hsv_values["v", ][colors_lock_i] + lv)),
+             "hf" = hsv_values["h", ][colors_lock_i] <- pmax(hmin, pmin(hmax, hsv_values["h", ][colors_lock_i] * hf)),
+             "sf" = hsv_values["s", ][colors_lock_i] <- pmax(smin, pmin(smax, hsv_values["s", ][colors_lock_i] * sf)),
+             "lf" = hsv_values["v", ][colors_lock_i] <- pmax(lmin, pmin(lmax, hsv_values["v", ][colors_lock_i] * lf))
+      )
+    }
+  } 
+  ## finally: set hexcolor based on last color space and update rgb and hsv spaces for potential exporting
+  if (call_mode == "hsv") {
+    colors <- hsv(hsv_values["h", ] / 100, hsv_values["s", ] / 100, hsv_values["v", ] / 100, alpha = alpha)
+  } else if (call_mode == "rgb") {
+    colors <- rgb(rgb_values[1, ] / 100, rgb_values[2, ] / 100, rgb_values[3, ] / 100, alpha = alpha)
+  }
+  rgb_values <- col2rgb(colors)
+  hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 255)
   
   ## set names
   if (length(colors_names) == length(colors)) {

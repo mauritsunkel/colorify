@@ -12,8 +12,6 @@ colorify(
   colors_names = character(0),
   colors_breakpoints = numeric(0),
   gradient_n = n,
-  gradient_space = c("rgb", "Lab"),
-  gradient_interpolate = c("linear", "spline"),
   hf = 1,
   sf = 1,
   lf = 1,
@@ -55,10 +53,6 @@ colorify(
 \item{colors_lock}{default: rep(FALSE, length(colors), numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n \%\% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern}
 
 \item{gradient_n}{default: n, else integer, amount of colors to output as gradient, after completing palette for n colors}
-
-\item{gradient_space}{default: "rgb", else "Lab", see ?grDevices::colorRamp()}
-
-\item{gradient_interpolate}{default: "linear", else "spline", see ? grDevices::colorRamp()}
 
 \item{hf}{hue factor, default: 1, multiply values by factor, proportional to base value of 1}
 
@@ -132,6 +126,10 @@ All RColorBrewer and Viridis palettes are included.
 
 All grDevices plotting functions are provided as palettes, simply use colors = "rainbow", "heat", "terrain", "topo" or "cm".
 
+Use ... to set space and interpolate for colorRampPalette()
+
+NOTE colorify call order matters: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
+
 TODO add description
 }
 \details{
@@ -155,7 +153,7 @@ colorify(colors = "viridis", n = 10, plot = TRUE, l = .9)
 colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = T, n = 10)
 
 ## no adjustments to locked indices 
-TODO more examples
+FINAL more examples
 colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = -300)
 colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = 300)
 
@@ -181,6 +179,6 @@ colorify(10, plot = TRUE, order = -1) # reverse
 colorify(10, plot = TRUE, order = -3) # negative shift
 colorify(10, plot = TRUE, order = 12) # > n
 
-TODO rgb, hsl examples
-TODO all parameter examples
+FINAL rgb, hsl examples
+FINAL all parameter examples
 }
