@@ -2,3 +2,5 @@
 
 export(colorify)
 export(display_palettes)
+export(hex2rgba)
+export(hsv2rgb)

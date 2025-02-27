@@ -2,15 +2,14 @@
 % Please edit documentation in R/colorify.R
 \name{colorify}
 \alias{colorify}
-\title{TODO add @param colors_breakpoints & @param ... to pass arguments to grDevices::colorRamp(Palette)
-Create and/or modify color/gradient palettes}
+\title{Create and/or modify color/gradient palettes}
 \usage{
 colorify(
   n = NULL,
   colors = character(0),
   colors_lock = NULL,
   colors_names = character(0),
-  colors_breakpoints = numeric(0),
+  colors_map = numeric(0),
   gradient_n = n,
   hf = 1,
   sf = 1,
@@ -50,9 +49,13 @@ colorify(
 
 \item{colors}{character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes}
 
-\item{colors_lock}{default: rep(FALSE, length(colors), numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n \%\% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern}
+\item{colors_lock}{numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n \%\% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern}
 
-\item{gradient_n}{default: n, else integer, amount of colors to output as gradient, after completing palette for n colors}
+\item{colors_names}{character, default: character(0), else return named vector of final colors}
+
+\item{colors_map}{numeric, default numeric(0), else vector of n values for colors to make gradient map between and return function}
+
+\item{gradient_n}{integer (vector), default: n, else amount(s) of colors to output as gradient, after completing palette for n colors}
 
 \item{hf}{hue factor, default: 1, multiply values by factor, proportional to base value of 1}
 
@@ -143,6 +146,10 @@ colorify(10, plot = TRUE, seed = 42)
 colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 ## create gradients
 colorify(colors = c("orange", "red", "white", "blue", "orange"), gradient_n = 100, plot = TRUE)
+## paired gradients
+gradient_n <- c(100, 500, 250)
+colors <- colorify(colors = colorify(4), gradient_n = gradient_n, plot = T)
+
 
 ## viridis gradient, lighten and saturate, darken
 colorify(colors = "viridis", n = 100, plot = TRUE)
@@ -178,6 +185,14 @@ colorify(10, plot = TRUE, order = 0)  # random
 colorify(10, plot = TRUE, order = -1) # reverse
 colorify(10, plot = TRUE, order = -3) # negative shift
 colorify(10, plot = TRUE, order = 12) # > n
+
+
+## circlize::colorRamp2  
+colors_map <- c(-5, 0, 10)
+colors <- c("red", "white", "blue")
+if (requireNamespace('circlize')) color_bar <- circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
+color_bar <- colorify(colors = colors, colors_map = colors_map, space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
+image(1:100, 1, as.matrix(1:100), col = color_bar, axes = FALSE, main = "Color Mapping using circlize::colorRamp2")
 
 FINAL rgb, hsl examples
 FINAL all parameter examples
