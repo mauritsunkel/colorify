@@ -1,4 +1,13 @@
 # TODO check FINAL 
+
+# TODO Rtistry
+## be able to loop Colorify to create rectangular palette displays 
+## modulo 2/3/... == 0,1,2 do something else (change lock and modification patterns)
+## change parameter, plot rectangles (functionize to easily plot 'gradients' of parameter changes, accept parameter ranges and step e.g. h = c(1:20,2))
+# TODO what if runif in hsl space
+## TODO if colors already given, see if runif() generator can plot other colors theoretically distinct from gives ones 
+# image(1:n,1,as.matrix(1:n),col=RColorBrewer::brewer.pal(n,name), xlab=paste(name,palattr),ylab="",xaxt="n",yaxt="n",bty="n")
+
 # TODO recreate
 # RColorBrewer::brewer.pal.info
 ## TODO enable showing palettes based on types etc 
@@ -8,6 +17,7 @@
 
 # TODO mention package at https://stackoverflow.com/questions/15282580/how-to-generate-a-number-of-most-distinctive-colors-in-r and more in stackoverflow
 # TODO link documentations
+# TODO clarify docs
 # TODO Github pages/Shiny color picker/palette creator
 
 # TODO colorblind: Viridis for continuous, Okabe-Ito for discrete, more?  
@@ -30,30 +40,25 @@
 ## rcartocolor
 ## ggsci
 
-# TODO check scale_continuous need for colour output (need of function as output?)
-# TODO gradient_n = Inf for continuous?, check scale_continuous
 
-# TODO Rtistry
-## be able to loop Colorify to create rectangular palette displays 
-## modulo 2/3/... == 0,1,2 do something else (change lock and modification patterns)
-## change parameter, plot rectangles (functionize to easily plot 'gradients' of parameter changes, accept parameter ranges and step e.g. h = c(1:20,2))
-# TODO what if runif in hsl space
-## TODO if colors already given, see if runif() generator can plot other colors theoretically distinct from gives ones 
 
-# image(1:n,1,as.matrix(1:n),col=RColorBrewer::brewer.pal(n,name), xlab=paste(name,palattr),ylab="",xaxt="n",yaxt="n",bty="n")
+
+
+
+
+# TODO if given colors and values, return mapped values between colors (like breakpoints) (maybe given through breakpoints if longer then 3?)
+## maybe auto check for 0 to pos, neg to o, and neg to 0 to pos 
 
 # TODO in display: separate palette names from indices parameter 
-
-
 # TODO tolower() to palette_mapping()
+# TODO allow shortened names matching palettes
 
+# TODO check viridis package to ggplot2 bindings
+# TODO check scale_continuous need for colour output (need of function as output?)
+# TODO gradient_n = Inf for continuous?, check scale_continuous
 # TODO check how ggplot scale_continuous returns colors
-#' TODO add @param colors_breakpoints & @param ... to pass arguments to grDevices::colorRamp(Palette)
-# TODO circlize::colorRamp2 style
-# TODO gradient_n
-## single: gradient
-## length(colors) - 1: paired gradients
-## length(colors) == length(gradient) Breakpoints mapping
+
+# TODO plot options: no labels, image variant 
 
 
 
@@ -64,6 +69,10 @@
 
 
 
+
+
+
+#### DOCS ----
 
 #' Create and/or modify color/gradient palettes
 #'
@@ -71,9 +80,11 @@
 #'
 #' @param n default: NULL, else integer, amount of colors to create, if palette selected and more colors requested they will be generated
 #' @param colors character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes
-#' @param colors_lock default: rep(FALSE, length(colors), numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n %% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern
+#' @param colors_lock numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n %% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern
+#' @param colors_names character, default: character(0), else return named vector of final colors
+#' @param colors_map numeric, default numeric(0), else vector of n values for colors to make gradient map between and return function
 #'
-#' @param gradient_n default: n, else integer, amount of colors to output as gradient, after completing palette for n colors
+#' @param gradient_n integer (vector), default: n, else amount(s) of colors to output as gradient, after completing palette for n colors
 #' 
 #' @param hf hue factor, default: 1, multiply values by factor, proportional to base value of 1
 #' @param sf saturation factor, default: 1, multiply values by factor, proportional to base value of 1
@@ -139,6 +150,10 @@
 #' colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 #' ## create gradients
 #' colorify(colors = c("orange", "red", "white", "blue", "orange"), gradient_n = 100, plot = TRUE)
+#' ## paired gradients
+#' gradient_n <- c(100, 500, 250)
+#' colors <- colorify(colors = colorify(4), gradient_n = gradient_n, plot = T)
+#' 
 #' 
 #' ## viridis gradient, lighten and saturate, darken
 #' colorify(colors = "viridis", n = 100, plot = TRUE)
@@ -175,10 +190,19 @@
 #' colorify(10, plot = TRUE, order = -3) # negative shift
 #' colorify(10, plot = TRUE, order = 12) # > n
 #' 
+#' 
+#' ## circlize::colorRamp2  
+#' colors_map <- c(-5, 0, 10)
+#' colors <- c("red", "white", "blue")
+#' if (requireNamespace('circlize')) color_bar <- circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
+#' color_bar <- colorify(colors = colors, colors_map = colors_map, space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
+#' image(1:100, 1, as.matrix(1:100), col = color_bar, axes = FALSE, main = "Color Mapping using circlize::colorRamp2")
+#' 
 #' FINAL rgb, hsl examples
 #' FINAL all parameter examples
 colorify <- function(
-    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_breakpoints = numeric(0), gradient_n = n,
+    #### colorify FINAL remove ---- 
+    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), gradient_n = n,
     hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
     hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
     hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
@@ -187,7 +211,7 @@ colorify <- function(
   
   stopifnot(
     is.character(c(colors, colors_names)),
-    is.numeric(c(colors_breakpoints, hf, sf, lf, rf, gf, bf, hv, sv, lv, rv, gv, bv, alpha, seed, order)),
+    is.numeric(c(colors_map, hf, sf, lf, rf, gf, bf, hv, sv, lv, rv, gv, bv, alpha, seed, order)),
     is.null(n) | is.numeric(n),
     is.null(gradient_n) | is.numeric(gradient_n),
     is.logical(plot),
@@ -199,7 +223,7 @@ colorify <- function(
   set.seed(round(seed))
   
   alpha <- max(0, min(1, alpha))
-  gradient_n <- ifelse(is.null(gradient_n), length(colors), max(0, round(gradient_n)))
+  gradient_n <- if (is.null(gradient_n)) length(colors) else pmax(0, round(gradient_n))
   
   ## add named palette(s) to colors
   colors <- unname(unlist(sapply(colors, function(color) {
@@ -232,27 +256,25 @@ colorify <- function(
     if (verbose) message(n-length(colors), " colors generated")
     ## generate theoretically distinct RGB values and convert to hexcodes
     rgb_matrix <- matrix(runif((n-length(colors)) * 3, min = 0, max = 255), ncol = 3)
-    colors <- c(colors, apply(rgb_matrix, 1, function(rgbv) {
-      rgb(rgbv[1], rgbv[2], rgbv[3], maxColorValue = 255)
-    }))
+    colors <- c(colors, apply(rgb_matrix, 1, function(rgbv) rgb(rgbv[1], rgbv[2], rgbv[3], maxColorValue = 255)))
   }
   
-  ## create gradient of set and/or generated colors
-  if (gradient_n > n & ! length(colors_breakpoints) > 0) colors <- grDevices::colorRampPalette(colors, ...)(gradient_n)
+  ## set (paired) gradient colors
+  if (length(gradient_n) == 1 & gradient_n[1] > n & ! length(colors_map) > 0) colors <- grDevices::colorRampPalette(colors, ...)(gradient_n)
+  else if (length(gradient_n) == length(colors) - 1) colors <- unlist(sapply(seq_len(length(colors) - 1), function(i) grDevices::colorRampPalette(c(colors[i], colors[i+1]), ...)(gradient_n[i])))
+  else if (length(gradient_n) != 1 && length(gradient_n) != length(colors) - 1) stop('pass single gradient_n or n for each gradient between colors')
   
   if (length(colors) == 0) stop("Input starting colors, palette name, or n colors to generate.")
   
   ## set colors to be modified
-  if (is.null(colors_lock)) {
-    colors_lock = rep(FALSE, length(colors))
-  }
+  if (is.null(colors_lock)) colors_lock = rep(FALSE, length(colors))
   colors_lock_bool <- identical(substitute(colors_lock)[[1]], as.symbol("!")) | identical(substitute(colors_lock)[[1]], as.symbol("-"))
   if (is.numeric(colors_lock)) {
     colors_i <- 1:length(colors)
     colors_lock_i <- replace(rep(FALSE, length(colors)), colors_i[colors_lock], TRUE)
   } else { ## if logical
-    if (gradient_n > n & gradient_n %% length(colors_lock) == 0) {
-      colors_lock_i <- rep(colors_lock, gradient_n / length(colors_lock))
+    if (gradient_n[1] > n & gradient_n[1] %% length(colors_lock) == 0) {
+      colors_lock_i <- rep(colors_lock, gradient_n[1] / length(colors_lock))
     }
     else if (length(colors_lock) >= length(colors)) {
       colors_lock_i <- colors_lock[1:length(colors)]
@@ -307,11 +329,8 @@ colorify <- function(
   hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 255)
   
   ## set names
-  if (length(colors_names) == length(colors)) {
-    names(colors) <- colors_names
-  } else if (length(colors_names) != 0) {
-    warning("colors_names given: need same length as amount of requested colors")
-  }
+  if (length(colors_names) == length(colors)) names(colors) <- colors_names
+  else if (length(colors_names) != 0) warning("colors_names given: need same length as amount of requested colors")
   
   ## order colors
   if (length(order) > 2 & length(order) >= n) { # set custom order
@@ -335,282 +354,7 @@ colorify <- function(
     ifelse(isTRUE(export), write.csv2(df, file = file.path(getwd(), "colorify.csv")), write.csv2(df, file = file.path(export, "colorify.csv")))
   }
   
-  ## return color map function if breakpoints per color given
-  if (length(colors_breakpoints) > 0) {
-    return(colorify_map(colors = colors, breakpoints = colors_breakpoints, ...)) # TODO test , n_breakpoints = gradient_n
-  }
+  ## return color map function if colormap values map to colors
+  if (length(colors_map) > 0) return(colorify_map(colors = colors, colors_map = colors_map, ...))
   return(colors)
-}
-
-#' Shift colors order
-#'
-#' @param shift integer to shift colors order by
-#' @param colors hexcolors vector
-#' @param n length(colors)
-#'
-#' @returns ordered colors vector
-order_by_shift <- function(shift, colors, n) {
-  if (shift > 0) {
-    shift <- (shift - 1) %% n
-    if (shift == 0) return(colors)
-    return(c(colors[(shift + 1):n], colors[1:shift]))
-  } else { # shift <= 0
-    shift <- abs(shift) %% n
-    if (shift == 0) return(colors)
-    left_shift <- n - shift
-    return(c(colors[(left_shift + 1):n], colors[1:left_shift]))
-  }
-}
-
-
-#' Colorify colorRamp between colors mapping to breakpoint values
-#'
-#' @param colors hexcolor character vector
-#' @param breakpoints numeric vector matching colors per value
-#' @param ... to pass arguments to grDevices::colorRamp
-#'
-#' @description
-#' Note that breakpoints and colors will be ordered ascendingly by breakpoints values
-#'
-#' @returns function with colors and breaks attributes, can be called as function(c(values)) to return hexcolorcodes
-#'
-#' @examples
-#' map_f <- colorify_map(colors = c("white", "blue", "red"), breakpoints = c(0, 10, -5))
-#' colorify(colors=map_f(c(-1,0,2,3)), plot=T)
-colorify_map <- function(colors, breakpoints, ...) {
-  if (length(colors) != length(breakpoints)) stop("for color mapping: 'colors' and 'breakpoints' must be the same length.")
-  if (length(colors) < 2 | length(breakpoints) < 2) stop("You need at least two colors and two breakpoints.")
-  
-  ## order breakpoints and colors ascendingly, respectively
-  ord <- order(breakpoints)
-  breakpoints <- breakpoints[ord]
-  colors <- colors[ord]
-  
-  ## colorRamp per sequential color pair: map colors to interval [0, 1]
-  ramp_list <- lapply(seq_len(length(colors) - 1), function(i) colorRamp(c(colors[i], colors[i+1]), ...))
-  
-  colorify_mapped <- function(values) {
-    ## initialize mapped hexcolors
-    mapped_colors <- character(length(values))
-    ## for each value index, figure out where it belongs:
-    for (vi in seq_along(values)) {
-      value <- values[vi]
-      ## if below/above the first/last breakpoint, clamp to first/last color
-      if (value <= breakpoints[1]) {
-        mapped_colors[vi] <- colors[1]
-      } else if (value >= breakpoints[length(breakpoints)]) {
-        mapped_colors[vi] <- colors[length(colors)]
-      } else {
-        ## find ramp index of value between breakpoints
-        ri <- findInterval(value, breakpoints, left.open = TRUE)
-        ## scale value between interval [0, 1] for specific color ramp pair
-        scaled <- (value - breakpoints[ri]) / (breakpoints[ri + 1] - breakpoints[ri])
-        ## get rgb values of pecific color ramp pair by scaled value
-        # message(4, " ", ri)
-        rgb_val <- ramp_list[[ri]](scaled)
-        ## convert rgb to hexcolor
-        mapped_colors[vi] <- rgb(rgb_val[1], rgb_val[2], rgb_val[3], maxColorValue = 255)
-      }
-    }
-    return(mapped_colors)
-  }
-  
-  # TODO test
-  ## set n_breakpoints from smallest to largest value
-  # breaks <- seq(from = breakpoints[1], to = breakpoints[length(breakpoints)], length.out = n_breakpoints)
-  ## get mapped colors by breakpoints
-  # colors <- colorify_mapped(breaks)
-  #' @param n_breakpoints optional, default: 1000, else non-negative numeric value for amount of breakpoints
-  #' , n_breakpoints = 1000
-  
-  ## attach function attributes
-  attr(colorify_mapped, "breaks") <- breakpoints
-  attr(colorify_mapped, "colors") <- colors
-  return(colorify_mapped)
-}
-
-#' Display R grDevices palettes
-#'
-#' @param n integer, amount of colors to display
-#' @param i_palettes default: numeric vector as index/range for choosing palettes, or a combination of 'rcolorbrewer', 'viridis', 'rainbow' (grDevices Palettes) to show specific palettes
-#' @param border default: FALSE, if TRUE show color rectangle borders
-#'
-#' @export
-#'
-#' @return named vector with source and name of palettes, 'hcl' for grDevices::hcl.pals() and 'pal' for grDevices::palette.pals()
-#'
-#' @description
-#' Use colorify() to select and modify the palettes, see its documentation.
-#' Note that discrete palettes with maximum n colors will be repeated in plotting.
-#'
-#' Any numeric i_palettes over maximum amount of palettes are not displayed.
-#'
-#' Contains all Viridis palettes, including Turbo.
-#'
-#' @examples
-#' display_palettes()
-#' display_palettes(i_palettes = 50:75)
-#'
-#' display_palettes(i_palettes = 'RColorBrewer')
-#' display_palettes(i_palettes = 'Viridis')
-#' display_palettes(i_palettes = c("rainbow", "viridis"))
-#'
-#' display_palettes(i_palettes = c(1,5,10,20,40,100,119)
-#' display_palettes(n = 100, i_palettes = 1:10)
-#' display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
-display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
-  stopifnot(
-    is.numeric(n),
-    is.numeric(i_palettes) | is.character(i_palettes),
-    is.logical(border)
-  )
-  
-  ## get base R grDevices palettes
-  viridis_palette_names <- c("Viridis", "Plasma", "Inferno", "Cividis", "Rocket", "Mako", "Turbo")
-  grDevices_palettes <- c("Rainbow", "Heat", "Terrain", "Topo", "Cm")
-  hcl_palettes <- grDevices::hcl.pals()
-  base_palettes <- grDevices::palette.pals()
-  turbo_palette <- setNames("Turbo", "Viridis-turbo")
-  grd_palettes <- setNames(grDevices_palettes, rep("grDevices", length(grDevices_palettes)))
-  hcl_palettes <- setNames(hcl_palettes, rep("hcl", length(hcl_palettes)))
-  base_palettes <- setNames(base_palettes, rep("pal", length(base_palettes)))
-  all_palettes <- c(turbo_palette, grd_palettes, hcl_palettes, base_palettes)
-  
-  if (is.character(i_palettes)) {
-    i_palettes <- unlist(sapply(i_palettes, function(pal) {
-      if (tolower(pal) == 'rcolorbrewer') {
-        brewer_palettes <- c(
-          "BrBG", "PiYG", "PRGn", "PuOr", "RdBu", "RdGy", "RdYlBu", "RdYlGn", "Spectral",
-          "Accent", "Dark 2", "Paired", "Pastel 1", "Pastel 2", "Set 1", "Set 2", "Set 3",
-          "Blues", "BuGn", "BuPu", "GnBu", "Greens", "Grays", "Oranges", "OrRd",
-          "PuBu", "PuBuGn", "PuRd", "Purples", "RdPu", "Reds", "YlGn", "YlGnBu", "YlOrBr", "YlOrRd"
-        )
-        match(brewer_palettes, all_palettes)
-      } else if (tolower(pal) %in% tolower(viridis_palette_names)) {
-        match(viridis_palette_names, all_palettes)
-      } else if (tolower(pal) %in% tolower(grd_palettes)) {
-        match(grd_palettes, all_palettes)
-      } else {
-        message("pass i_palettes = 'rcolorbrewer', 'viridis'(-palettes), see grDevices Palettes or numeric index/range e.g. = 1:30")
-      }
-    }))
-    
-  }
-  ## set index between 1 and maximum amount of palettes
-  i_palettes <- i_palettes[i_palettes > 0 & i_palettes <= length(all_palettes)]
-  ## select palettes by index
-  all_palettes <- all_palettes[i_palettes]
-  
-  ## save and set par plot margins
-  old_par <- par(no.readonly = TRUE)
-  par(mar = c(0, 0, 0, 0))
-  
-  ## initialize empty plot
-  plot(NULL, xlim = c(-3, n), ylim = c(0, length(all_palettes)), xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n", main = "")
-  
-  for (i in seq_along(all_palettes)) {
-    ## get grDevices colors by palette name
-    if (names(all_palettes[i]) == "hcl") {
-      colors <- grDevices::hcl.colors(n, palette = all_palettes[i])
-    } else if (names(all_palettes[i]) == "pal") {
-      colors <- grDevices::palette.colors(palette = all_palettes[i])
-    } else if (all_palettes[i] == "Turbo") {
-      colors <- turbo(n)
-    } else if (all_palettes[i] == "Rainbow") {
-      colors <- grDevices::rainbow(n)
-    } else if (all_palettes[i] == "Heat") {
-      colors <- grDevices::heat.colors(n)
-    } else if (all_palettes[i] == "Terrain") {
-      colors <- grDevices::terrain.colors(n)
-    } else if (all_palettes[i] == "Topo") {
-      colors <- grDevices::topo.colors(n)
-    } else if (all_palettes[i] == "Cm") {
-      colors <- grDevices::cm.colors(n)
-    }
-    
-    ## draw rectangular palettes
-    y_bottom <- i - 1
-    y_top <- i - 0.1
-    rect(xleft = 0:(n - 1), ybottom = y_bottom, xright = 1:n, ytop = y_top, col = colors, border = ifelse(border, TRUE, NA))
-    
-    ## center text in palette, no falling off side of plot
-    text_x <- n / 2
-    text_y <- (y_bottom + y_top) / 2
-    text(x = text_x, y = text_y, labels = all_palettes[i], col = "black", cex = 0.9, font = 2)
-  }
-  
-  ## reset plot margins to default
-  par(old_par)
-  
-  return(all_palettes)
-}
-
-#' Palette original name mapping
-#'
-#' @param palette string: name of palette, will be lower()ed and stripped of whitespace
-#'
-#' @return original palette name
-#'
-#' @description
-#' All ColorBrewer palettes overlap with grDevices palettes
-#' Viridis palettes, except "Magma", overlap with grDevices palettes
-#'
-#' @examples
-#' palette_name_mapping("dark2") # "Dark 2"
-palette_name_mapping <- function(palette) {
-  palette_mapping <- list(
-    ## custom palettes
-    "turbo" = "Turbo", "rainbow" = "Rainbow", "heat" = "Heat",
-    "terrain" = "Terrain", "topo" = "Topo", "cm" = "Cm",
-    ## all RColorBrewer palettes
-    ## grDevices::palette.pals()
-    "r3" = "R3", "r 3" = "R3", "r4" = "R4", "r 4" = "R4", "ggplot2" = "ggplot2", "okabe-ito" = "Okabe-Ito",
-    "accent" = "Accent", "dark2" = "Dark 2", "dark 2" = "Dark 2", "paired" = "Paired",
-    "pastel1" = "Pastel 1", "pastel 1" = "Pastel 1", "pastel2" = "Pastel 2", "pastel 2" = "Pastel 2",
-    "set1" = "Set 1", "set 1" = "Set 1", "set2" = "Set 2", "set 2" = "Set 2", "set3" = "Set 3", "set 3" = "Set 3",
-    "tableau10" = "Tableau 10", "tableau 10" = "Tableau 10",
-    "classictableau" = "Classic Tableau", "classic tableau" = "Classic Tableau",
-    "polychrome36" = "Polychrome 36", "polychrome 36" = "Polychrome 36",
-    "alphabet" = "Alphabet",
-    ## grDevices::hcl.pals()
-    "dark3" = "Dark 3", "dark 3" = "Dark 3",
-    "warm" = "Warm", "cold" = "Cold", "harmonic" = "Harmonic", "dynamic" = "Dynamic",
-    "grays" = "Grays", "greys", "Grays", "lightgrays" = "Light Grays", "light grays" = "Light Grays",
-    "blues2" = "Blues 2", "blues 2" = "Blues 2", "blues3" = "Blues 3", "blues 3" = "Blues 3",
-    "purples2" = "Purples 2", "purples 2" = "Purples 2", "purples3" = "Purples 3", "purples 3" = "Purples 3",
-    "reds2" = "Reds 2", "reds 2" = "Reds 2", "reds3" = "Reds 3", "reds 3" = "Reds 3",
-    "greens2" = "Greens 2", "greens 2" = "Greens 2", "greens3" = "Greens 3", "greens 3" = "Greens 3",
-    "oslo" = "Oslo", "purple-blue" = "Purple-Blue", "red-purple" = "Red-Purple",
-    "red-blue" = "Red-Blue", "purple-orange" = "Purple-Orange", "purple-yellow" = "Purple-Yellow",
-    "blue-yellow" = "Blue-Yellow", "green-yellow" = "Green-Yellow", "red-yellow" = "Red-Yellow",
-    "heat" = "Heat", "heat2" = "Heat 2", "heat 2" = "Heat 2",
-    "terrain" = "Terrain", "terrain2" = "Terrain 2", "terrain 2" = "Terrain 2",
-    "viridis" = "Viridis", "plasma" = "Plasma", "inferno" = "Inferno", "rocket" = "Rocket", "mako" = "Mako",
-    "darkmint" = "Dark Mint", "dark mint" = "Dark Mint", "mint" = "Mint",
-    "blugrn" = "BluGrn", "teal" = "Teal", "tealgrn" = "TealGrn", "emrld" = "Emrld",
-    "bluyl" = "BluYl", "ag_grnyl" = "ag_GrnYl", "peach" = "Peach", "pinkyl" = "PinkYl",
-    "burg" = "Burg", "burgyl" = "BurgYl", "redor" = "RedOr", "oryel" = "OrYel",
-    "purp" = "Purp", "purpor" = "PurpOr", "sunset" = "Sunset", "magenta" = "Magenta",
-    "sunsetdark" = "SunsetDark", "ag_sunset" = "ag_Sunset", "brwnyl" = "BrwnYl",
-    "ylorrd" = "YlOrRd", "ylorbr" = "YlOrBr", "oranges" = "Oranges", "reds" = "Reds",
-    "rdpu" = "RdPu", "purd" = "PuRd", "purples" = "Purples", "pubugn" = "PuBuGn",
-    "pubu" = "PuBu", "greens" = "Greens", "bugn" = "BuGn", "gnbu" = "GnBu", "bupu" = "BuPu",
-    "blues" = "Blues",
-    "lajolla" = "Lajolla", "turku" = "Turku", "hawaii" = "Hawaii", "batlow" = "Batlow",
-    "blue-red" = "Blue-Red", "blue-red2" = "Blue-Red 2", "blue-red 2" = "Blue-Red 2",
-    "blue-red3" = "Blue-Red 3", "blue-red 3" = "Blue-Red 3",
-    "red-green" = "Red-Green", "purple-green" = "Purple-Green", "purple-brown" = "Purple-Brown",
-    "green-brown" = "Green-Brown", "blue-yellow2" = "Blue-Yellow 2", "blue-yellow 2" = "Blue-Yellow 2",
-    "blue-yellow3" = "Blue-Yellow 3", "blue-yellow 3" = "Blue-Yellow 3",
-    "green-orange" = "Green-Orange", "cyan-magenta" = "Cyan-Magenta", "tropic" = "Tropic",
-    "broc" = "Broc", "cork" = "Cork", "vik" = "Vik", "berlin" = "Berlin", "lisbon" = "Lisbon",
-    "tofino" = "Tofino", "armyrose" = "ArmyRose", "earth" = "Earth", "fall" = "Fall",
-    "geyser" = "Geyser", "tealrose" = "TealRose", "temps" = "Temps",
-    "puor" = "PuOr", "rdbu" = "RdBu", "rdgy" = "RdGy", "piyg" = "PiYG",
-    "prgn" = "PRGn", "brbg" = "BrBG", "rdylbu" = "RdYlBu", "rdylgn" = "RdYlGn", "spectral" = "Spectral",
-    "zissou1" = "Zissou 1", "zissou 1" = "Zissou 1",
-    "cividis" = "Cividis", "roma" = "Roma"
-  )
-  original_palette <- palette_mapping[[tolower(gsub(" ", "", palette))]]
-  ifelse(is.null(original_palette), return(""), return(original_palette))
 }
