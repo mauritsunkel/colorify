@@ -9,6 +9,8 @@
 #' 
 #' @description Expects hsv color values to be in range [0-1]
 #' 
+#' @export
+#' 
 #' @examples
 #' colors <- colorify(5)
 #' rgb <- col2rgb(colors)
