@@ -58,8 +58,6 @@
 # TODO gradient_n = Inf for continuous?, check scale_continuous
 # TODO check how ggplot scale_continuous returns colors
 
-# TODO plot options: no labels, image variant 
-
 
 
 
@@ -117,7 +115,7 @@
 #' @param alpha numeric, sets color alpha values
 #' @param seed integer, default: 42, set seed for generation of colors (n > given colors (palettes)) and colors ordering (see order)
 #' @param order default: 1, numeric (vector) to adjust colors order, -1: reverse order, 0: seeded random order, >1: shift order, c(-1, >1): reverse then shift order, or numeric vector as many colors to set custom order (if longer, vector shortened to n colors)
-#' @param plot default: FALSE, if TRUE plot pie chart of color palette
+#' @param plot default: FALSE, if TRUE or string, plot pie chart of color palette, if 'i' in string then plat image instead of pie,  if 'l' in string plot color index as labels
 #' @param export default: FALSE, if TRUE: export = getwd(), if export = "string/", save hexcodes, rgb, and hsl values to export/colorify.csv
 #'
 #' @returns vector of color hexcodes
@@ -214,8 +212,8 @@ colorify <- function(
     is.numeric(c(colors_map, hf, sf, lf, rf, gf, bf, hv, sv, lv, rv, gv, bv, alpha, seed, order)),
     is.null(n) | is.numeric(n),
     is.null(gradient_n) | is.numeric(gradient_n),
-    is.logical(plot),
-    is.logical(export) | is.character(plot),
+    is.logical(plot) | is.character(plot),
+    is.logical(export),
     is.null(colors_lock) | is.logical(colors_lock) | is.numeric(colors_lock)
   )
   
@@ -228,26 +226,18 @@ colorify <- function(
   ## add named palette(s) to colors
   colors <- unname(unlist(sapply(colors, function(color) {
     original_palette <- palette_name_mapping(color)
-    if (original_palette %in% grDevices::palette.pals()) {
-      grDevices::palette.colors(n = NULL, palette = original_palette)
-    } else if (original_palette %in% grDevices::hcl.pals()) {
+    if (original_palette %in% grDevices::palette.pals())  grDevices::palette.colors(n = NULL, palette = original_palette) 
+    else if (original_palette %in% grDevices::hcl.pals()) {
       if (is.null(n)) stop("To select hcl palette, pass n colors.")
       grDevices::hcl.colors(n, palette = original_palette)
-    } else if (original_palette == "Turbo") {
-      turbo(n)
-    } else if (original_palette == "Rainbow") {
-      grDevices::rainbow(n)
-    } else if (original_palette == "Heat") {
-      grDevices::heat.colors(n)
-    } else if (original_palette == "Terrain") {
-      grDevices::terrain.colors(n)
-    } else if (original_palette == "Topo") {
-      grDevices::topo.colors(n)
-    } else if (original_palette == "Cm") {
-      grDevices::cm.colors(n)
-    } else {
-      color
-    }
+    } 
+    else if (original_palette == "Turbo") turbo(n) 
+    else if (original_palette == "Rainbow") grDevices::rainbow(n)
+    else if (original_palette == "Heat") grDevices::heat.colors(n)
+    else if (original_palette == "Terrain") grDevices::terrain.colors(n)
+    else if (original_palette == "Topo") grDevices::topo.colors(n)
+    else if (original_palette == "Cm") grDevices::cm.colors(n)
+    else color
   })))
   
   n <- ifelse(is.null(n), length(colors), max(0, round(n)))
@@ -345,9 +335,12 @@ colorify <- function(
     colors <- order_by_shift(shift = order[1], colors = colors, n = n)
   }
   
-  ## plot pie to visualize colors
-  if (plot) pie(rep(1, length(colors)), col = colors, border = NA)
-  
+  ## plot colors
+  if ( ! isFALSE(plot)) {
+    pie(rep(1, length(colors)), labels = if (grepl("l|L", plot)) 1:length(colors) else NA, col = colors, border = NA)
+    if (grepl("i|I", plot)) image(1:length(colors), 1, as.matrix(1:length(colors)), col = colors, xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")
+    if (grepl("i|I", plot) && grepl("l|L", plot)) text(1:length(colors), rep(1, length(colors)), labels = 1:length(colors), col = "black")
+  }
   ## export colors
   if (is.character(export) | isTRUE(export)) {
     df <- setNames(cbind(as.data.frame(colors), t(rgb_values), t(hsv_values)), c("hexcode", "r", "g", "b", "h", "s", "l"))

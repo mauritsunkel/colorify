@@ -111,7 +111,7 @@ colorify(
 
 \item{order}{default: 1, numeric (vector) to adjust colors order, -1: reverse order, 0: seeded random order, >1: shift order, c(-1, >1): reverse then shift order, or numeric vector as many colors to set custom order (if longer, vector shortened to n colors)}
 
-\item{plot}{default: FALSE, if TRUE plot pie chart of color palette}
+\item{plot}{default: FALSE, if TRUE or string, plot pie chart of color palette, if 'i' in string then plat image instead of pie,  if 'l' in string plot color index as labels}
 
 \item{export}{default: FALSE, if TRUE: export = getwd(), if export = "string/", save hexcodes, rgb, and hsl values to export/colorify.csv}
 }
