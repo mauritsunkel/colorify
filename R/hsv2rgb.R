@@ -27,6 +27,10 @@ hsv2rgb <- function(h, s, v, maxColorValue = 100) {
   i4 <- h >= 180 & h < 240
   i5 <- h >= 240 & h < 300
   i6 <- h >= 300 & h <= 360
+  ## Initialize r, g, b as zero vectors of the same length as h
+  r <- numeric(length(h))
+  g <- numeric(length(h))
+  b <- numeric(length(h))
   ## assigns values by index
   r[i1] <- c[i1]; g[i1] <- x[i1]  # red to yellow
   r[i2] <- x[i2]; g[i2] <- c[i2]  # yellow to green
