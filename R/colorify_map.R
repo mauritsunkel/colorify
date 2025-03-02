@@ -22,7 +22,7 @@ colorify_map <- function(colors, colors_map, ...) {
   colors <- colors[ord]
   
   ## colorRamp per sequential color pair: map colors to interval [0, 1]
-  ramp_list <- lapply(seq_len(length(colors) - 1), function(i) colorRamp(c(colors[i], colors[i+1]), ...))
+  ramp_list <- lapply(seq_len(length(colors) - 1), function(i) grDevices::colorRamp(c(colors[i], colors[i+1]), ...))
   
   colorify_mapped <- function(values) {
     ## initialize mapped hexcolors
