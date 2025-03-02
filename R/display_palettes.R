@@ -178,7 +178,9 @@ palette_name_mapping <- function(palette) {
     "puor" = "PuOr", "rdbu" = "RdBu", "rdgy" = "RdGy", "piyg" = "PiYG",
     "prgn" = "PRGn", "brbg" = "BrBG", "rdylbu" = "RdYlBu", "rdylgn" = "RdYlGn", "spectral" = "Spectral",
     "zissou1" = "Zissou 1", "zissou 1" = "Zissou 1",
-    "cividis" = "Cividis", "roma" = "Roma"
+    "cividis" = "Cividis", "roma" = "Roma",
+    ## viridis variations (except viridisa = Magma)
+    "viridisb" = "Inferno", "viridisc" = "Plasma", "viridisd" = "Viridis", 'viridise' = 'Cividis', "viridisf" = "Rocket", "viridisg" = "Mako", 'viridish' = "Turbo"
   )
   original_palette <- palette_mapping[[tolower(gsub(" ", "", palette))]]
   ifelse(is.null(original_palette), return(""), return(original_palette))
