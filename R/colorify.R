@@ -40,7 +40,7 @@
 ## rcartocolor
 ## ggsci
 
-
+# TODO enable setting ... for ..ColorRamp and for rainbow() (and more later?)
 
 
 
@@ -53,10 +53,26 @@
 # TODO tolower() to palette_mapping()
 # TODO allow shortened names matching palettes
 
-# TODO check viridis package to ggplot2 bindings
+
 # TODO check scale_continuous need for colour output (need of function as output?)
-# TODO gradient_n = Inf for continuous?, check scale_continuous
+# TODO nn = Inf for continuous?, check scale_continuous
 # TODO check how ggplot scale_continuous returns colors
+# TODO check viridis package to ggplot2 bindings
+## TODO add                    
+# A = "A", magma = "A",
+# B = "B", inferno = "B",
+# C = "C", plasma = "C",
+# D = "D", viridis = "D",
+# E = "E", cividis = "E",
+# F = "F", rocket = "F",
+# G = "G", mako = "G",
+# H = "H", turbo = "H",
+# TODO Roxygen2 doc style
+#' \itemize{
+#'   \item "magma" (or "A")
+#'   \item "inferno" (or "B")
+# TODO accept colors_*/colours_* as param
+# TODO rdname scale_colorify
 
 
 
@@ -64,9 +80,127 @@
 
 
 
+# ggplot2::discrete_scale
+# viridis::scale_color_viridis()
+# 
+# 
+# viridisLite::viridis(256, alpha=1, begin=0, end=1, direction=1, option="D")
+# colorify(colors = viridisLite::viridis(256, alpha=1, begin=0, end=1, direction=1, option="D"), plot = T)
+# scale_fill_gradientn(colors = viridisLite::viridis(256, alpha=1, begin=0, end=1, direction=1, option="D"))
+# 
+# scale_fill_gradientn(colors = colorify(colors = "viridis", n = 256))
+# 
+# 
+# viridis_pal()(10)
+# 
+# 
+# scale_fill_viridis <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
+#                                discrete = FALSE, option = "D", aesthetics = "fill") {
+#   if (discrete) {
+#     discrete_scale(aesthetics, "viridis", viridis_pal(alpha, begin, end, direction, option), ...)
+#   } else {
+#     scale_fill_gradientn(colors = viridisLite::viridis(256, alpha, begin, end, direction, option), aesthetics = aesthetics, ...)
+#   }
+#   
+# }
+# 
+# 
+# colorRampPalette(c("red", "white", "blue"))(10)
+# colorify(colors = colorRampPalette(c("red", "white", "blue"))(10), plot = T)
+# 
+# 
+# scale_fill_colorify <- function(..., aesthetics = "fill") {
+#   if (discrete) discrete_scale(aesthetics, "colorify", colorify(, ...), ...)
+#   else scale_fill_gradientn(colours = viridisLite::viridis(256, alpha, begin, end, direction, option), aesthetics = aesthetics, ...)
+# }
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# colorify_pal <- function(colors = character(0), colors_lock = NULL, 
+#                          hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
+#                          hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
+#                          hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
+#                          hmax = 100L, smax = 100L, lmax = 100L, rmax = 100L, gmax = 100L, bmax = 100L,
+#                          alpha = 1, seed = 42L, order = 1, verbose = TRUE, ...) {
+#   
+#   function(n) {
+#     nn = Inf
+#     colorify(n, colors = colors, colors_lock = colors_lock, colors_names = character(0), colors_map = numeric(0),
+#              hf = hf, sf = sf, lf = lf, rf = rf, gf = gf, bf = bf,
+#              hv = hv, sv = sv, lv = lv, rv = rv, gv = gv, bv = bv,
+#              hmin = hmin, smin = smin, lmin = lmin, rmin = rmin, gmin = gmin, bmin = bmin, 
+#              hmax = hmax, smax = smax, lmax = lmax, rmax = rmax, gmax = gmax, bmax = bmax,
+#              alpha = alpha, seed = seed, order = order, plot = FALSE, export = FALSE, verbose = verbose, ...)
+#   }
+# }
+# 
+# 
+# 
+# 
+# colorify_pal <- function(colors = character(0), colors_lock = NULL, 
+#                          
+#                          hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
+#                          hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
+#                          hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
+#                          hmax = 100L, smax = 100L, lmax = 100L, rmax = 100L, gmax = 100L, bmax = 100L,
+#                          alpha = 1, seed = 42L, order = 1, verbose = TRUE, ...) {
+#   
+#   function(n) {
+#     colorify(nn = Inf, colors = colors, colors_lock = colors_lock,
+#              
+#              hf = hf, sf = sf, lf = lf, rf = rf, gf = gf, bf = bf,
+#              hv = hv, sv = sv, lv = lv, rv = rv, gv = gv, bv = bv,
+#              hmin = hmin, smin = smin, lmin = lmin, rmin = rmin, gmin = gmin, bmin = bmin, 
+#              hmax = hmax, smax = smax, lmax = lmax, rmax = rmax, gmax = gmax, bmax = bmax,
+#              alpha = alpha, seed = seed, order = order, verbose = verbose, ...)(n)
+#   }
+# }
+# 
+# 
+# colorify_pal <- function(colors = character(0), colors_lock = NULL, 
+#                          hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
+#                          hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
+#                          hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
+#                          hmax = 100L, smax = 100L, lmax = 100L, rmax = 100L, gmax = 100L, bmax = 100L,
+#                          alpha = 1, seed = 42L, order = 1, verbose = TRUE, ...) {
+#   
+#   # Generate a color palette function
+#   palette_func <- colorify(nn = Inf, colors = colors, colors_lock = colors_lock,
+#                            hf = hf, sf = sf, lf = lf, rf = rf, gf = gf, bf = bf,
+#                            hv = hv, sv = sv, lv = lv, rv = rv, gv = gv, bv = bv,
+#                            hmin = hmin, smin = smin, lmin = lmin, rmin = rmin, gmin = gmin, bmin = bmin, 
+#                            hmax = hmax, smax = smax, lmax = lmax, rmax = rmax, gmax = gmax, bmax = bmax,
+#                            alpha = alpha, seed = seed, order = order, verbose = verbose, ...)
+#   
+#   # Return a function that generates `n` colors using the palette function
+#   function(n) {
+#     palette_func(n)  # Correctly generate n colors from the palette function
+#   }
+# }
+# 
+# # TODO red - blue (blues become black in _pal, not in direct call, why? )
+# test_pal <- colorify_pal(colors = c("red", "white"))
+# print(test_pal(20))  # Should return a gradient from red to blue
+# colorify(colors = test_pal(20), plot = T)
+# 
+# 
+# test <- colorify_pal()
+# colorify(colors = test(1), plot = T)
+# 
+# 
+# 
+# colorify(colors = colorify(nn = Inf)(10), plot = T) # basically random palette function
+# colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = T)
+# colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = T)
+# colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = T)
 
-
-
+# https://github.com/sjmgarnier/viridis/blob/master/R/scales.R
 
 
 
@@ -76,13 +210,12 @@
 #'
 #' Either generate theoretically maximally different colors, select an available R grDevices palette and/or modify the colors of the given gradient/palette
 #'
-#' @param n default: NULL, else integer, amount of colors to create, if palette selected and more colors requested they will be generated
+#' @param n integer, default: NULL, else amount of colors to get, if palette selected and more colors requested they will be generated
+#' @param nn integer (vector), default: n, else amount(s) of colors to output as gradient(s), after completing palette for n colors
 #' @param colors character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes
-#' @param colors_lock numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If gradient_n %% length(colors) == 0, i.e. if gradient_n divisive by amount of colors without rest, set repeat given locking pattern
+#' @param colors_lock numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If nn %% length(colors) == 0, i.e. if nn divisive by amount of colors without rest, set repeat given locking pattern
 #' @param colors_names character, default: character(0), else return named vector of final colors
 #' @param colors_map numeric, default numeric(0), else vector of n values for colors to make gradient map between and return function
-#'
-#' @param gradient_n integer (vector), default: n, else amount(s) of colors to output as gradient, after completing palette for n colors
 #' 
 #' @param hf hue factor, default: 1, multiply values by factor, proportional to base value of 1
 #' @param sf saturation factor, default: 1, multiply values by factor, proportional to base value of 1
@@ -133,7 +266,7 @@
 #' 
 #' All grDevices plotting functions are provided as palettes, simply use colors = "rainbow", "heat", "terrain", "topo" or "cm".
 #' 
-#' Use ... to set space and interpolate for colorRampPalette()
+#' Use ... to set space and interpolate for grDevices::colorRampPalette()
 #' 
 #' NOTE colorify call order matters: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
 #' 
@@ -147,10 +280,10 @@
 #' ## set colors, generate additional up to n
 #' colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 #' ## create gradients
-#' colorify(colors = c("orange", "red", "white", "blue", "orange"), gradient_n = 100, plot = TRUE)
+#' colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 100, plot = TRUE)
 #' ## paired gradients
-#' gradient_n <- c(100, 500, 250)
-#' colors <- colorify(colors = colorify(4), gradient_n = gradient_n, plot = T)
+#' nn <- c(100, 500, 250)
+#' colors <- colorify(colors = colorify(4), nn = nn, plot = T)
 #' 
 #' 
 #' ## viridis gradient, lighten and saturate, darken
@@ -200,7 +333,7 @@
 #' FINAL all parameter examples
 colorify <- function(
     #### colorify FINAL remove ---- 
-    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), gradient_n = n,
+    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), nn = n,
     hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
     hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
     hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
@@ -210,27 +343,22 @@ colorify <- function(
   stopifnot(
     is.character(c(colors, colors_names)),
     is.numeric(c(colors_map, hf, sf, lf, rf, gf, bf, hv, sv, lv, rv, gv, bv, alpha, seed, order)),
-    is.null(n) | is.numeric(n),
-    is.null(gradient_n) | is.numeric(gradient_n),
+    is.null(n) | is.numeric(n) | length(n) == 1,
+    is.null(nn) | is.numeric(nn),
     is.logical(plot) | is.character(plot),
     is.logical(export),
     is.null(colors_lock) | is.logical(colors_lock) | is.numeric(colors_lock)
   )
-  
-  ## set generation seed
-  set.seed(round(seed))
-  
-  alpha <- max(0, min(1, alpha))
-  gradient_n <- if (is.null(gradient_n)) length(colors) else pmax(0, round(gradient_n))
+  set.seed(round(seed)) # set generation seed
+  alpha <- max(0, min(1, alpha)) # set color opacity within range
+  nn <- if (is.null(nn)) length(colors) else pmax(0, round(nn)) # set gradient nn within range(s)
+  if (nn == Inf & is.null(n)) n <- ifelse(length(colors) > 1, length(colors), 256) # set to return colorRampPalette function
   
   ## add named palette(s) to colors
   colors <- unname(unlist(sapply(colors, function(color) {
     original_palette <- palette_name_mapping(color)
-    if (original_palette %in% grDevices::palette.pals())  grDevices::palette.colors(n = NULL, palette = original_palette) 
-    else if (original_palette %in% grDevices::hcl.pals()) {
-      if (is.null(n)) stop("To select hcl palette, pass n colors.")
-      grDevices::hcl.colors(n, palette = original_palette)
-    } 
+    if (original_palette %in% grDevices::palette.pals()) grDevices::palette.colors(n = NULL, palette = original_palette) 
+    else if (original_palette %in% grDevices::hcl.pals()) grDevices::hcl.colors(n, palette = original_palette)
     else if (original_palette == "Turbo") turbo(n) 
     else if (original_palette == "Rainbow") grDevices::rainbow(n)
     else if (original_palette == "Heat") grDevices::heat.colors(n)
@@ -243,32 +371,33 @@ colorify <- function(
   n <- ifelse(is.null(n), length(colors), max(0, round(n)))
   if (length(colors) > n) colors <- colors[1:n]
   if (length(colors) < n) {
-    if (verbose) message(n-length(colors), " colors generated")
+    if (verbose) message(n - length(colors), " colors generated")
     ## generate theoretically distinct RGB values and convert to hexcodes
-    rgb_matrix <- matrix(runif((n-length(colors)) * 3, min = 0, max = 255), ncol = 3)
+    rgb_matrix <- matrix(runif((n - length(colors)) * 3, min = 0, max = 255), ncol = 3)
     colors <- c(colors, apply(rgb_matrix, 1, function(rgbv) rgb(rgbv[1], rgbv[2], rgbv[3], maxColorValue = 255)))
   }
   
   ## set (paired) gradient colors
-  if (length(gradient_n) == 1 & gradient_n[1] > n & ! length(colors_map) > 0) colors <- grDevices::colorRampPalette(colors, ...)(gradient_n)
-  else if (length(gradient_n) == length(colors) - 1) colors <- unlist(sapply(seq_len(length(colors) - 1), function(i) grDevices::colorRampPalette(c(colors[i], colors[i+1]), ...)(gradient_n[i])))
-  else if (length(gradient_n) != 1 && length(gradient_n) != length(colors) - 1) stop('pass single gradient_n or n for each gradient between colors')
+  if (length(nn) == 1 & nn[1] > n & ! length(colors_map) > 0 & ! is.infinite(nn)) colors <- grDevices::colorRampPalette(colors, ...)(nn)
+  else if ( ! is.infinite(nn) & length(nn) == length(colors) - 1) colors <- unlist(sapply(seq_len(length(colors) - 1), function(i) grDevices::colorRampPalette(c(colors[i], colors[i+1]), ...)(nn[i])))
+  else if ( ! is.infinite(nn) & length(nn) != 1 && length(nn) != length(colors) - 1) stop('pass single nn or n for each gradient between colors')
   
-  if (length(colors) == 0) stop("Input starting colors, palette name, or n colors to generate.")
+  if (length(colors) == 0) stop("Input starting color(s), palette name(s), or n colors to generate.")
   
   ## set colors to be modified
   if (is.null(colors_lock)) colors_lock = rep(FALSE, length(colors))
-  colors_lock_bool <- identical(substitute(colors_lock)[[1]], as.symbol("!")) | identical(substitute(colors_lock)[[1]], as.symbol("-"))
+  if (is.infinite(nn)) colors_lock <- integer(0)
   if (is.numeric(colors_lock)) {
     colors_i <- 1:length(colors)
     colors_lock_i <- replace(rep(FALSE, length(colors)), colors_i[colors_lock], TRUE)
   } else { ## if logical
-    if (gradient_n[1] > n & gradient_n[1] %% length(colors_lock) == 0) {
-      colors_lock_i <- rep(colors_lock, gradient_n[1] / length(colors_lock))
+    if (nn[1] > n & nn[1] %% length(colors_lock) == 0) {
+      colors_lock_i <- rep(colors_lock, nn[1] / length(colors_lock))
     }
     else if (length(colors_lock) >= length(colors)) {
       colors_lock_i <- colors_lock[1:length(colors)]
     } else {
+      colors_lock_bool <- identical(substitute(colors_lock)[[1]], as.symbol("!")) | identical(substitute(colors_lock)[[1]], as.symbol("-"))
       colors_lock_i <- c(colors_lock, rep(colors_lock_bool, length(colors) - length(colors_lock)))
     }
   }
@@ -297,7 +426,7 @@ colorify <- function(
     } else if (call %in% c("hv", "sv", "lv", "hf", "sf", "lf")) {
       if (call_mode == "rgb") {
         call_mode <- "hsv"
-        hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 100) * 100 # scale values intuitively between 0-100 
+        hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 100) * 100 # scale values intuitively between 0-100
       }
       switch(call,
              "hv" = hsv_values["h", ][colors_lock_i] <- pmax(hmin, pmin(hmax, hsv_values["h", ][colors_lock_i] + hv)),
@@ -308,7 +437,7 @@ colorify <- function(
              "lf" = hsv_values["v", ][colors_lock_i] <- pmax(lmin, pmin(lmax, hsv_values["v", ][colors_lock_i] * lf))
       )
     }
-  } 
+  }
   ## finally: set hexcolor based on last color space and update rgb and hsv spaces for potential exporting
   if (call_mode == "hsv") {
     colors <- hsv(hsv_values["h", ] / 100, hsv_values["s", ] / 100, hsv_values["v", ] / 100, alpha = alpha)
@@ -347,6 +476,8 @@ colorify <- function(
     ifelse(isTRUE(export), write.csv2(df, file = file.path(getwd(), "colorify.csv")), write.csv2(df, file = file.path(export, "colorify.csv")))
   }
   
+  ## return colorRampPalette function 
+  if (nn == Inf) return(grDevices::colorRampPalette(colors, ...))
   ## return color map function if colormap values map to colors
   if (length(colors_map) > 0) return(colorify_map(colors = colors, colors_map = colors_map, ...))
   return(colors)
