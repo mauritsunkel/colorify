@@ -6,7 +6,7 @@
 #'
 #' @param n integer, default: NULL, else amount of colors to get, if palette selected and more colors requested they will be generated
 #' @param nn integer (vector), default: n, else amount(s) of colors to output as gradient(s), after completing palette for n colors, if Inf return a callable function(n) generating colors
-#' @param colors character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes
+#' @param colors/colours character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes
 #' @param colors_lock numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If nn %% length(colors) == 0, i.e. if nn divisive by amount of colors without rest, set repeat given locking pattern
 #' @param colors_names character, default: character(0), else return named vector of final colors
 #' @param colors_map numeric, default numeric(0), else vector of n values for colors to make gradient map between and return function
@@ -42,7 +42,7 @@
 #' @param alpha numeric, sets color alpha values
 #' @param seed integer, default: 42, set seed for generation of colors (n > given colors (palettes)) and colors ordering (see order)
 #' @param order default: 1, numeric (vector) to adjust colors order, -1: reverse order, 0: seeded random order, >1: shift order, c(-1, >1): reverse then shift order, or numeric vector as many colors to set custom order (if longer, vector shortened to n colors)
-#' @param plot default: FALSE, if TRUE or string, plot pie chart of color palette, if 'i' in string then plat image instead of pie,  if 'l' in string plot color index as labels
+#' @param plot default: FALSE, if TRUE or string, plot pie chart of color palette, if 'i' in string then plot image instead of pie,  if 'l' in string plot color index as labels
 #' @param export default: FALSE, if TRUE: export = getwd(), if export = "string/", save hexcodes, rgb, and hsl values to export/colorify.csv
 #'
 #' @returns vector of color hexcodes
@@ -79,11 +79,15 @@
 #' nn <- c(100, 500, 250)
 #' colors <- colorify(colors = colorify(4), nn = nn, plot = T)
 #' 
-#' 
 #' ## viridis gradient, lighten and saturate, darken
 #' colorify(colors = "viridis", n = 100, plot = TRUE)
 #' colorify(colors = "viridis", n = 10, plot = TRUE, l = 1.2, s = 10)
 #' colorify(colors = "viridis", n = 10, plot = TRUE, l = .9)
+#' TODO doc examples for nn 
+#' colorify(colors = colorify(nn = Inf)(10), plot = T) # basically random palette function
+#' colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = T)
+#' colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = T)
+#' colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = T)
 #' 
 #' ## palette selected by name in colors[1], can add colors to selected palette, if n < length, remove colors , if greater generate 
 #' colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = T, n = 10)
@@ -115,7 +119,6 @@
 #' colorify(10, plot = TRUE, order = -3) # negative shift
 #' colorify(10, plot = TRUE, order = 12) # > n
 #' 
-#' 
 #' ## circlize::colorRamp2  
 #' colors_map <- c(-5, 0, 10)
 #' colors <- c("red", "white", "blue")
@@ -127,12 +130,14 @@
 #' FINAL all parameter examples
 colorify <- function(
     #### colorify FINAL remove ---- 
-    n = NULL, colors = character(0), colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), nn = n,
+    n = NULL, colors = character(0), colours = colors, colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), nn = n,
     hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
     hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
     hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
     hmax = 100L, smax = 100L, lmax = 100L, rmax = 100L, gmax = 100L, bmax = 100L,
-    alpha = 1, seed = 42L, order = 1, plot = FALSE, export = FALSE, verbose = TRUE, ...) {
+    alpha = 1, seed = 42L, order = 1, plot = FALSE, export = FALSE, verbose = TRUE, debug = F, ...) {
+  
+  colors <- colours
   
   stopifnot(
     is.character(c(colors, colors_names)),
@@ -147,6 +152,8 @@ colorify <- function(
   alpha <- max(0, min(1, alpha)) # set color opacity within range
   nn <- if (is.null(nn)) length(colors) else pmax(0, round(nn)) # set gradient nn within range(s)
   if (nn == Inf & is.null(n)) n <- ifelse(length(colors) > 1, length(colors), 256) # set to return colorRampPalette function
+  
+  if (debug) print(1)
   
   ## add named palette(s) to colors
   colors <- unname(unlist(sapply(colors, function(color) {
@@ -164,22 +171,30 @@ colorify <- function(
     else if (palette == "Cm") grDevices::cm.colors(n)
     else color
   })))
-  
+  if (debug) print(2)
   n <- ifelse(is.null(n), length(colors), max(0, round(n)))
-  if (nn == Inf & length(colors) > n) colors <- colors[1:length(colors)]
-  else if (length(colors) > n) colors <- colors[1:n]
+  if (nn == Inf & length(colors) > n) {
+    colors <- colors[1:length(colors)]
+  } else if (length(colors) > n) {
+    colors <- colors[1:n]
+  }
+
   if (length(colors) < n) {
     if (verbose) message(n - length(colors), " colors generated")
-    ## generate theoretically distinct RGB values and convert to hexcodes
+    ## generate random theoretically uniform RGB values and convert to hexcodes
     rgb_matrix <- matrix(runif((n - length(colors)) * 3, min = 0, max = 255), ncol = 3)
     colors <- c(colors, apply(rgb_matrix, 1, function(rgbv) rgb(rgbv[1], rgbv[2], rgbv[3], maxColorValue = 255)))
   }
-  
+  if (debug) print(3)
   ## set (paired) gradient colors
-  if (length(nn) == 1 & nn[1] > n & ! length(colors_map) > 0 & ! is.infinite(nn)) colors <- grDevices::colorRampPalette(colors, ...)(nn)
-  else if ( ! is.infinite(nn) & length(nn) == length(colors) - 1) colors <- unlist(sapply(seq_len(length(colors) - 1), function(i) grDevices::colorRampPalette(c(colors[i], colors[i+1]), ...)(nn[i])))
-  else if ( ! is.infinite(nn) & length(nn) != 1 && length(nn) != length(colors) - 1) stop('pass single nn or n for each gradient between colors')
-  
+  if (length(nn) == 1 & nn[1] > n & ! length(colors_map) > 0 & ! is.infinite(nn)) {
+    colors <- grDevices::colorRampPalette(colors, ...)(nn)
+  } else if ( ! is.infinite(nn) & length(nn) == length(colors) - 1) {
+    colors <- unlist(sapply(seq_len(length(colors) - 1), function(i) grDevices::colorRampPalette(c(colors[i], colors[i+1]), ...)(nn[i])))
+  } else if ( ! is.infinite(nn) & length(nn) != 1 && length(nn) != length(colors) - 1) {
+    stop('pass single nn or n for each gradient between colors')
+  }
+  if (debug) print(4)
   if (length(colors) == 0) stop("Input starting color(s), palette name(s), or n colors to generate.")
   
   ## set colors to be modified
@@ -247,8 +262,11 @@ colorify <- function(
   hsv_values <- grDevices::rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 255)
   
   ## set names
-  if (length(colors_names) == length(colors)) names(colors) <- colors_names
-  else if (length(colors_names) != 0) warning("colors_names given: need same length as amount of requested colors")
+  if (length(colors_names) == length(colors)) {
+    names(colors) <- colors_names
+  } else if (length(colors_names) != 0) {
+    warning("colors_names given: need same length as amount of requested colors")
+  }
   
   ## order colors
   if (length(order) > 2 & length(order) >= n) { # set custom order
