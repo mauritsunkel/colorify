@@ -50,14 +50,6 @@ colorify_map <- function(colors, colors_map, ...) {
     return(mapped_colors)
   }
   
-  # TODO test
-  ## set n_colors_map from smallest to largest value
-  # breaks <- seq(from = colors_map[1], to = colors_map[length(colors_map)], length.out = n_colors_map)
-  ## get mapped colors by colors_map
-  # colors <- colorify_mapped(breaks)
-  #' @param n_colors_map optional, default: 1000, else non-negative numeric value for amount of colors_map
-  #' , n_colors_map = 1000
-  
   ## attach function attributes
   attr(colorify_mapped, "breaks") <- colors_map
   attr(colorify_mapped, "colors") <- colors
