@@ -1,7 +1,7 @@
 Package: colorify
 Type: Package
 Title: Color modification and generation.
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     person(given = "Maurits",
 	       family = "Unkel",
@@ -18,3 +18,7 @@ RoxygenNote: 7.3.2
 Config/testthat/edition: 3
 Depends: 
     R (>= 4.3)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
