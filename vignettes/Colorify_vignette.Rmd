@@ -1,8 +1,10 @@
 ---
-title: "Colorify_vignette"
+title: "Introduction to Colorify"
+author: "Maurits Unkel"
+date: "2024-06-16"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Colorify_vignette}
+  %\VignetteIndexEntry{introduction_to_my_package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,5 +17,55 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(colorify)
+library(myPackage)
+
+# https://r-package-guide.netlify.app/vignettes
+
+# build vignette - test with: help(package = "colorify") & browseVignettes("colorify")
+## keep in mind: devtools::install_github("mauritsunkel/colorify", build_vignettes = TRUE)
+
+# consider doc site: https://r-package-guide.netlify.app/building-a-website-with-pkgdown
+## check more in package building site from Hadley Wickham ^
+```
+
+\
+
+# Introduction
+
+This is an example vignette for the `myPackage` package, an example package created as part of my tutorial on making R packages. This practice package contains a couple of functions. One of them, `random_movie_recommendation`, utilizes the `ggplot2movies` package from CRAN, which provides a dataset of movies. The other function, `calculate_group_mean`, uses example data included in `myPackage`.
+
+## Example Data
+
+The `example_data` dataset included in this package contains a small sample of data for demonstration purposes. It has three columns: `ID`, `Age`, and `Likes_Coffee`. Here is how you can load and view the dataset:
+
+```{r}
+# Load the example dataset
+data(example_data, package = "myPackage")
+
+# View the dataset
+example_data
+```
+
+\
+
+# Random Movie Recommendation
+
+The `random_movie_recommendation` function randomly selects and returns the title of a movie from the `ggplot2movies` dataset. This function is useful for getting a random movie suggestion.
+
+Here is how you can use the `random_movie_recommendation` function:
+
+```{r}
+random_movie_recommendation()
+```
+
+\
+
+# Calculate Group Mean
+
+The `calculate_group_mean` function calculates the mean of a numeric variable for rows where a specified binary variable is TRUE. In our example dataset, it can be used to find the mean age of people who like coffee.
+
+Here is how you can use the `calculate_group_mean` function:
+
+```{r}
+calculate_group_mean(example_data, "Age", "Likes_Coffee")
 ```
