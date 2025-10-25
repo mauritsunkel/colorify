@@ -1,6 +1,6 @@
 #### DOCS ----
 
-#' Create and/or modify color/gradient palettes
+#' coloRify: creation and modification of color/gradient palettes 
 #'
 #' Either generate theoretically maximally different colors, select an available R grDevices palette and/or modify the colors of the given gradient/palette
 #'
@@ -45,28 +45,25 @@
 #' @param plot default: FALSE, if TRUE or string, plot pie chart of color palette, if 'i' in string then plot image instead of pie,  if 'l' in string plot color index as labels
 #' @param export default: FALSE, if TRUE: export = getwd(), if export = "string/", save hexcodes, rgb, and hsl values to export/colorify.csv
 #'
-#' @returns vector of color hexcodes
+#' @returns colorify: vector of color hexcodes
 #'
 #' @export
 #'
 #' @description
-#' TODO especially Viridis for colorblind continuous  
-#' Note for colorblind use: "Okabe-Ito"
-#' 
-#' Addition of values happens before multiplication with factors. Intuitively, all given values are expected to be within range [0, 100], values will be scaled between [0, 1], as hsv() and rgb2hsv(maxColorValue = 1) require.
+#' The main colorify function can be used to generate or take colors that can then be modified with the same function call. See the vignette for extended examples. 
 #' 
 #' Palette names are stripped of whitespace and lowered for name matching. 
 #' All RColorBrewer and Viridis palettes are included.
+#' All grDevices plotting functions are provided as palettes, simply use: colors = "rainbow", "heat", "terrain", "topo" or "cm".
+#' Viridis is recommended for (continuous) color-blind friendly paletets. 
+#' Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more colors are required). 
 #' 
-#' All grDevices plotting functions are provided as palettes, simply use colors = "rainbow", "heat", "terrain", "topo" or "cm".
+#' Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range [0, 100], values will be scaled between [0, 1], as hsv() and rgb2hsv(maxColorValue = 1) require.
 #' 
-#' Use ... to set space and interpolate for grDevices::colorRampPalette()
+#' Use the ellipsis parameter, '...', to set space and interpolate for grDevices::colorRampPalette()
 #' 
-#' NOTE colorify call order matters: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
+#' Note that parameter call order within the function call matters, see examples and vignette. 
 #' 
-#' TODO add description
-#'
-#'
 #' @examples
 #' ## if parameters identical, change seed to change generation
 #' colorify(10, plot = TRUE, seed = 1)
@@ -119,6 +116,9 @@
 #' colorify(10, plot = TRUE, order = -3) # negative shift
 #' colorify(10, plot = TRUE, order = 12) # > n
 #' 
+#' ## call order
+#' TODO Note that parameter call order within the function call matters, see examples and vignette: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
+#' 
 #' ## circlize::colorRamp2  
 #' colors_map <- c(-5, 0, 10)
 #' colors <- c("red", "white", "blue")
@@ -126,8 +126,8 @@
 #' color_bar <- colorify(colors = colors, colors_map = colors_map, space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
 #' image(1:100, 1, as.matrix(1:100), col = color_bar, axes = FALSE, main = "Color Mapping using circlize::colorRamp2")
 #' 
-#' FINAL rgb, hsl examples
-#' FINAL all parameter examples
+#' TODO FINAL rgb, hsl examples (in vignette)
+#' TODO FINAL all parameter examples (in)
 colorify <- function(
     #### colorify FINAL remove ---- 
     n = NULL, colors = character(0), colours = colors, colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), nn = n,

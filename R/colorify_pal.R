@@ -1,10 +1,11 @@
 #' Colorifunctionalize palettes 
 #' 
-#' @description A wrapper function around \code{\link{colorify}} to
+#' @description A wrapper function around \code{\link{coloRify}} to
 #'  turn it into a palette function compatible with
 #'  \code{\link[ggplot2]{discrete_scale}} and \code{\link[ggplot2]{scale_fill_gradientn}}.
 #' 
-#' @return callable function(n) generating colors
+#' @return colorify_pal: callable function(n) for generating colors
+#' 
 #' @export
 #' 
 #' @rdname colorify

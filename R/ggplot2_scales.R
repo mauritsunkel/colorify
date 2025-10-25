@@ -1,4 +1,4 @@
-#' Colorify scale color bindings for ggplot2 
+#' coloRify scale color bindings for ggplot2 
 #'
 #' @param aesthetics string, default: 'color', see \code{\link[ggplot2]{discrete_scale}} and \code{\link[ggplot2]{scale_color_gradientn}} for more aesthetics
 #' @param discrete boolean, default = FALSE (calls \code{\link[ggplot2]{scale_color_gradientn}}), else TRUE (calls \code{\link[ggplot2]{discrete_scale}})
@@ -13,7 +13,7 @@
 #' @importFrom ggplot2 scale_color_gradientn discrete_scale
 #' @export
 #' 
-#' @description for rest and default Colorify parameters see \code{\link{colorify}}
+#' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
 #' @examples
 #' ## viridis ggplot2 examples Colorified 
@@ -62,7 +62,7 @@ scale_color_colorify <- function(
 #' @export
 scale_colour_colorify <- scale_color_colorify
 
-#' Colorify scale fill bindings for ggplot2 
+#' coloRify scale fill bindings for ggplot2 
 #'
 #' @param aesthetics string, default: 'fill', see \code{\link[ggplot2]{discrete_scale}} and \code{\link[ggplot2]{scale_fill_gradientn}} for more aesthetics
 #' @param discrete boolean, default = FALSE (calls \code{\link[ggplot2]{scale_fill_gradientn}}), else TRUE (calls \code{\link[ggplot2]{discrete_scale}})
@@ -75,7 +75,7 @@ scale_colour_colorify <- scale_color_colorify
 #' @importFrom ggplot2 discrete_scale scale_fill_gradientn
 #' @export
 #' 
-#' @description for rest and default Colorify parameters see \code{\link{colorify}}
+#' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
 #' @examples
 #' ## viridis ggplot2 examples Colorified

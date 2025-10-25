@@ -2,6 +2,28 @@
 
 ## code credits to: https://gist.github.com/jlmelville/be981e2f36485d8ef9616aef60fd52ab
 
+#' Get Turbo colormap
+#'
+#' @param n integer, amount of colors
+#'
+#' @return vector of Turbo hexcode colors
+#'
+#' @examples
+#' colorify(colors=turbo(100), plot = T)
+turbo <- function(n) {
+  ## interpolate
+  x <- seq.int(from = 0, to = 1, length.out = n)
+  x <- pmax(0.0, pmin(1.0, x))
+  a <- floor(x * 255.0)
+  b <- pmin(255, a + 1)
+  f <- x * 255.0 - a
+  a <- a + 1
+  b <- b + 1
+  colormap <- turbo_colormap_data[a, ] + (turbo_colormap_data[b, ] - turbo_colormap_data[a, ]) * f
+  ## rgb tp hex
+  grDevices::rgb(colormap)
+}
+
 turbo_colormap_data <- matrix(
   c(
     c(0.18995, 0.07176, 0.23217),
@@ -264,25 +286,3 @@ turbo_colormap_data <- matrix(
   ncol = 3,
   byrow = TRUE
 )
-
-#' Get Turbo colormap
-#'
-#' @param n integer, amount of colors
-#'
-#' @return vector of Turbo hexcode colors
-#'
-#' @examples
-#' colorify(colors=turbo(100), plot = T)
-turbo <- function(n) {
-  ## interpolate
-  x <- seq.int(from = 0, to = 1, length.out = n)
-  x <- pmax(0.0, pmin(1.0, x))
-  a <- floor(x * 255.0)
-  b <- pmin(255, a + 1)
-  f <- x * 255.0 - a
-  a <- a + 1
-  b <- b + 1
-  colormap <- turbo_colormap_data[a, ] + (turbo_colormap_data[b, ] - turbo_colormap_data[a, ]) * f
-  ## rgb tp hex
-  grDevices::rgb(colormap)
-}

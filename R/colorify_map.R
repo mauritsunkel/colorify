@@ -1,11 +1,12 @@
-#' Colorify colorRamp between colors mapping to breakpoint values
+#' coloRify colorRamp between colors mapping to breakpoint values
 #'
 #' @param colors hexcolor character vector
 #' @param colors_map numeric vector matching colors per value
 #' @param ... to pass arguments to grDevices::colorRamp
 #'
 #' @description
-#' Note that colors_map and colors will be ordered ascendingly by colors_map values
+#' \code{\link{coloRify}} map for gradient coloring using grDevices::colorRamp, inspired by circlize::colorRamp2. 
+#' Note that colors_map and colors will be ordered ascendingly by colors_map values. 
 #'
 #' @returns function with colors and breaks attributes, can be called as function(c(values)) to return hexcolorcodes
 #'

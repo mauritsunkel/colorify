@@ -9,7 +9,7 @@
 #' @return named vector with source and name of palettes, 'hcl' for grDevices::hcl.pals() and 'pal' for grDevices::palette.pals()
 #'
 #' @description
-#' Use colorify() to select and modify the palettes, see its documentation.
+#' Use \code{\link{coloRify}} to select and modify the palettes.
 #' Note that discrete palettes with maximum n colors will be repeated in plotting.
 #'
 #' Any numeric i_palettes over maximum amount of palettes are not displayed.
@@ -185,3 +185,13 @@ palette_name_mapping <- function(palette) {
   original_palette <- palette_mapping[[tolower(gsub(" ", "", palette))]]
   ifelse(is.null(original_palette), return(""), return(original_palette))
 }
+
+# TODO add
+# A = "A", magma = "A",
+# B = "B", inferno = "B",
+# C = "C", plasma = "C",
+# D = "D", viridis = "D",
+# E = "E", cividis = "E",
+# F = "F", rocket = "F",
+# G = "G", mako = "G",
+# H = "H", turbo = "H",

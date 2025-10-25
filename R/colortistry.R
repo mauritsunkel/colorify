@@ -1,6 +1,6 @@
 #' Colortistry plot from Colorified palettes
 #'
-#' @param colors_list list of colors generated with \code{\link{Colorify}}, see example
+#' @param colors_list list of colors generated with \code{\link{coloRify}}, see example
 #' @param border_color default: NA, for no border, otherwise R grDevices color or hexcolor
 #'
 #' @return plot Colortistry plot of combined Colorified palettes
