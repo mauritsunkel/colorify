@@ -2,7 +2,7 @@
 % Please edit documentation in R/colorify_map.R
 \name{colorify_map}
 \alias{colorify_map}
-\title{Colorify colorRamp between colors mapping to breakpoint values}
+\title{coloRify colorRamp between colors mapping to breakpoint values}
 \usage{
 colorify_map(colors, colors_map, ...)
 }
@@ -12,15 +12,13 @@ colorify_map(colors, colors_map, ...)
 \item{colors_map}{numeric vector matching colors per value}
 
 \item{...}{to pass arguments to grDevices::colorRamp}
-
-\item{n_colors_map}{optional, default: 1000, else non-negative numeric value for amount of colors_map
-, n_colors_map = 1000}
 }
 \value{
 function with colors and breaks attributes, can be called as function(c(values)) to return hexcolorcodes
 }
 \description{
-Note that colors_map and colors will be ordered ascendingly by colors_map values
+\code{\link{coloRify}} map for gradient coloring using grDevices::colorRamp, inspired by circlize::colorRamp2.
+Note that colors_map and colors will be ordered ascendingly by colors_map values.
 }
 \examples{
 map_f <- colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
