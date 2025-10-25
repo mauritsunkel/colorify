@@ -2,8 +2,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![BioC
-status](https://github.com/mauritsunkel/colorify/workflows/R-CMD-check-bioc/badge.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/colorify)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -17,16 +15,21 @@ size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
 # coloRify <img src="man/figures/colorify_logo.png" align="right" height="139" alt="" />
 
 Are you, like me, tired of errors complaining *you need more colors than
-your palette contains*? No problem! 🌈 Colorify makes color creation and
-modification intuitive and effortless. Colorify is dependency-free yet
-combines functionality of popular color and visualization packages,
-including: \* viridis palettes, that are perceptually uniform and
-colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket &
-Mako. \* Rcolorbrewer palettes and inspired palette visualization. \*
-ggplot2 easy-to-use integration of scale_color\_\* and scale_fill\_\*
-bindings. \* base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo,
-Cm & all hcl/pal palettes. \* Okabe-Ito palette, for a highly distinct
-and colorblind-safe scheme.
+your palette contains*? No problem!
+
+🌈 Colorify makes color creation and modification intuitive and
+effortless. Colorify is dependency-free yet combines functionality of
+popular color and visualization packages, including:
+
+- viridis palettes, that are perceptually uniform and
+  colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket
+  & Mako.
+- Rcolorbrewer palettes and inspired palette visualization.
+- ggplot2 easy-to-use integration of scale_color\_\* and scale_fill\_\*
+  bindings.
+- base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo, Cm & all
+  hcl/pal palettes.
+- Okabe-Ito palette, for a highly distinct and colorblind-safe scheme.
 
 But… I already have my own cool color palettes! Why should I need
 Colorify? Colorify can make your colors even coolor! By slightly
@@ -37,10 +40,12 @@ visually distinct color palettes. Simply drop in your own colors and
 palettes or pick them from the overview, Colorify automatically
 generates maximally different colors as need by.
 
-🌈 Colorify also lets you… \* Create color gradients between palette or
-custom colors \* Map color gradients to specific value ranges \* Build
-color functions when plots generette colors dynamically \* Convert from
-HSV/hexcolor to RGB color space
+🌈 Colorify also lets you…
+
+- Create color gradients between palette or custom colors
+- Map color gradients to specific value ranges
+- Build color functions when plots generette colors dynamically
+- Convert from HSV/hexcolor to RGB color space
 
 Feeling fancy? Free your inner artist and express yourself with
 coloRtistry!
