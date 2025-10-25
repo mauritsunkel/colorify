@@ -16,6 +16,14 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
 # BiocStyle::markdown() # for Bioconductor package 
 
+
+```
+
+```{r setup}
+library(myPackage)
+
+# https://r-package-guide.netlify.app/vignettes
+
 # build vignette - test with: help(package = "colorify") & browseVignettes("colorify")
 ## keep in mind: devtools::install_github("mauritsunkel/colorify", build_vignettes = TRUE)
 
@@ -61,20 +69,4 @@ colors <- colorify(colors = colorify(4), nn = nn, plot = T)
 colorify::display_palettes(10)
 colorify::display_palettes(10, 'rcolorbrewer')
 colorify::display_palettes(10, 'viridis')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
