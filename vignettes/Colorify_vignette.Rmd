@@ -1,0 +1,80 @@
+---
+title: "Introduction to coloRify"
+author: "Maurits Unkel"
+date: "10-15-2025"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{colorify}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r options, include = FALSE, echo = FALSE, results = 'asis',}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+
+# BiocStyle::markdown() # for Bioconductor package 
+
+# build vignette - test with: help(package = "colorify") & browseVignettes("colorify")
+## keep in mind: devtools::install_github("mauritsunkel/colorify", build_vignettes = TRUE)
+
+# TODO vignette that goes through all examples & colortistry plot (#Rtistry) 
+## note R grDevices colors are used, check with: grDevices::colors()
+## use colorspace::demoplot(colorify(4), type = "heatmap") for plot types 
+## intuitive range 0-100 insteaf of 0-255 
+## link vignette from docs 
+```
+
+# Introduction
+
+## Why use coloRify?
+
+## How coloRify works 
+
+
+
+
+
+
+
+```{r colorify setup, eval=TRUE, message=FALSE, warning=FALSE}
+library(colorify)
+
+## if parameters identical, change seed to change generation
+colorify(10, plot = TRUE, seed = 1)
+colorify(10, plot = TRUE, seed = 42)
+## set colors, generate additional up to n
+colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
+## create gradients
+colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 100, plot = TRUE)
+## paired gradients
+nn <- c(100, 500, 250)
+colors <- colorify(colors = colorify(4), nn = nn, plot = T)
+
+
+```
+
+
+
+
+colorify::display_palettes(10)
+colorify::display_palettes(10, 'rcolorbrewer')
+colorify::display_palettes(10, 'viridis')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
