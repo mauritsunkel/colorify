@@ -1,5 +1,7 @@
 # coloRify (development version)
 
+# v0.0.6
+* added tests/ * coverage badge 
 * polishing by CRAN standards for publishing
 
 # v0.0.5

@@ -1,7 +1,7 @@
 Package: colorify
 Type: Package
-Title: Color modification and generation.
-Version: 0.0.5
+Title: Colorify makes color/palette creation and modification intuitive and effortless, Colorify is dependency-free yet combines functionality of popular color and visualization packages! 
+Version: 0.0.6
 Authors@R: 
     person(given = "Maurits",
 	       family = "Unkel",
@@ -19,6 +19,6 @@ Depends:
     R (>= 4.3)
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
-
