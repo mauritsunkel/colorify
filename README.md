@@ -9,7 +9,10 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![license](https://img.shields.io/github/license/mauritsunkel/colorify)](https://opensource.org/license/apache-2-0)
 ![repo
 size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
+[![Test
+coverage](https://raw.githubusercontent.com/mauritsunkel/colorify/coverage/badges/coverage.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/test-coverage.yaml)
 ![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
+
 <!-- badges: end -->
 
 # coloRify <img src="man/figures/colorify_logo.png" align="right" height="139" alt="" />
