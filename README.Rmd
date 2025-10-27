@@ -37,7 +37,8 @@ Are you, like me, tired of errors complaining *you need more colors than your pa
 * base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo, Cm & all hcl/pal palettes.
 * Okabe-Ito palette, for a highly distinct and colorblind-safe scheme.  
 
-But... I already have my own cool color palettes! Why should I need Colorify? Colorify can make your colors even coolor! By slightly adjusting hue, saturation, brightness or by nudging individual RGB channells your visualizations become more vibrant and clear! A bit of HSL/RGB knowledge goes a long way toward crafting perfectly balanced and visually distinct color palettes. Simply drop in your own colors and palettes or pick them from the overview, Colorify automatically generates maximally different colors as need by.
+But... I already have my own cool color palettes! Why should I need Colorify? Colorify can make your colors even ***COOLOR***✨! 
+By slightly adjusting hue, saturation, brightness or by nudging individual RGB channells your visualizations become more vibrant and clear! A bit of HSL/RGB knowledge goes a long way toward crafting perfectly balanced and visually distinct color palettes. Simply drop in your own colors and palettes or pick them from the overview, Colorify automatically generates maximally different colors as need by.
 
 🌈 Colorify also lets you...
 
@@ -50,13 +51,13 @@ Feeling fancy? Free your inner artist and express yourself with coloRtistry!
 
 # Installation
 
-goatea will become available on CRAN, the development version is available here.
+Colorify will become available on CRAN, the development version is available here.
 
 ``` r
-## coloRify installation requires R version >4.3, to download and install visit:. 
+## coloRify installation requires R version >4.3, to download and install visit:
 # R: https://cran.r-project.org/mirrors.html
 
-## To install GOATEA from CRAN, once available, use:
+## To install coloRify from CRAN, once available, use:
 install.packages('colorify')
 # or via pak
 pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
@@ -68,7 +69,7 @@ See the [vignette](https://mauritsunkel.github.io/colorify/colorify.html) for de
 
 # Contact
 
-A thank you for your time and effort in using colorify, I hope it may aid
+A thank you for your time and effort in using coloRify, I hope it may aid
 you in coloRifying your data!
 
 For issues: <https://github.com/mauritsunkel/colorify/issues>
