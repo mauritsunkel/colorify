@@ -3,5 +3,7 @@
 .RData
 .Ruserdata
 .Rbuildignore
+.gitignore
 inst/
 inst/doc
+colorify.Rproj
