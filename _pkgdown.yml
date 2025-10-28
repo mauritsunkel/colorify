@@ -1,0 +1,15 @@
+url: https://mauritsunkel.github.io/colorify
+
+template:
+  bootstrap: 5
+
+authors:
+  Maurits Unkel:
+    href: https://github.com/mauritsunkel
+    
+articles:
+  toc: 
+    depth: 4
+  title: Getting started
+  contents:
+  - colorify

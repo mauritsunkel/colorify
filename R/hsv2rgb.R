@@ -13,8 +13,8 @@
 #' 
 #' @examples
 #' colors <- colorify(5)
-#' rgb <- col2rgb(colors)
-#' hsv <- rgb2hsv(rgb, maxColorValue = 255)
+#' rgb <- grDevices::col2rgb(colors)
+#' hsv <- grDevices::rgb2hsv(rgb, maxColorValue = 255)
 #' rgb2 <- hsv2rgb(hsv['h',], hsv['s',], hsv['v',], maxColorValue = 255)
 hsv2rgb <- function(h, s, v, maxColorValue = 100) {
   ## scale from [0-100]

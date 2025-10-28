@@ -16,5 +16,5 @@ vector of Turbo hexcode colors
 Get Turbo colormap
 }
 \examples{
-colorify(colors=turbo(100), plot = T)
+colorify(colors=colorify:::turbo(100), plot = T)
 }

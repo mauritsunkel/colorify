@@ -3,7 +3,7 @@
 \name{colorify}
 \alias{colorify}
 \alias{colorify_pal}
-\title{coloRify: creation and modification of color/gradient palettes}
+\title{colorify: creation and modification of color/gradient palettes}
 \usage{
 colorify(
   n = NULL,
@@ -43,7 +43,6 @@ colorify(
   plot = FALSE,
   export = FALSE,
   verbose = TRUE,
-  debug = F,
   ...
 )
 
@@ -83,6 +82,10 @@ colorify_pal(
 }
 \arguments{
 \item{n}{integer, default: NULL, else amount of colors to get, if palette selected and more colors requested they will be generated}
+
+\item{colors}{character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes}
+
+\item{colours}{colors}
 
 \item{colors_lock}{numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If nn \%\% length(colors) == 0, i.e. if nn divisive by amount of colors without rest, set repeat given locking pattern}
 
@@ -150,7 +153,9 @@ colorify_pal(
 
 \item{export}{default: FALSE, if TRUE: export = getwd(), if export = "string/", save hexcodes, rgb, and hsl values to export/colorify.csv}
 
-\item{colors/colours}{character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes}
+\item{verbose}{default: TRUE, mentions if and how many colors are generated}
+
+\item{...}{Use the ellipsis parameter to set color space and interpolate for grDevices::colorRampPalette()}
 }
 \value{
 colorify: vector of color hexcodes
@@ -168,9 +173,8 @@ Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more
 
 Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.
 
-Use the ellipsis parameter, '...', to set space and interpolate for grDevices::colorRampPalette()
-
-Note that parameter call order within the function call matters, see examples and vignette.
+Note that parameter call order within the function call matters,
+see examples and vignette.
 
 A wrapper function around \code{\link{coloRify}} to
 turn it into a palette function compatible with
@@ -187,42 +191,40 @@ colorify(10, plot = TRUE, seed = 42)
 colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 ## create gradients
 colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 100, plot = TRUE)
-## paired gradients
-nn <- c(100, 500, 250)
-colors <- colorify(colors = colorify(4), nn = nn, plot = T)
 
 ## viridis gradient, lighten and saturate, darken
 colorify(colors = "viridis", n = 100, plot = TRUE)
-colorify(colors = "viridis", n = 10, plot = TRUE, l = 1.2, s = 10)
-colorify(colors = "viridis", n = 10, plot = TRUE, l = .9)
-TODO doc examples for nn 
-colorify(colors = colorify(nn = Inf)(10), plot = T) # basically random palette function
-colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = T)
-colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = T)
-colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = T)
+colorify(colors = "viridis", n = 10, plot = TRUE, lf = 1.5, sv = 10)
+colorify(colors = "viridis", n = 10, plot = TRUE, lf = .9)
+# TODO add examples for nn to vignette
+colorify(colors = colorify(nn = Inf)(10), plot = TRUE) # basically random palette function
+colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = TRUE)
+colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = TRUE)
+colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = TRUE)
 
-## palette selected by name in colors[1], can add colors to selected palette, if n < length, remove colors , if greater generate 
-colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = T, n = 10)
+## palette selected by name in colors[1], 
+## can add colors to selected palette, 
+## if n < length, remove colors , if greater generate 
+colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = TRUE, n = 10)
 
 ## no adjustments to locked indices 
-FINAL more examples
-colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = -300)
-colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = 300)
+colorify(colors = "Okabe-Ito", colors_lock = c(FALSE,FALSE,TRUE,TRUE), plot = TRUE, rv = -300)
+colorify(colors = "Okabe-Ito", colors_lock = c(FALSE,FALSE,TRUE,TRUE), plot = TRUE, rv = 300)
 
 ## colors_lock and inversing
-colors <- colorify(5)
-colorify(colors_lock = c(T,T), colors=colors)
-colorify(colors_lock = ! c(T,F,T), colors=colors)
-colorify(colors_lock = c(3,4), colors=colors)
-colorify(colors_lock = - c(3,4), colors=colors)
+colors <- colorify(5, plot = TRUE)
+colorify(colors_lock = c(TRUE,TRUE), colors=colors, plot = TRUE, lf = .5)
+colorify(colors_lock = ! c(TRUE,FALSE,TRUE), colors=colors, plot = TRUE, lf = .5)
+colorify(colors_lock = c(3,4), colors=colors, plot = TRUE, lf = .5)
+colorify(colors_lock = -c(3,4), colors=colors, plot = TRUE, lf = .5)
 
 ## rainbow
-colorify(colors=grDevices::rainbow(100, s = .5), plot = T)
-colorify(colors="rainbow", n = 100, sf = .5, plot = T)
-colorify(colors=grDevices::rainbow(100, v = .5), plot = T)
-colorify(colors="rainbow", n = 100, lf = .5, plot = T,)
-colorify(colors=grDevices::rainbow(100, start = .25, end = .75), plot = T)
-colorify(colors=grDevices::rainbow(100)[25:75], plot = T)
+colorify(colors=grDevices::rainbow(100, s = .5), plot = TRUE)
+colorify(colors="rainbow", n = 100, sf = .5, plot = TRUE)
+colorify(colors=grDevices::rainbow(100, v = .5), plot = TRUE)
+colorify(colors="rainbow", n = 100, lf = .5, plot = TRUE)
+colorify(colors=grDevices::rainbow(100, start = .25, end = .75), plot = TRUE)
+colorify(colors=grDevices::rainbow(100)[25:75], plot = TRUE)
 
 ## order
 colorify(10, plot = TRUE, order = 1)  # default
@@ -232,24 +234,37 @@ colorify(10, plot = TRUE, order = -3) # negative shift
 colorify(10, plot = TRUE, order = 12) # > n
 
 ## call order
-TODO Note that parameter call order within the function call matters, see examples and vignette: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
+# Note that parameter call order within the function call matters, 
+# see examples and vignette: 
+# rv = 20 then rf = 1.2 can be different then 
+# rf = 1.2 then rv = 20
 
-## circlize::colorRamp2  
+# TODO add example to vignette
 colors_map <- c(-5, 0, 10)
 colors <- c("red", "white", "blue")
-if (requireNamespace('circlize')) color_bar <- circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
-color_bar <- colorify(colors = colors, colors_map = colors_map, space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
-image(1:100, 1, as.matrix(1:100), col = color_bar, axes = FALSE, main = "Color Mapping using circlize::colorRamp2")
-
-TODO FINAL rgb, hsl examples (in vignette)
-TODO FINAL all parameter examples (in)
+if (requireNamespace('circlize')) 
+color_bar <- 
+  circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
+color_bar <- colorify(
+  colors = colors, 
+  colors_map = colors_map, 
+  space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
+graphics::image(1:100, 1, as.matrix(1:100), 
+  col = color_bar, 
+  axes = FALSE, 
+  main = "Color Mapping using circlize::colorRamp2")
 ## named base R/hexcode
 colorifunction <- colorify_pal(colors = c('red', '#FFFFFF', 'blue'))
-colorify(colors = colorifunction(10), plot = T)
+colorify(colors = colorifunction(10), plot = TRUE)
 ## empty for random
 colorifunction <- colorify_pal()
-colorify(colors = colorifunction(10), plot = T)
+colorify(colors = colorifunction(10), plot = TRUE)
 ## named colors and palette(s)
 colorifunction <- colorify_pal(colors = c('green', 'viridis', 'rainbow', 'yellow'), plot = T)
-colorify(colors = colorifunction(100), plot = T)
+colorify(colors = colorifunction(100), plot = TRUE)
+}
+\seealso{
+Browse vignettes with \code{vignette("colorify")}
+
+Browse vignettes with \code{vignette("colorify")}
 }

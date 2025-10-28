@@ -9,8 +9,6 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/colorify)](https://CRAN.R-project.org/package=colorify)
-[![Test
-coverage](https://raw.githubusercontent.com/mauritsunkel/colorify/coverage/badges/coverage.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/test-coverage.yaml)
 [![license](https://img.shields.io/github/license/mauritsunkel/colorify)](https://opensource.org/license/apache-2-0)
 ![repo
 size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
@@ -23,8 +21,8 @@ Are you, like me, tired of errors complaining *you need more colors than
 your palette contains*? No problem!
 
 🌈 Colorify makes color creation and modification intuitive and
-effortless. Colorify is dependency-free yet combines functionality of
-popular color and visualization packages, including:
+effortless. Colorify is lightweight and dependency-free yet combines
+functionality of popular color and visualization packages, including:
 
 - viridis palettes, that are perceptually uniform and
   colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket

@@ -5,13 +5,15 @@
 #' @param ... to pass arguments to grDevices::colorRamp
 #'
 #' @description
-#' \code{\link{coloRify}} map for gradient coloring using grDevices::colorRamp, inspired by circlize::colorRamp2. 
+#' \code{\link{colorify}} map for gradient coloring using grDevices::colorRamp, inspired by circlize::colorRamp2. 
 #' Note that colors_map and colors will be ordered ascendingly by colors_map values. 
 #'
 #' @returns function with colors and breaks attributes, can be called as function(c(values)) to return hexcolorcodes
 #'
+#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' 
 #' @examples
-#' map_f <- colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
+#' map_f <- colorify:::colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
 #' colorify(colors=map_f(c(-1,0,2,3)), plot=T)
 colorify_map <- function(colors, colors_map, ...) {
   if (length(colors) != length(colors_map)) stop("for color mapping: 'colors' and 'colors_map' must be the same length.")
@@ -45,7 +47,7 @@ colorify_map <- function(colors, colors_map, ...) {
         # message(4, " ", ri)
         rgb_val <- ramp_list[[ri]](scaled)
         ## convert rgb to hexcolor
-        mapped_colors[vi] <- rgb(rgb_val[1], rgb_val[2], rgb_val[3], maxColorValue = 255)
+        mapped_colors[vi] <- grDevices::rgb(rgb_val[1], rgb_val[2], rgb_val[3], maxColorValue = 255)
       }
     }
     return(mapped_colors)

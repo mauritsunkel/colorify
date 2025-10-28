@@ -1,14 +1,17 @@
 Package: colorify
 Type: Package
-Title: Colorify makes color/palette creation and modification intuitive and effortless, Colorify is dependency-free yet combines functionality of popular color and visualization packages! 
-Version: 0.0.6
+Title: Making Color/Palette Creation and Modification Intuitive and Effortless, Colorify is Dependency-Free yet Combines Functionality of Popular Color and Visualization Packages!
+Version: 0.0.9
 Authors@R: 
     person(given = "Maurits",
 	       family = "Unkel",
 		   role = c("aut", "cre"),
 		   email = "mauritsunkel@gmail.com")
 Description: Color modification and generation.
-License: Apache (>= 2) + file LICENSE
+URL: https://github.com/mauritsunkel/colorify,
+    https://mauritsunkel.github.io/colorify
+BugReports: https://github.com/mauritsunkel/colorify/issues
+License: Apache License 2.0 | file LICENSE
 Encoding: UTF-8
 LazyData: false
 LazyDataCompression: xz
@@ -21,5 +24,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-	ggplot2
+	ggplot2,
+	circlize
 VignetteBuilder: knitr

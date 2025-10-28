@@ -7,7 +7,7 @@
 colortistry(colors_list, border_color = NA)
 }
 \arguments{
-\item{colors_list}{list of colors generated with \code{\link{coloRify}}, see example}
+\item{colors_list}{list of colors generated with \code{\link{colorify}}, see example}
 
 \item{border_color}{default: NA, for no border, otherwise R grDevices color or hexcolor}
 }
@@ -20,11 +20,34 @@ Colortistry plot from Colorified palettes
 \examples{
 colors_list <- list()
 for (i in seq(100)) {
-  colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(T,F,F,F,F), 20), hf = 25/i, lf = i/20)
-  if (i \%\% 3) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(F,F,T,F,F), 20), hf = 30/i, lf = i/20)
-  if (i \%\% 4) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(F,F,F,T,F), 20), hf = 50/i, lf = i/40)
-  if (i \%\% 5) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(F,T,F,F,F), 20), hf = 50/i, sf = i/50)
+  colors_list[[i]] <- colorify(
+  n = 100, 
+  colors = "rainbow", 
+  colors_lock = rep(c(T,F,F,F,F), 20), 
+  hf = 25/i, 
+  lf = i/20)
+  if (i \%\% 3) colors_list[[i]] <- colorify(
+  n = 100, 
+  colors = "rainbow", 
+  colors_lock = rep(c(F,F,T,F,F), 20), 
+  hf = 30/i, 
+  lf = i/20)
+  if (i \%\% 4) colors_list[[i]] <- colorify(
+  n = 100, 
+  colors = "rainbow",
+  colors_lock = rep(c(F,F,F,T,F), 20), 
+  hf = 50/i, 
+  lf = i/40)
+  if (i \%\% 5) colors_list[[i]] <- colorify(
+  n = 100, 
+  colors = "rainbow", 
+  colors_lock = rep(c(F,T,F,F,F), 20), 
+  hf = 50/i, 
+  sf = i/50)
 }
 colortistry(colors_list)
 colortistry(colors_list, border_color = 'black')
+}
+\seealso{
+Browse vignettes with \code{vignette("colorify")}
 }

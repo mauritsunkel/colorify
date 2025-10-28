@@ -23,7 +23,7 @@ Expects hsv color values to be in range (0-100])
 }
 \examples{
 colors <- colorify(5)
-rgb <- col2rgb(colors)
-hsv <- rgb2hsv(rgb, maxColorValue = 255)
+rgb <- grDevices::col2rgb(colors)
+hsv <- grDevices::rgb2hsv(rgb, maxColorValue = 255)
 rgb2 <- hsv2rgb(hsv['h',], hsv['s',], hsv['v',], maxColorValue = 255)
 }

@@ -17,10 +17,13 @@ colorify_map(colors, colors_map, ...)
 function with colors and breaks attributes, can be called as function(c(values)) to return hexcolorcodes
 }
 \description{
-\code{\link{coloRify}} map for gradient coloring using grDevices::colorRamp, inspired by circlize::colorRamp2.
+\code{\link{colorify}} map for gradient coloring using grDevices::colorRamp, inspired by circlize::colorRamp2.
 Note that colors_map and colors will be ordered ascendingly by colors_map values.
 }
 \examples{
-map_f <- colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
+map_f <- colorify:::colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
 colorify(colors=map_f(c(-1,0,2,3)), plot=T)
+}
+\seealso{
+Browse vignettes with \code{vignette("colorify")}
 }

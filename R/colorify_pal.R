@@ -8,18 +8,20 @@
 #' 
 #' @export
 #' 
+#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' 
 #' @rdname colorify
 #'
 #' @examples
 #' ## named base R/hexcode
 #' colorifunction <- colorify_pal(colors = c('red', '#FFFFFF', 'blue'))
-#' colorify(colors = colorifunction(10), plot = T)
+#' colorify(colors = colorifunction(10), plot = TRUE)
 #' ## empty for random
 #' colorifunction <- colorify_pal()
-#' colorify(colors = colorifunction(10), plot = T)
+#' colorify(colors = colorifunction(10), plot = TRUE)
 #' ## named colors and palette(s)
 #' colorifunction <- colorify_pal(colors = c('green', 'viridis', 'rainbow', 'yellow'), plot = T)
-#' colorify(colors = colorifunction(100), plot = T)
+#' colorify(colors = colorifunction(100), plot = TRUE)
 colorify_pal <- function(
     colors = character(0), colors_lock = NULL,
     hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,

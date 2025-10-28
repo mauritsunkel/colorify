@@ -1,12 +1,13 @@
 #### DOCS ----
 
-#' coloRify: creation and modification of color/gradient palettes 
+#' colorify: creation and modification of color/gradient palettes 
 #'
 #' Either generate theoretically maximally different colors, select an available R grDevices palette and/or modify the colors of the given gradient/palette
 #'
 #' @param n integer, default: NULL, else amount of colors to get, if palette selected and more colors requested they will be generated
 #' @param nn integer (vector), default: n, else amount(s) of colors to output as gradient(s), after completing palette for n colors, if Inf return a callable function(n) generating colors
-#' @param colors/colours character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes
+#' @param colors character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes
+#' @param colours colors
 #' @param colors_lock numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If nn %% length(colors) == 0, i.e. if nn divisive by amount of colors without rest, set repeat given locking pattern
 #' @param colors_names character, default: character(0), else return named vector of final colors
 #' @param colors_map numeric, default numeric(0), else vector of n values for colors to make gradient map between and return function
@@ -44,10 +45,14 @@
 #' @param order default: 1, numeric (vector) to adjust colors order, -1: reverse order, 0: seeded random order, >1: shift order, c(-1, >1): reverse then shift order, or numeric vector as many colors to set custom order (if longer, vector shortened to n colors)
 #' @param plot default: FALSE, if TRUE or string, plot pie chart of color palette, if 'i' in string then plot image instead of pie,  if 'l' in string plot color index as labels
 #' @param export default: FALSE, if TRUE: export = getwd(), if export = "string/", save hexcodes, rgb, and hsl values to export/colorify.csv
+#' @param verbose default: TRUE, mentions if and how many colors are generated
+#' @param ... Use the ellipsis parameter to set color space and interpolate for grDevices::colorRampPalette()
 #'
 #' @returns colorify: vector of color hexcodes
 #'
 #' @export
+#' 
+#' @seealso Browse vignettes with \code{vignette("colorify")}
 #'
 #' @description
 #' The main colorify function can be used to generate or take colors that can then be modified with the same function call. See the vignette for extended examples. 
@@ -60,9 +65,8 @@
 #' 
 #' Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.
 #' 
-#' Use the ellipsis parameter, '...', to set space and interpolate for grDevices::colorRampPalette()
-#' 
-#' Note that parameter call order within the function call matters, see examples and vignette. 
+#' Note that parameter call order within the function call matters, 
+#' see examples and vignette. 
 #' 
 #' @examples
 #' ## if parameters identical, change seed to change generation
@@ -72,42 +76,40 @@
 #' colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 #' ## create gradients
 #' colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 100, plot = TRUE)
-#' ## paired gradients
-#' nn <- c(100, 500, 250)
-#' colors <- colorify(colors = colorify(4), nn = nn, plot = T)
 #' 
 #' ## viridis gradient, lighten and saturate, darken
 #' colorify(colors = "viridis", n = 100, plot = TRUE)
-#' colorify(colors = "viridis", n = 10, plot = TRUE, l = 1.2, s = 10)
-#' colorify(colors = "viridis", n = 10, plot = TRUE, l = .9)
-#' TODO doc examples for nn 
-#' colorify(colors = colorify(nn = Inf)(10), plot = T) # basically random palette function
-#' colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = T)
-#' colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = T)
-#' colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = T)
+#' colorify(colors = "viridis", n = 10, plot = TRUE, lf = 1.5, sv = 10)
+#' colorify(colors = "viridis", n = 10, plot = TRUE, lf = .9)
+#' # TODO add examples for nn to vignette
+#' colorify(colors = colorify(nn = Inf)(10), plot = TRUE) # basically random palette function
+#' colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = TRUE)
+#' colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = TRUE)
+#' colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = TRUE)
 #' 
-#' ## palette selected by name in colors[1], can add colors to selected palette, if n < length, remove colors , if greater generate 
-#' colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = T, n = 10)
+#' ## palette selected by name in colors[1], 
+#' ## can add colors to selected palette, 
+#' ## if n < length, remove colors , if greater generate 
+#' colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = TRUE, n = 10)
 #' 
 #' ## no adjustments to locked indices 
-#' FINAL more examples
-#' colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = -300)
-#' colorify(colors = "Okabe-Ito", colors_lock = c(F,F,T,T), plot = T, rv = 300)
+#' colorify(colors = "Okabe-Ito", colors_lock = c(FALSE,FALSE,TRUE,TRUE), plot = TRUE, rv = -300)
+#' colorify(colors = "Okabe-Ito", colors_lock = c(FALSE,FALSE,TRUE,TRUE), plot = TRUE, rv = 300)
 #' 
 #' ## colors_lock and inversing
-#' colors <- colorify(5)
-#' colorify(colors_lock = c(T,T), colors=colors)
-#' colorify(colors_lock = ! c(T,F,T), colors=colors)
-#' colorify(colors_lock = c(3,4), colors=colors)
-#' colorify(colors_lock = - c(3,4), colors=colors)
+#' colors <- colorify(5, plot = TRUE)
+#' colorify(colors_lock = c(TRUE,TRUE), colors=colors, plot = TRUE, lf = .5)
+#' colorify(colors_lock = ! c(TRUE,FALSE,TRUE), colors=colors, plot = TRUE, lf = .5)
+#' colorify(colors_lock = c(3,4), colors=colors, plot = TRUE, lf = .5)
+#' colorify(colors_lock = -c(3,4), colors=colors, plot = TRUE, lf = .5)
 #' 
 #' ## rainbow
-#' colorify(colors=grDevices::rainbow(100, s = .5), plot = T)
-#' colorify(colors="rainbow", n = 100, sf = .5, plot = T)
-#' colorify(colors=grDevices::rainbow(100, v = .5), plot = T)
-#' colorify(colors="rainbow", n = 100, lf = .5, plot = T,)
-#' colorify(colors=grDevices::rainbow(100, start = .25, end = .75), plot = T)
-#' colorify(colors=grDevices::rainbow(100)[25:75], plot = T)
+#' colorify(colors=grDevices::rainbow(100, s = .5), plot = TRUE)
+#' colorify(colors="rainbow", n = 100, sf = .5, plot = TRUE)
+#' colorify(colors=grDevices::rainbow(100, v = .5), plot = TRUE)
+#' colorify(colors="rainbow", n = 100, lf = .5, plot = TRUE)
+#' colorify(colors=grDevices::rainbow(100, start = .25, end = .75), plot = TRUE)
+#' colorify(colors=grDevices::rainbow(100)[25:75], plot = TRUE)
 #' 
 #' ## order
 #' colorify(10, plot = TRUE, order = 1)  # default
@@ -117,25 +119,32 @@
 #' colorify(10, plot = TRUE, order = 12) # > n
 #' 
 #' ## call order
-#' TODO Note that parameter call order within the function call matters, see examples and vignette: rv = 20 then rf = 1.2 can be different then rf = 1.2 then rv = 20, make examples
+#' # Note that parameter call order within the function call matters, 
+#' # see examples and vignette: 
+#' # rv = 20 then rf = 1.2 can be different then 
+#' # rf = 1.2 then rv = 20
 #' 
-#' ## circlize::colorRamp2  
+#' # TODO add example to vignette
 #' colors_map <- c(-5, 0, 10)
 #' colors <- c("red", "white", "blue")
-#' if (requireNamespace('circlize')) color_bar <- circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
-#' color_bar <- colorify(colors = colors, colors_map = colors_map, space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
-#' image(1:100, 1, as.matrix(1:100), col = color_bar, axes = FALSE, main = "Color Mapping using circlize::colorRamp2")
-#' 
-#' TODO FINAL rgb, hsl examples (in vignette)
-#' TODO FINAL all parameter examples (in)
+#' if (requireNamespace('circlize')) 
+#' color_bar <- 
+#'   circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
+#' color_bar <- colorify(
+#'   colors = colors, 
+#'   colors_map = colors_map, 
+#'   space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
+#' graphics::image(1:100, 1, as.matrix(1:100), 
+#'   col = color_bar, 
+#'   axes = FALSE, 
+#'   main = "Color Mapping using circlize::colorRamp2")
 colorify <- function(
-    #### colorify FINAL remove ---- 
     n = NULL, colors = character(0), colours = colors, colors_lock = NULL, colors_names = character(0), colors_map = numeric(0), nn = n,
     hf = 1, sf = 1, lf = 1, rf = 1, gf = 1, bf = 1,
     hv = 0, sv = 0, lv = 0, rv = 0L, gv = 0L, bv = 0L,
     hmin = 0L, smin = 0L, lmin = 0L, rmin = 0L, gmin = 0L, bmin = 0L, 
     hmax = 100L, smax = 100L, lmax = 100L, rmax = 100L, gmax = 100L, bmax = 100L,
-    alpha = 1, seed = 42L, order = 1, plot = FALSE, export = FALSE, verbose = TRUE, debug = F, ...) {
+    alpha = 1, seed = 42L, order = 1, plot = FALSE, export = FALSE, verbose = TRUE, ...) {
   
   colors <- colours
   
@@ -153,8 +162,6 @@ colorify <- function(
   nn <- if (is.null(nn)) length(colors) else pmax(0, round(nn)) # set gradient nn within range(s)
   if (nn == Inf & is.null(n)) n <- ifelse(length(colors) > 1, length(colors), 256) # set to return colorRampPalette function
   
-  if (debug) print(1)
-  
   ## add named palette(s) to colors
   colors <- unname(unlist(sapply(colors, function(color) {
     if (grepl('#', color) | color %in% grDevices::colors()) return(color)
@@ -171,7 +178,6 @@ colorify <- function(
     else if (palette == "Cm") grDevices::cm.colors(n)
     else color
   })))
-  if (debug) print(2)
   n <- ifelse(is.null(n), length(colors), max(0, round(n)))
   if (nn == Inf & length(colors) > n) {
     colors <- colors[1:length(colors)]
@@ -182,10 +188,10 @@ colorify <- function(
   if (length(colors) < n) {
     if (verbose) message(n - length(colors), " colors generated")
     ## generate random theoretically uniform RGB values and convert to hexcodes
-    rgb_matrix <- matrix(runif((n - length(colors)) * 3, min = 0, max = 255), ncol = 3)
-    colors <- c(colors, apply(rgb_matrix, 1, function(rgbv) rgb(rgbv[1], rgbv[2], rgbv[3], maxColorValue = 255)))
+    rgb_matrix <- matrix(stats::runif((n - length(colors)) * 3, min = 0, max = 255), ncol = 3)
+    colors <- c(colors, apply(rgb_matrix, 1, function(rgbv) grDevices::rgb(rgbv[1], rgbv[2], rgbv[3], maxColorValue = 255)))
   }
-  if (debug) print(3)
+  
   ## set (paired) gradient colors
   if (length(nn) == 1 & nn[1] > n & ! length(colors_map) > 0 & ! is.infinite(nn)) {
     colors <- grDevices::colorRampPalette(colors, ...)(nn)
@@ -194,7 +200,6 @@ colorify <- function(
   } else if ( ! is.infinite(nn) & length(nn) != 1 && length(nn) != length(colors) - 1) {
     stop('pass single nn or n for each gradient between colors')
   }
-  if (debug) print(4)
   if (length(colors) == 0) stop("Input starting color(s), palette name(s), or n colors to generate.")
   
   ## set colors to be modified
@@ -217,7 +222,7 @@ colorify <- function(
   colors_lock_i <- ! colors_lock_i
   
   ## initialize color space
-  rgb_values <- col2rgb(colors) / 255 * 100 # scale values intuitively between 0-100 
+  rgb_values <- grDevices::col2rgb(colors) / 255 * 100 # scale values intuitively between 0-100 
   call_mode <- "rgb"
   call_order <- names(as.list(sys.call()))
   call_order <- call_order[nzchar(call_order)]
@@ -239,7 +244,7 @@ colorify <- function(
     } else if (call %in% c("hv", "sv", "lv", "hf", "sf", "lf")) {
       if (call_mode == "rgb") {
         call_mode <- "hsv"
-        hsv_values <- rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 100) * 100 # scale values intuitively between 0-100
+        hsv_values <- grDevices::rgb2hsv(rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], maxColorValue = 100) * 100 # scale values intuitively between 0-100
       }
       switch(call,
              "hv" = hsv_values["h", ][colors_lock_i] <- pmax(hmin, pmin(hmax, hsv_values["h", ][colors_lock_i] + hv)),
@@ -252,7 +257,7 @@ colorify <- function(
     }
   }
  
-  ## finally: set hexcolor based on last color space and update rgb and hsv spaces for potential exporting
+  ## set hexcolor based on last color space and update rgb and hsv spaces for potential exporting
   if (call_mode == "hsv") {
     colors <- grDevices::hsv(hsv_values["h", ] / 100, hsv_values["s", ] / 100, hsv_values["v", ] / 100, alpha = alpha)
   } else if (call_mode == "rgb") {
@@ -283,14 +288,14 @@ colorify <- function(
   
   ## plot colors
   if ( ! isFALSE(plot)) {
-    pie(rep(1, length(colors)), labels = if (grepl("l|L", plot)) 1:length(colors) else NA, col = colors, border = NA)
-    if (grepl("i|I", plot)) image(1:length(colors), 1, as.matrix(1:length(colors)), col = colors, xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")
-    if (grepl("i|I", plot) && grepl("l|L", plot)) text(1:length(colors), rep(1, length(colors)), labels = 1:length(colors), col = "black")
+    graphics::pie(rep(1, length(colors)), labels = if (grepl("l|L", plot)) 1:length(colors) else NA, col = colors, border = NA)
+    if (grepl("i|I", plot)) graphics::image(1:length(colors), 1, as.matrix(1:length(colors)), col = colors, xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")
+    if (grepl("i|I", plot) && grepl("l|L", plot)) graphics::text(1:length(colors), rep(1, length(colors)), labels = 1:length(colors), col = "black")
   }
   ## export colors
   if (is.character(export) | isTRUE(export)) {
-    df <- setNames(cbind(as.data.frame(colors), t(rgb_values), t(hsv_values)), c("hexcode", "r", "g", "b", "h", "s", "l"))
-    ifelse(isTRUE(export), write.csv2(df, file = file.path(getwd(), "colorify.csv")), write.csv2(df, file = file.path(export, "colorify.csv")))
+    df <- stats::setNames(cbind(as.data.frame(colors), t(rgb_values), t(hsv_values)), c("hexcode", "r", "g", "b", "h", "s", "l"))
+    ifelse(isTRUE(export), utils::write.csv2(df, file = file.path(getwd(), "colorify.csv")), utils::write.csv2(df, file = file.path(export, "colorify.csv")))
   }
   
   ## return colorRampPalette function 

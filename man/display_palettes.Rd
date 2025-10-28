@@ -17,7 +17,7 @@ display_palettes(n = 10, i_palettes = 1:1000, border = FALSE)
 named vector with source and name of palettes, 'hcl' for grDevices::hcl.pals() and 'pal' for grDevices::palette.pals()
 }
 \description{
-Use \code{\link{coloRify}} to select and modify the palettes.
+Use \code{\link{colorify}} to select and modify the palettes.
 Note that discrete palettes with maximum n colors will be repeated in plotting.
 
 Any numeric i_palettes over maximum amount of palettes are not displayed.
@@ -32,7 +32,10 @@ display_palettes(i_palettes = 'RColorBrewer')
 display_palettes(i_palettes = 'Viridis')
 display_palettes(i_palettes = c("rainbow", "viridis"))
 
-display_palettes(i_palettes = c(1,5,10,20,40,100,119)
+display_palettes(i_palettes = c(1,5,10,20,40,100,119))
 display_palettes(n = 100, i_palettes = 1:10)
 display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
+}
+\seealso{
+Browse vignettes with \code{vignette("colorify")}
 }

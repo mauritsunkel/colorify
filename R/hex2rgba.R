@@ -9,11 +9,11 @@
 #'
 #' @examples
 #' colors <- colorify(5)
-#' hexcolor2rgba(colors)
-#' hexcolor2rgba(colors, alpha = .5)
+#' hex2rgba(colors)
+#' hex2rgba(colors, alpha = .5)
 #' colors <- gsub('FF$', 75, colors)
-#' hexcolor2rgba(colors)
-#' hexcolor2rgba(colors, alpha = .5)
+#' hex2rgba(colors)
+#' hex2rgba(colors, alpha = .5)
 hex2rgba <- function(hex, alpha = NULL) {
   stopifnot(
     is.character(hex),

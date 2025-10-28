@@ -9,13 +9,15 @@
 #' @return named vector with source and name of palettes, 'hcl' for grDevices::hcl.pals() and 'pal' for grDevices::palette.pals()
 #'
 #' @description
-#' Use \code{\link{coloRify}} to select and modify the palettes.
+#' Use \code{\link{colorify}} to select and modify the palettes.
 #' Note that discrete palettes with maximum n colors will be repeated in plotting.
 #'
 #' Any numeric i_palettes over maximum amount of palettes are not displayed.
 #'
 #' Contains all Viridis palettes, including Turbo.
-#'
+#' 
+#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' 
 #' @examples
 #' display_palettes()
 #' display_palettes(i_palettes = 50:75)
@@ -24,7 +26,7 @@
 #' display_palettes(i_palettes = 'Viridis')
 #' display_palettes(i_palettes = c("rainbow", "viridis"))
 #'
-#' display_palettes(i_palettes = c(1,5,10,20,40,100,119)
+#' display_palettes(i_palettes = c(1,5,10,20,40,100,119))
 #' display_palettes(n = 100, i_palettes = 1:10)
 #' display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
 display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
@@ -39,10 +41,10 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
   grDevices_palettes <- c("Rainbow", "Heat", "Terrain", "Topo", "Cm")
   hcl_palettes <- grDevices::hcl.pals()
   base_palettes <- grDevices::palette.pals()
-  turbo_palette <- setNames("Turbo", "Viridis-turbo")
-  grd_palettes <- setNames(grDevices_palettes, rep("grDevices", length(grDevices_palettes)))
-  hcl_palettes <- setNames(hcl_palettes, rep("hcl", length(hcl_palettes)))
-  base_palettes <- setNames(base_palettes, rep("pal", length(base_palettes)))
+  turbo_palette <- stats::setNames("Turbo", "Viridis-turbo")
+  grd_palettes <- stats::setNames(grDevices_palettes, rep("grDevices", length(grDevices_palettes)))
+  hcl_palettes <- stats::setNames(hcl_palettes, rep("hcl", length(hcl_palettes)))
+  base_palettes <- stats::setNames(base_palettes, rep("pal", length(base_palettes)))
   all_palettes <- c(turbo_palette, grd_palettes, hcl_palettes, base_palettes)
   
   if (is.character(i_palettes)) {
@@ -71,8 +73,8 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
   all_palettes <- all_palettes[i_palettes]
   
   ## save and set par plot margins
-  old_par <- par(no.readonly = TRUE)
-  par(mar = c(0, 0, 0, 0))
+  old_par <- graphics::par(no.readonly = TRUE)
+  graphics::par(mar = c(0, 0, 0, 0))
   
   ## initialize empty plot
   plot(NULL, xlim = c(-3, n), ylim = c(0, length(all_palettes)), xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n", main = "")
@@ -100,16 +102,16 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
     ## draw rectangular palettes
     y_bottom <- i - 1
     y_top <- i - 0.1
-    rect(xleft = 0:(n - 1), ybottom = y_bottom, xright = 1:n, ytop = y_top, col = colors, border = ifelse(border, TRUE, NA))
+    graphics::rect(xleft = 0:(n - 1), ybottom = y_bottom, xright = 1:n, ytop = y_top, col = colors, border = ifelse(border, TRUE, NA))
     
     ## center text in palette, no falling off side of plot
     text_x <- n / 2
     text_y <- (y_bottom + y_top) / 2
-    text(x = text_x, y = text_y, labels = all_palettes[i], col = "black", cex = 0.9, font = 2)
+    graphics::text(x = text_x, y = text_y, labels = all_palettes[i], col = "black", cex = 0.9, font = 2)
   }
   
   ## reset plot margins to default
-  par(old_par)
+  graphics::par(old_par)
   
   return(all_palettes)
 }
@@ -125,7 +127,7 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
 #' Viridis palettes, except "Magma", overlap with grDevices palettes
 #'
 #' @examples
-#' palette_name_mapping("dark2") # "Dark 2"
+#' colorify:::palette_name_mapping("dark2") # "Dark 2"
 palette_name_mapping <- function(palette) {
   palette_mapping <- list(
     ## custom palettes

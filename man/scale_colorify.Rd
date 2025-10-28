@@ -91,6 +91,66 @@ scale_colour_colorify(
 \item{nn}{integer, default: Inf, length of gradients, if Inf then set to 256}
 
 \item{n}{integer, default: 2, amount of colors(/gradients) to return, only works if not discrete}
+
+\item{colors}{character (vector), combination of selecting palette(s) by name (options: see display_palettes()), and/or vector of R color names and/or color hexcodes}
+
+\item{colors_lock}{numeric/boolean, default: NULL, numerical or logical index of colors (not) to be modified, if logical length != colors it will be cut or filled with TRUE/FALSE, prefix with '!' for logical vectors and '-' for numerical vectors to get inverse, see examples. If nn \%\% length(colors) == 0, i.e. if nn divisive by amount of colors without rest, set repeat given locking pattern}
+
+\item{hf}{hue factor, default: 1, multiply values by factor, proportional to base value of 1}
+
+\item{sf}{saturation factor, default: 1, multiply values by factor, proportional to base value of 1}
+
+\item{lf}{lightness/brightness factor, default: 1, multiply values by factor, proportional to base value of 1}
+
+\item{rf}{red factor, default: 1, multiply values by factor, proportional to base value of 1}
+
+\item{gf}{green factor, default: 1, multiply values by factor, proportional to base value of 1}
+
+\item{bf}{blue factor, default: 1, multiply values by factor, proportional to base value of 1}
+
+\item{hv}{hue value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
+
+\item{sv}{saturation value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
+
+\item{lv}{lightness/brightness value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
+
+\item{rv}{red value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
+
+\item{gv}{green value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
+
+\item{bv}{blue value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
+
+\item{hmin}{hue minimum threshold, default: 0, expected range (0, 100)}
+
+\item{smin}{saturation minimum threshold, default: 0, expected range (0, 100)}
+
+\item{lmin}{lightness/brightness minimum threshold, default: 0, expected range (0, 100)}
+
+\item{rmin}{red minimum threshold, default: 0, expected range (0, 100)}
+
+\item{gmin}{green minimum threshold, default: 0, expected range (0, 100)}
+
+\item{bmin}{blue minimum threshold, default: 0, expected range (0, 100)}
+
+\item{hmax}{hue maximum threshold, default: 0, expected range (0, 100)}
+
+\item{smax}{saturation maximum threshold, default: 0, expected range (0, 100)}
+
+\item{lmax}{lightness/brightness maximum threshold, default: 0, expected range (0, 100)}
+
+\item{rmax}{red maximum threshold, default: 0, expected range (0, 100)}
+
+\item{gmax}{green maximum threshold, default: 0, expected range (0, 100)}
+
+\item{bmax}{blue maximum threshold, default: 0, expected range (0, 100)}
+
+\item{alpha}{numeric, sets color alpha values}
+
+\item{seed}{integer, default: 42, set seed for generation of colors (n > given colors (palettes)) and colors ordering (see order)}
+
+\item{order}{default: 1, numeric (vector) to adjust colors order, -1: reverse order, 0: seeded random order, >1: shift order, c(-1, >1): reverse then shift order, or numeric vector as many colors to set custom order (if longer, vector shortened to n colors)}
+
+\item{verbose}{default: TRUE, mentions if and how many colors are generated}
 }
 \value{
 sets colors in ggplot2 plotted object, see examples
@@ -102,13 +162,21 @@ for rest and default coloRify parameters see \code{\link{colorify}}
 ## viridis ggplot2 examples Colorified 
 
 ## non-discrete
-dsub <- subset(diamonds, x > 5 & x < 6 & y > 5 & y < 6)
-dsub$diff <- with(dsub, sqrt(abs(x - y)) * sign(x - y))
-d <- ggplot(dsub, aes(x, y, colour = diff)) + geom_point()
-  d + scale_color_colorify(n = 4, colors = 'viridis') + theme_bw()
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  dsub <- subset(ggplot2::diamonds, x > 5 & x < 6 & y > 5 & y < 6)
+  dsub$diff <- with(dsub, sqrt(abs(x - y)) * sign(x - y))
+
+  d <- ggplot2::ggplot(dsub, ggplot2::aes(x, y, colour = diff)) + ggplot2::geom_point()
+    d + scale_color_colorify(n = 4, colors = 'viridis') + ggplot2::theme_bw()
+
 
 ## discrete
-p <- ggplot(mtcars, aes(wt, mpg))
-p + geom_point(size = 4, aes(colour = factor(cyl))) +
-  theme_bw() + scale_color_colorify(discrete = TRUE, seed = 1)
+
+  p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg))
+  p + ggplot2::geom_point(size = 4, ggplot2::aes(colour = factor(cyl))) +
+    ggplot2::theme_bw() + scale_color_colorify(discrete = TRUE, colors = c('red', 'blue', 'yellow'))
+}
+}
+\seealso{
+Browse vignettes with \code{vignette("colorify")}
 }
