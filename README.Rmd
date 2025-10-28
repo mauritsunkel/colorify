@@ -63,7 +63,7 @@ install.packages('colorify')
 pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
 ```
 
-# Running colorify - vignette
+# Running colorify - vignette - examples
 
 See the [vignette](https://mauritsunkel.github.io/colorify/colorify.html) for details and examples.
 

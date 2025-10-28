@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![Project Status: Active – The project has reached a stable, usable
@@ -9,10 +10,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![license](https://img.shields.io/github/license/mauritsunkel/colorify)](https://opensource.org/license/apache-2-0)
 ![repo
 size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
-[![Test
-coverage](https://raw.githubusercontent.com/mauritsunkel/colorify/coverage/badges/coverage.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/test-coverage.yaml)
 ![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
-
 <!-- badges: end -->
 
 # coloRify <img src="man/figures/colorify_logo.png" align="right" height="139" alt="" />
@@ -35,7 +33,7 @@ popular color and visualization packages, including:
 - Okabe-Ito palette, for a highly distinct and colorblind-safe scheme.
 
 But… I already have my own cool color palettes! Why should I need
-Colorify? Colorify can make your colors even coolor! By slightly
+Colorify? Colorify can make your colors even ***COOLOR***✨! By slightly
 adjusting hue, saturation, brightness or by nudging individual RGB
 channells your visualizations become more vibrant and clear! A bit of
 HSL/RGB knowledge goes a long way toward crafting perfectly balanced and
@@ -55,20 +53,20 @@ coloRtistry!
 
 # Installation
 
-goatea will become available on CRAN, the development version is
+Colorify will become available on CRAN, the development version is
 available here.
 
 ``` r
-## coloRify installation requires R version >4.3, to download and install visit:. 
+## coloRify installation requires R version >4.3, to download and install visit:
 # R: https://cran.r-project.org/mirrors.html
 
-## To install GOATEA from CRAN, once available, use:
+## To install coloRify from CRAN, once available, use:
 install.packages('colorify')
 # or via pak
 pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
 ```
 
-# Running colorify - vignette
+# Running colorify - vignette - examples
 
 See the
 [vignette](https://mauritsunkel.github.io/colorify/colorify.html) for
@@ -76,7 +74,7 @@ details and examples.
 
 # Contact
 
-A thank you for your time and effort in using colorify, I hope it may
+A thank you for your time and effort in using coloRify, I hope it may
 aid you in coloRifying your data!
 
 For issues: <https://github.com/mauritsunkel/colorify/issues>
