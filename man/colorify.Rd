@@ -116,29 +116,29 @@ colorify_pal(
 
 \item{bv}{blue value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100}
 
-\item{hmin}{hue minimum threshold, default: 0, expected range \link{0, 100}}
+\item{hmin}{hue minimum threshold, default: 0, expected range (0, 100)}
 
-\item{smin}{saturation minimum threshold, default: 0, expected range \link{0, 100}}
+\item{smin}{saturation minimum threshold, default: 0, expected range (0, 100)}
 
-\item{lmin}{lightness/brightness minimum threshold, default: 0, expected range \link{0, 100}}
+\item{lmin}{lightness/brightness minimum threshold, default: 0, expected range (0, 100)}
 
-\item{rmin}{red minimum threshold, default: 0, expected range \link{0, 100}}
+\item{rmin}{red minimum threshold, default: 0, expected range (0, 100)}
 
-\item{gmin}{green minimum threshold, default: 0, expected range \link{0, 100}}
+\item{gmin}{green minimum threshold, default: 0, expected range (0, 100)}
 
-\item{bmin}{blue minimum threshold, default: 0, expected range \link{0, 100}}
+\item{bmin}{blue minimum threshold, default: 0, expected range (0, 100)}
 
-\item{hmax}{hue maximum threshold, default: 0, expected range \link{0, 100}}
+\item{hmax}{hue maximum threshold, default: 0, expected range (0, 100)}
 
-\item{smax}{saturation maximum threshold, default: 0, expected range \link{0, 100}}
+\item{smax}{saturation maximum threshold, default: 0, expected range (0, 100)}
 
-\item{lmax}{lightness/brightness maximum threshold, default: 0, expected range \link{0, 100}}
+\item{lmax}{lightness/brightness maximum threshold, default: 0, expected range (0, 100)}
 
-\item{rmax}{red maximum threshold, default: 0, expected range \link{0, 100}}
+\item{rmax}{red maximum threshold, default: 0, expected range (0, 100)}
 
-\item{gmax}{green maximum threshold, default: 0, expected range \link{0, 100}}
+\item{gmax}{green maximum threshold, default: 0, expected range (0, 100)}
 
-\item{bmax}{blue maximum threshold, default: 0, expected range \link{0, 100}}
+\item{bmax}{blue maximum threshold, default: 0, expected range (0, 100)}
 
 \item{alpha}{numeric, sets color alpha values}
 
@@ -166,7 +166,7 @@ All grDevices plotting functions are provided as palettes, simply use: colors = 
 Viridis is recommended for (continuous) color-blind friendly paletets.
 Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more colors are required).
 
-Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range \link{0, 100}, values will be scaled between \link{0, 1}, as hsv() and rgb2hsv(maxColorValue = 1) require.
+Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.
 
 Use the ellipsis parameter, '...', to set space and interpolate for grDevices::colorRampPalette()
 

@@ -19,7 +19,7 @@ hsv2rgb(h, s, v, maxColorValue = 100)
 unnamed dataframe with rgb colors
 }
 \description{
-Expects hsv color values to be in range \link{0-100}
+Expects hsv color values to be in range (0-100])
 }
 \examples{
 colors <- colorify(5)

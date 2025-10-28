@@ -25,19 +25,19 @@
 #' @param gv green value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100
 #' @param bv blue value, default: 0, add value to values, linear from base value of 0 to a maximum value of 100
 #' 
-#' @param hmin hue minimum threshold, default: 0, expected range [0, 100]
-#' @param smin saturation minimum threshold, default: 0, expected range [0, 100]
-#' @param lmin lightness/brightness minimum threshold, default: 0, expected range [0, 100]
-#' @param rmin red minimum threshold, default: 0, expected range [0, 100]
-#' @param gmin green minimum threshold, default: 0, expected range [0, 100]
-#' @param bmin blue minimum threshold, default: 0, expected range [0, 100]
+#' @param hmin hue minimum threshold, default: 0, expected range (0, 100)
+#' @param smin saturation minimum threshold, default: 0, expected range (0, 100)
+#' @param lmin lightness/brightness minimum threshold, default: 0, expected range (0, 100)
+#' @param rmin red minimum threshold, default: 0, expected range (0, 100)
+#' @param gmin green minimum threshold, default: 0, expected range (0, 100)
+#' @param bmin blue minimum threshold, default: 0, expected range (0, 100)
 #' 
-#' @param hmax hue maximum threshold, default: 0, expected range [0, 100]
-#' @param smax saturation maximum threshold, default: 0, expected range [0, 100]
-#' @param lmax lightness/brightness maximum threshold, default: 0, expected range [0, 100]
-#' @param rmax red maximum threshold, default: 0, expected range [0, 100]
-#' @param gmax green maximum threshold, default: 0, expected range [0, 100]
-#' @param bmax blue maximum threshold, default: 0, expected range [0, 100]
+#' @param hmax hue maximum threshold, default: 0, expected range (0, 100)
+#' @param smax saturation maximum threshold, default: 0, expected range (0, 100)
+#' @param lmax lightness/brightness maximum threshold, default: 0, expected range (0, 100)
+#' @param rmax red maximum threshold, default: 0, expected range (0, 100)
+#' @param gmax green maximum threshold, default: 0, expected range (0, 100)
+#' @param bmax blue maximum threshold, default: 0, expected range (0, 100)
 #' 
 #' @param alpha numeric, sets color alpha values
 #' @param seed integer, default: 42, set seed for generation of colors (n > given colors (palettes)) and colors ordering (see order)
@@ -58,7 +58,7 @@
 #' Viridis is recommended for (continuous) color-blind friendly paletets. 
 #' Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more colors are required). 
 #' 
-#' Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range [0, 100], values will be scaled between [0, 1], as hsv() and rgb2hsv(maxColorValue = 1) require.
+#' Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.
 #' 
 #' Use the ellipsis parameter, '...', to set space and interpolate for grDevices::colorRampPalette()
 #' 

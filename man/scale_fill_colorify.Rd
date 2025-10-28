@@ -64,13 +64,18 @@ for rest and default coloRify parameters see \code{\link{colorify}}
 
 ## non-discrete
 dat <- data.frame(x = rnorm(10000), y = rnorm(10000))
-ggplot(dat, aes(x = x, y = y)) +
-  geom_hex() + coord_fixed() +
-  scale_fill_colorify(colors = 'viridis', n = 4) + theme_bw()
 
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  ggplot2::ggplot(dat, ggplot2::aes(x = x, y = y)) +
+    ggplot2::geom_hex() + coord_fixed() +
+    scale_fill_colorify(colors = 'viridis', n = 4) + theme_bw()
+}
 ## discrete
 df <- data.frame(category = c("A", "B", "C", "D"), value = c(10, 23, 15, 8))
-ggplot(df, aes(x = category, y = value, fill = category)) +
-  geom_bar(stat = "identity") +
-  scale_fill_colorify(discrete = TRUE, colors = 'viridis')
+
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  ggplot2::ggplot(df, ggplot2::aes(x = category, y = value, fill = category)) +
+    ggplot2::geom_bar(stat = "identity") +
+    scale_fill_colorify(discrete = TRUE, colors = 'viridis')
+}
 }

@@ -7,7 +7,7 @@
 #'
 #' @return unnamed dataframe with rgb colors
 #' 
-#' @description Expects hsv color values to be in range [0-100]
+#' @description Expects hsv color values to be in range (0-100])
 #' 
 #' @export
 #' 

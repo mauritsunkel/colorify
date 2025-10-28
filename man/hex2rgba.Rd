@@ -9,7 +9,7 @@ hex2rgba(hex, alpha = NULL)
 \arguments{
 \item{hex}{character (vector), hexcode colors (e.g. #FFFFFF)}
 
-\item{alpha}{numeric in range \link{0-1}, default: NULL to use full opacity or given opacity (AA) in hex (#RRGGBBAA)}
+\item{alpha}{numeric in range (0-1), default: NULL to use full opacity or given opacity (AA) in hex (#RRGGBBAA)}
 }
 \value{
 colors in rgba format

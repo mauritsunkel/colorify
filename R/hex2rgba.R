@@ -1,7 +1,7 @@
 #' Hex code colors to rgba format
 #'
 #' @param hex character (vector), hexcode colors (e.g. #FFFFFF)
-#' @param alpha numeric in range [0-1], default: NULL to use full opacity or given opacity (AA) in hex (#RRGGBBAA)
+#' @param alpha numeric in range (0-1), default: NULL to use full opacity or given opacity (AA) in hex (#RRGGBBAA)
 #'
 #' @returns colors in rgba format
 #' 
