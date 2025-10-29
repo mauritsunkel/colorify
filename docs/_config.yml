@@ -12,14 +12,14 @@ exclude:
   - pkgdown.js
   - bootstrap.css
   - bootstrap.min.css
-  - *.js
-  - *.png
-  - *.svg
-  - *.ico
-  - *.gif
-  - *.jpg
-  - *.jpeg
-  - *.map
+  - "*.js"
+  - "*.png"
+  - "*.svg"
+  - "*.ico"
+  - "*.gif"
+  - "*.jpg"
+  - "*.jpeg"
+  - "*.map"
   - site_libs/
   - assets/css/style.scss
 
