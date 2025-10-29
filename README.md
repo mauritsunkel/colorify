@@ -13,6 +13,8 @@ status](https://www.r-pkg.org/badges/version/colorify)](https://CRAN.R-project.o
 ![repo
 size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
 ![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
+[![pkgdown
+site](https://img.shields.io/badge/docs-pkgdown-brown.svg)](https://mauritsunkel.github.io/colorify)
 <!-- badges: end -->
 
 # coloRify <img src="man/figures/colorify_logo.png" align="right" height="139" alt="" />
@@ -68,11 +70,11 @@ install.packages('colorify')
 pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
 ```
 
-# Running colorify - vignette - examples
+# Documentation
 
-See the
-[vignette](https://mauritsunkel.github.io/colorify/colorify.html) for
-details and examples.
+See the pkgdown site for documentation with the
+[vignette](https://mauritsunkel.github.io/colorify) for details and
+examples.
 
 # Contact
 
