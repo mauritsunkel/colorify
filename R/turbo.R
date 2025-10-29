@@ -9,7 +9,7 @@
 #' @return vector of Turbo hexcode colors
 #'
 #' @examples
-#' colorify(colors=colorify:::turbo(100), plot = T)
+#' colorify(colors=colorify:::turbo(100), plot = TRUE)
 turbo <- function(n) {
   ## interpolate
   x <- seq.int(from = 0, to = 1, length.out = n)

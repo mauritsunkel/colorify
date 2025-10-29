@@ -22,7 +22,7 @@ Note that colors_map and colors will be ordered ascendingly by colors_map values
 }
 \examples{
 map_f <- colorify:::colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
-colorify(colors=map_f(c(-1,0,2,3)), plot=T)
+colorify(colors=map_f(c(-1,0,2,3)), plot=TRUE)
 }
 \seealso{
 Browse vignettes with \code{vignette("Introduction to coloRify")}

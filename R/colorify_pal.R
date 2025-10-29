@@ -1,6 +1,6 @@
 #' Colorifunctionalize palettes 
 #' 
-#' @description A wrapper function around \code{\link{coloRify}} to
+#' @description A wrapper function around \code{\link{colorify}} to
 #'  turn it into a palette function compatible with
 #'  \code{\link[ggplot2]{discrete_scale}} and \code{\link[ggplot2]{scale_fill_gradientn}}.
 #' 
@@ -20,7 +20,7 @@
 #' colorifunction <- colorify_pal()
 #' colorify(colors = colorifunction(10), plot = TRUE)
 #' ## named colors and palette(s)
-#' colorifunction <- colorify_pal(colors = c('green', 'viridis', 'rainbow', 'yellow'), plot = T)
+#' colorifunction <- colorify_pal(colors = c('green', 'viridis', 'rainbow', 'yellow'), plot = TRUE)
 #' colorify(colors = colorifunction(100), plot = TRUE)
 colorify_pal <- function(
     colors = character(0), colors_lock = NULL,
