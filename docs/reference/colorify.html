@@ -8,7 +8,7 @@ Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more
 Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.
 Note that parameter call order within the function call matters,
 see examples and vignette.
-A wrapper function around coloRify to
+A wrapper function around colorify to
 turn it into a palette function compatible with
 discrete_scale and scale_fill_gradientn.'><meta property="og:description" content='The main colorify function can be used to generate or take colors that can then be modified with the same function call. See the vignette for extended examples.
 Palette names are stripped of whitespace and lowered for name matching.
@@ -19,7 +19,7 @@ Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more
 Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.
 Note that parameter call order within the function call matters,
 see examples and vignette.
-A wrapper function around coloRify to
+A wrapper function around colorify to
 turn it into a palette function compatible with
 discrete_scale and scale_fill_gradientn.'><meta property="og:image" content="https://mauritsunkel.github.io/colorify/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -29,7 +29,7 @@ discrete_scale and scale_fill_gradientn.'><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html">colorify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@ Okabe-Ito is recommended for discrete distinct colors (up to 8, generate if more
 <p>Addition of values (.v) happens before multiplication with factors (.f). Intuitively, all given values are expected to be within range (0, 100), values will be scaled between (0, 1), as hsv() and rgb2hsv(maxColorValue = 1) require.</p>
 <p>Note that parameter call order within the function call matters,
 see examples and vignette.</p>
-<p>A wrapper function around <code>coloRify</code> to
+<p>A wrapper function around <code>colorify</code> to
 turn it into a palette function compatible with
 <code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html" class="external-link">discrete_scale</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></code>.</p>
     </div>
@@ -619,7 +619,7 @@ turn it into a palette function compatible with
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#E91C3AFF" "#9245CAFF" "#5639ACFF" "#8F1756FF" "#7A388CFF" "#55AA91FF"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "#BA76BEFF" "#BC5EE0FF" "#395DC7FF" "#CBC368FF"</span>
 <span class="r-in"><span><span class="co">## named colors and palette(s)</span></span></span>
-<span class="r-in"><span><span class="va">colorifunction</span> <span class="op">&lt;-</span> <span class="fu">colorify_pal</span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'green'</span>, <span class="st">'viridis'</span>, <span class="st">'rainbow'</span>, <span class="st">'yellow'</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">colorifunction</span> <span class="op">&lt;-</span> <span class="fu">colorify_pal</span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'green'</span>, <span class="st">'viridis'</span>, <span class="st">'rainbow'</span>, <span class="st">'yellow'</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">colorify</span><span class="op">(</span>colors <span class="op">=</span> <span class="fu">colorifunction</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="colorify-34.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="colorify-35.png" alt="" width="700" height="433"></span>

@@ -73,12 +73,12 @@ See the examples below for the following functionality:
 # Examples
 
 To run coloRify, simply install the package from CRAN...
-```{r install CRAN, eval=FALSE, message=FALSE, warning=FALSE}
+```{r install_CRAN, eval=FALSE, message=FALSE, warning=FALSE}
 install.packages('colorify')
 ```
 
 ...or the development version from GitHub
-```{r install GitHub, eval=FALSE, message=FALSE, warning=FALSE}
+```{r install_GitHub, eval=FALSE, message=FALSE, warning=FALSE}
 pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
 ```
 
@@ -88,14 +88,14 @@ library(colorify)
 ```
 
 Note that coloRify uses hexcolors (e.g.: '#FF0000FF') and includes base R colors (e.g.: 'red') from grDevices:
-```{r base colors, eval=FALSE, message=FALSE, warning=FALSE}
+```{r base_colors, eval=FALSE, message=FALSE, warning=FALSE}
 grDevices::colors()
 ```
 
 ## colorify()
 ### basic
 A basic call with just n(=10) colors requested. n takes an integer > 0. 
-```{r colorify basic, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_basic, eval=TRUE, message=FALSE, warning=FALSE}
 colorify(n = 10, plot = TRUE)
 ```
 
@@ -103,28 +103,28 @@ See in the output above that coloRify returns a hexcolor vector.
 
 ### seed
 To show that a different seed yields different generated colors. Pass seed as an integer.
-```{r colorify basic seed, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_basic_seed, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(10, plot = TRUE, seed = 1337)
 ```
 
 ### custom colors
 
 You can give custom colors and generate the rest, *always* have enough colors for plotting calls! 
-```{r colorify custom colors, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_custom_colors, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 ```
 
 ### naming
 
 Set names to the output hexcolor vector. colors_names takes a character vector of names the length of the amount of requested colors. 
-```{r colorify named colors, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_named_colors, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("red", "white", "blue"), n = 5, colors_names = paste0('name', rep(1:5)), plot = TRUE)
 ```
 
 ### ordering
 
 Order the hexcolor output. Integer given as starting point for ordering, may be negative. 
-```{r colorify order colors, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_order_colors, eval=TRUE, message=FALSE, warning=FALSE}
 # set integer for the ordering starting position
 c <- colorify(colors = c("red", "white", "blue"), n = 5, order = 2, plot = TRUE)
 c <- colorify(colors = c("red", "white", "blue"), n = 5, order = 3, plot = TRUE)
@@ -135,14 +135,14 @@ c <- colorify(colors = c("red", "white", "blue"), n = 5, order = -1, plot = TRUE
 ### transparency
 
 Set transparency of colors. alpha takes a float ranging between [0-1].
-```{r colorify colors transparency, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_colors_transparency, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("red", "white", "blue"), n = 5, alpha = .25, plot = TRUE)
 ```
 
 ### custom palettes
 
 You can supply an available palette in colors, that will be expanded up to requested n. 
-```{r colorify available palette, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_available_palette, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("Okabe-Ito"), plot = TRUE)
 # note the 10th color is generated
 c <- colorify(colors = c("Okabe-Ito"), plot = TRUE, n = 10)
@@ -153,7 +153,7 @@ c <- colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = TRUE, n =
 ### gradients
 
 Easy color gradients using the 'nn' parameter, also with custom and available palettes.
-```{r colorify color gradients, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_color_gradients, eval=TRUE, message=FALSE, warning=FALSE}
 g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 100, plot = TRUE)
 g2 <- colorify(colors = c("pastel2"), nn = 100, plot = TRUE)
 ```
@@ -161,7 +161,7 @@ g2 <- colorify(colors = c("pastel2"), nn = 100, plot = TRUE)
 ### plotting
 
 Plot options, default is circular output, plot = include 'i' for image and 'l' to plot color index as labels. 
-```{r colorify plotting, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_plotting, eval=TRUE, message=FALSE, warning=FALSE}
 g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = 'l')
 g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = 'i')
 g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = 'il')
@@ -176,7 +176,7 @@ The order in which values and factors are called matters, play around with combi
 
 Note that a gradient is made from the 'n' parameter here, as some palettes are actually called as functions internally. 
 
-```{r colorify values and factors, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_values_and_factors, eval=TRUE, message=FALSE, warning=FALSE}
 g3 <- colorify(100, colors = c("viridis"), plot = T)
 # r = red, f = factor: rf = 2 to multiply all red values 
 g4 <- colorify(100, colors = c("viridis"), rf = 2, plot = T)
@@ -195,7 +195,7 @@ g9 <- colorify(100, colors = c("viridis"), bv = -100, gv = -50, plot = T)
 ### minimum and maximum values
 
 When value and factor adjustments are made, the .min and .max parameters are used to set minimum and maximum RGB/HSL values.
-```{r colorify min and max, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_min_and_max, eval=TRUE, message=FALSE, warning=FALSE}
 g3 <- colorify(100, colors = c("viridis"), plot = T)
 g8 <- colorify(100, colors = c("viridis"), bf = .5, plot = T)
 # same factor decrease, yet limited by minimum value
@@ -211,7 +211,7 @@ g12 <- colorify(100, colors = c("viridis"), bf = 1, bmin = 40, bmax = 40,  plot 
 The colors_lock can be used by locking specific colors by numerical index, starting from 1. 
 colors_lock can also be used by patterning, as long as the nn % length of the boolean character == 0. 
 colors_lock can be inversed by putting a ! in front of the given vector. 
-```{r colorify color locking, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_color_locking, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("pastel2"), nn = 30, plot = TRUE)
 # lock by index
 c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(4,5,6, 10,11,12), lf = .5, plot = T)
@@ -225,7 +225,7 @@ c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(TRUE, FALSE, FALSE
 ### mapping
 
 colors_map takes a vector of values matching the vector of (generated) colors, returning a color_map function which can then be used to generate colors based on supplied values to it. 
-```{r colorify paired gradients, eval=TRUE, message=FALSE, warning=FALSE}
+```{r colorify_paired_gradients, eval=TRUE, message=FALSE, warning=FALSE}
 color_map <- colorify(colors = c('red', 'white', 'blue'), colors_map = c(0, 500, 1000))
 # note the map is then given values to map back to the given color ranges from colors_map
 m1 <- colorify(colors = color_map(0:1000), plot = T)
@@ -236,7 +236,7 @@ m1 <- colorify(colors = color_map(0:1000), plot = T)
 ### all palettes
 
 The base use of display_palettes() shows all available palettes in coloRify, that can be used with colorify(colors = c(...)).
-```{r display basic, eval=TRUE, message=FALSE, warning=FALSE}
+```{r display_basic, eval=TRUE, message=FALSE, warning=FALSE}
 display_palettes()
 ```
 
@@ -244,7 +244,7 @@ display_palettes()
 
 The n parameter here is used to show the amount of colors per palette. 
 
-```{r display basic n, eval=TRUE, message=FALSE, warning=FALSE}
+```{r display_basic_n, eval=TRUE, message=FALSE, warning=FALSE}
 p1 <- display_palettes(10)
 # display 100 colors per palette
 p2 <- display_palettes(100)
@@ -253,7 +253,7 @@ p2 <- display_palettes(100)
 ### palettes by index 
 
 The i_palettes parameter can also be passed numeric integers to get a more clear palette view. 
-```{r display zoomed view, eval=TRUE, message=FALSE, warning=FALSE}
+```{r display_zoomed_view, eval=TRUE, message=FALSE, warning=FALSE}
 # display palettes by index
 display_palettes(i_palettes = 50:75)
 display_palettes(i_palettes = c(1,5,10,20,40,100,119))
@@ -262,7 +262,7 @@ display_palettes(i_palettes = c(1,5,10,20,40,100,119))
 ### popular palettes
 
 Popular palettes from commonly used color packages are available. 
-```{r display common, eval=TRUE, message=FALSE, warning=FALSE}
+```{r display_common, eval=TRUE, message=FALSE, warning=FALSE}
 display_palettes(10, 'rcolorbrewer')
 display_palettes(10, 'viridis')
 display_palettes(10, 'rainbow') # grDevices palettes 
@@ -271,7 +271,7 @@ display_palettes(10, 'rainbow') # grDevices palettes
 ### bordered palettes
 
 Visualize palettes with borders around individual colors.
-```{r display border, eval=TRUE, message=FALSE, warning=FALSE}
+```{r display_border, eval=TRUE, message=FALSE, warning=FALSE}
 display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
 ```
 
@@ -279,7 +279,7 @@ display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
 
 These functions are bindings similar to the ggplot2 scale_* functions, to use them ggplot2 has to be installed and loaded.
 
-```{r scale_colorify ggplot2 setup, eval=FALSE, message=FALSE, warning=FALSE}
+```{r scale_colorify_ggplot2_setup, eval=FALSE, message=FALSE, warning=FALSE}
 install.packages('ggplot2')
 library(ggplot2)
 ```
@@ -288,7 +288,7 @@ library(ggplot2)
 
 #### non-discrete
 
-```{r scale_colorify ggplot2 color non-discrete, eval=TRUE, message=FALSE, warning=FALSE}
+```{r scale_colorify_ggplot2_color_non_discrete, eval=TRUE, message=FALSE, warning=FALSE}
 dsub <- subset(ggplot2::diamonds, x > 5 & x < 6 & y > 5 & y < 6)
 dsub$diff <- with(dsub, sqrt(abs(x - y)) * sign(x - y))
 
@@ -300,7 +300,7 @@ ggplot2::ggplot(dsub, ggplot2::aes(x, y, colour = diff)) +
 
 #### discrete
 
-```{r scale_colorify ggplot2 color discrete, eval=TRUE, message=FALSE, warning=FALSE}
+```{r scale_colorify_ggplot2_color_discrete, eval=TRUE, message=FALSE, warning=FALSE}
 p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg))
 
 p + ggplot2::geom_point(size = 4, ggplot2::aes(colour = factor(cyl))) +
@@ -312,7 +312,7 @@ p + ggplot2::geom_point(size = 4, ggplot2::aes(colour = factor(cyl))) +
 
 #### non-discrete
 
-```{r scale_colorify ggplot2 fill non-discrete, eval=TRUE, message=FALSE, warning=FALSE}
+```{r scale_colorify_ggplot2_fill_non_discrete, eval=TRUE, message=FALSE, warning=FALSE}
 dat <- data.frame(x = rnorm(10000), y = rnorm(10000))
 
 ggplot2::ggplot(dat, ggplot2::aes(x = x, y = y)) +
@@ -322,7 +322,7 @@ ggplot2::ggplot(dat, ggplot2::aes(x = x, y = y)) +
 
 #### discrete
 
-```{r scale_colorify ggplot2 fill discrete, eval=TRUE, message=FALSE, warning=FALSE}
+```{r scale_colorify_ggplot2_fill_discrete, eval=TRUE, message=FALSE, warning=FALSE}
 df <- data.frame(category = c("A", "B", "C", "D"), value = c(10, 23, 15, 8))
 
 ggplot2::ggplot(df, ggplot2::aes(x = category, y = value, fill = category)) +
@@ -376,6 +376,6 @@ Q: How can I easily test my coloRify palettes on actual visualizations?
 
 ## Session info
 
-```{r session info}
+```{r session_info}
 sessionInfo()
 ```

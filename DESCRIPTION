@@ -1,7 +1,7 @@
 Package: colorify
 Type: Package
 Title: Making Color/Palette Creation and Modification Intuitive and Effortless, Colorify is Dependency-Free yet Combines Functionality of Popular Color and Visualization Packages!
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Maurits",
 	       family = "Unkel",
