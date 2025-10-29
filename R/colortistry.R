@@ -7,7 +7,7 @@
 #' 
 #' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
 #'
 #' @examples
 #' colors_list <- list()

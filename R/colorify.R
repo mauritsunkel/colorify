@@ -52,7 +52,7 @@
 #'
 #' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
 #'
 #' @description
 #' The main colorify function can be used to generate or take colors that can then be modified with the same function call. See the vignette for extended examples. 
@@ -288,7 +288,7 @@ colorify <- function(
   
   ## plot colors
   if ( ! isFALSE(plot)) {
-    graphics::pie(rep(1, length(colors)), labels = if (grepl("l|L", plot)) 1:length(colors) else NA, col = colors, border = NA)
+    if (isTRUE(plot)) graphics::pie(rep(1, length(colors)), labels = if (grepl("l|L", plot)) 1:length(colors) else NA, col = colors, border = NA)
     if (grepl("i|I", plot)) graphics::image(1:length(colors), 1, as.matrix(1:length(colors)), col = colors, xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")
     if (grepl("i|I", plot) && grepl("l|L", plot)) graphics::text(1:length(colors), rep(1, length(colors)), labels = 1:length(colors), col = "black")
   }

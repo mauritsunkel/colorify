@@ -8,7 +8,7 @@
 #' 
 #' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
 #' 
 #' @rdname colorify
 #'

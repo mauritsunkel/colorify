@@ -16,7 +16,7 @@
 #'
 #' Contains all Viridis palettes, including Turbo.
 #' 
-#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
 #' 
 #' @examples
 #' display_palettes()

@@ -25,5 +25,5 @@ map_f <- colorify:::colorify_map(colors = c("white", "blue", "red"), colors_map 
 colorify(colors=map_f(c(-1,0,2,3)), plot=T)
 }
 \seealso{
-Browse vignettes with \code{vignette("colorify")}
+Browse vignettes with \code{vignette("Introduction to coloRify")}
 }

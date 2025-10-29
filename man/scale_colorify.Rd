@@ -178,5 +178,5 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
 }
 }
 \seealso{
-Browse vignettes with \code{vignette("colorify")}
+Browse vignettes with \code{vignette("Introduction to coloRify")}
 }

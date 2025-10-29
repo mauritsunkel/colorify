@@ -37,5 +37,5 @@ display_palettes(n = 100, i_palettes = 1:10)
 display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
 }
 \seealso{
-Browse vignettes with \code{vignette("colorify")}
+Browse vignettes with \code{vignette("Introduction to coloRify")}
 }

@@ -49,5 +49,5 @@ colortistry(colors_list)
 colortistry(colors_list, border_color = 'black')
 }
 \seealso{
-Browse vignettes with \code{vignette("colorify")}
+Browse vignettes with \code{vignette("Introduction to coloRify")}
 }

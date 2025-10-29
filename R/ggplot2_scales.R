@@ -13,7 +13,7 @@
 #'
 #' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
 #' 
 #' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
@@ -84,7 +84,7 @@ scale_colour_colorify <- scale_color_colorify
 #' 
 #' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("colorify")}
+#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
 #' 
 #' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
