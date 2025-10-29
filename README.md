@@ -18,7 +18,7 @@ site](https://img.shields.io/badge/docs-pkgdown-brown.svg)](https://mauritsunkel
 [![R-CMD-check](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# coloRify <img src="man/figures/colorify_logo.png" align="right" height="139" alt="" />
+# coloRify <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 Are you, like me, tired of errors complaining *you need more colors than
 your palette contains*? No problem!
