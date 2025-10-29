@@ -1,0 +1,21 @@
+name: pages-build-deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: noop
+        run: |
+          echo "Skipping Jekyll. pkgdown site is already built in docs/."
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: noop
+        run: |
+          echo "Nothing to deploy. GitHub Pages is serving main/docs directly."
