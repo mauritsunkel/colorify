@@ -6,10 +6,10 @@ template:
 authors:
   Maurits Unkel:
     href: https://github.com/mauritsunkel
-    
+
 articles:
-  toc: 
+  toc:
     depth: 4
-  title: Getting started
-  contents:
-  - colorify
+    title: Getting started with colorify
+    contents:
+    - colorify
