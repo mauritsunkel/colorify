@@ -11,10 +11,9 @@
 #' @returns function with colors and breaks attributes, can be called as function(c(values)) to return hexcolorcodes
 #'
 #' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
-#' 
-#' @examples
-#' map_f <- colorify:::colorify_map(colors = c("white", "blue", "red"), colors_map = c(0, 10, -5))
-#' colorify(colors=map_f(c(-1,0,2,3)), plot=TRUE)
+#'
+#' @keywords internal
+#' @noRd
 colorify_map <- function(colors, colors_map, ...) {
   if (length(colors) != length(colors_map)) stop("for color mapping: 'colors' and 'colors_map' must be the same length.")
   if (length(colors) < 2 | length(colors_map) < 2) stop("You need at least two colors and two colors_map.")

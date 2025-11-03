@@ -7,13 +7,9 @@
 #' @param nn integer, default: Inf, length of gradients, if Inf then set to 256 
 #' @param ... additional parameters passed to \code{\link{colorify}}, \code{\link[ggplot2]{discrete_scale}} and/or \code{\link[ggplot2]{scale_color_gradientn}}
 #'
-#' @rdname scale_colorify
-#'
 #' @return sets colors in ggplot2 plotted object, see examples
-#'
-#' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
+#' @seealso \code{vignette("Introduction to coloRify")}
 #' 
 #' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
@@ -35,6 +31,8 @@
 #'   p + ggplot2::geom_point(size = 4, ggplot2::aes(colour = factor(cyl))) +
 #'     ggplot2::theme_bw() + scale_color_colorify(discrete = TRUE, colors = c('red', 'blue', 'yellow'))
 #' }
+#' @rdname scale_colorify
+#' @export
 scale_color_colorify <- function(
     ..., aesthetics = "color", discrete = FALSE,
     nn = Inf, n = 2, colors = character(0), colors_lock = NULL,

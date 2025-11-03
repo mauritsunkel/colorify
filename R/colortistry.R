@@ -40,8 +40,6 @@
 #' colortistry(colors_list)
 #' colortistry(colors_list, border_color = 'black')
 colortistry <- function(colors_list, border_color = NA) {
-  ## set plot margins
-  graphics::par(mar = c(0, 0, 0, 0))
   ## initialize empty colortistry plot
   plot(NULL, xlim = c(0, max(sapply(colors_list, length))), ylim = c(0, length(colors_list)), xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n")
   ## draw rectangle bars for each colors list

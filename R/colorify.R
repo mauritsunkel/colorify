@@ -48,11 +48,11 @@
 #' @param verbose default: TRUE, mentions if and how many colors are generated
 #' @param ... Use the ellipsis parameter to set color space and interpolate for grDevices::colorRampPalette()
 #'
-#' @returns colorify: vector of color hexcodes
+#' @return colorify: vector of color hexcodes
 #'
 #' @export
 #' 
-#' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
+#' @seealso \code{vignette("Introduction to coloRify")}
 #'
 #' @description
 #' The main colorify function can be used to generate or take colors that can then be modified with the same function call. See the vignette for extended examples. 

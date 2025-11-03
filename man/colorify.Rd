@@ -264,7 +264,7 @@ colorifunction <- colorify_pal(colors = c('green', 'viridis', 'rainbow', 'yellow
 colorify(colors = colorifunction(100), plot = TRUE)
 }
 \seealso{
-Browse vignettes with \code{vignette("Introduction to coloRify")}
+\code{vignette("Introduction to coloRify")}
 
 Browse vignettes with \code{vignette("Introduction to coloRify")}
 }

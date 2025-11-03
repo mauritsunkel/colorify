@@ -72,10 +72,6 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
   ## select palettes by index
   all_palettes <- all_palettes[i_palettes]
   
-  ## save and set par plot margins
-  old_par <- graphics::par(no.readonly = TRUE)
-  graphics::par(mar = c(0, 0, 0, 0))
-  
   ## initialize empty plot
   plot(NULL, xlim = c(-3, n), ylim = c(0, length(all_palettes)), xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n", main = "")
   
@@ -110,9 +106,6 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
     graphics::text(x = text_x, y = text_y, labels = all_palettes[i], col = "black", cex = 0.9, font = 2)
   }
   
-  ## reset plot margins to default
-  graphics::par(old_par)
-  
   return(all_palettes)
 }
 
@@ -126,8 +119,8 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
 #' All ColorBrewer palettes overlap with grDevices palettes
 #' Viridis palettes, except "Magma", overlap with grDevices palettes
 #'
-#' @examples
-#' colorify:::palette_name_mapping("dark2") # "Dark 2"
+#' @keywords internal
+#' @noRd
 palette_name_mapping <- function(palette) {
   palette_mapping <- list(
     ## custom palettes
