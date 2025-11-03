@@ -18,7 +18,7 @@ site](https://img.shields.io/badge/docs-pkgdown-brown.svg)](https://mauritsunkel
 [![R-CMD-check](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# coloRify <img src="man/figures/logo.png" align="right" height="139" alt="" />
+# coloRify <img src="man/figures/colorify_logo.png" align="right" height="139" alt="" />
 
 Are you, like me, tired of errors complaining *you need more colors than
 your palette contains*? No problem!
@@ -29,11 +29,11 @@ functionality of popular color and visualization packages, including:
 
 - viridis palettes, that are perceptually uniform and
   colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket
-  & Mako.
+  and Mako.
 - Rcolorbrewer palettes and inspired palette visualization.
 - ggplot2 easy-to-use integration of scale_color\_\* and scale_fill\_\*
   bindings.
-- base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo, Cm & all
+- base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo, Cm and all
   hcl/pal palettes.
 - Okabe-Ito palette, for a highly distinct and colorblind-safe scheme.
 

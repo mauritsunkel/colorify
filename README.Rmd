@@ -35,10 +35,10 @@ Are you, like me, tired of errors complaining *you need more colors than your pa
 
 🌈 Colorify makes color creation and modification intuitive and effortless. Colorify is lightweight and dependency-free yet combines functionality of popular color and visualization packages, including:
 
-* viridis palettes, that are perceptually uniform and colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket & Mako. 
+* viridis palettes, that are perceptually uniform and colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket and Mako. 
 * Rcolorbrewer palettes and inspired palette visualization. 
 * ggplot2 easy-to-use integration of scale_color_* and scale_fill_* bindings.
-* base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo, Cm & all hcl/pal palettes.
+* base R (grDevices) palettes: Rainbow, Heat, Terrain, Topo, Cm and all hcl/pal palettes.
 * Okabe-Ito palette, for a highly distinct and colorblind-safe scheme.  
 
 But... I already have my own cool color palettes! Why should I need Colorify? Colorify can make your colors even ***COOLOR***✨! 

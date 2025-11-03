@@ -1,6 +1,15 @@
-# coloRify (development version)
+# colorify (development version)
+
+# v0.1.2
+
+* 2nd submiussion to CRAN - comments: fixed DESCRIPTION title and description, removed ::: calls, removed par() calls
+
+# v0.1.0
+
+* first submission to CRAN 
 
 # v0.0.6
+
 * added tests/ * coverage badge 
 * polishing by CRAN standards for publishing
 

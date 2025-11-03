@@ -1,17 +1,22 @@
 Package: colorify
 Type: Package
-Title: Making Color/Palette Creation and Modification Intuitive and Effortless, Colorify is Dependency-Free yet Combines Functionality of Popular Color and Visualization Packages!
-Version: 0.1.1
+Title: Intuitive Color and Palette Generation and Modification
+Version: 0.1.2
 Authors@R: 
     person(given = "Maurits",
 	       family = "Unkel",
 		   role = c("aut", "cre"),
 		   email = "mauritsunkel@gmail.com")
-Description: Color modification and generation.
+Description: A one-stop shop for intuitive and dependency-free color and palette 
+    creation and modification. Includes palettes and functionality from popular 
+    packages such as 'viridis', 'RColorBrewer', and base R 'grDevices', as well 
+    as 'ggplot2' plot bindings. Users can generate perceptually uniform and 
+    colorblind-friendly palettes, adjust palettes in HSL and RGB color spaces, 
+    map color gradients to value ranges, and create color-generating functions.
 URL: https://github.com/mauritsunkel/colorify,
     https://mauritsunkel.github.io/colorify/
 BugReports: https://github.com/mauritsunkel/colorify/issues
-License: Apache License 2.0 | file LICENSE
+License: Apache License 2.0
 Encoding: UTF-8
 LazyData: false
 LazyDataCompression: xz
