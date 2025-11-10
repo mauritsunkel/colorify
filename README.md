@@ -9,12 +9,13 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/colorify)](https://CRAN.R-project.org/package=colorify)
+<!--
 [![license](https://img.shields.io/github/license/mauritsunkel/colorify)](https://opensource.org/license/apache-2-0)
-![repo
-size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
+![repo size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
+-->
 ![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
 [![pkgdown
-site](https://img.shields.io/badge/docs-pkgdown-brown.svg)](https://mauritsunkel.github.io/colorify/)
+site](https://img.shields.io/badge/docs-pkgdown-green.svg)](https://mauritsunkel.github.io/colorify/)
 [![R-CMD-check](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
