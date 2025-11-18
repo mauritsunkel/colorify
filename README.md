@@ -41,7 +41,7 @@ functionality of popular color and visualization packages, including:
 But… I already have my own cool color palettes! Why should I need
 Colorify? Colorify can make your colors even ***COOLOR***✨! By slightly
 adjusting hue, saturation, brightness or by nudging individual RGB
-channells your visualizations become more vibrant and clear! A bit of
+channels your visualizations become more vibrant and clear! A bit of
 HSL/RGB knowledge goes a long way toward crafting perfectly balanced and
 visually distinct color palettes. Simply drop in your own colors and
 palettes or pick them from the overview, Colorify automatically
