@@ -77,8 +77,8 @@ pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
 
 # Documentation
 
-See the pkgdown site for documentation with the
-[vignette](https://mauritsunkel.github.io/colorify/) for details and
+See the [pkgdown site for documentation](https://mauritsunkel.github.io/colorify/) with the
+[vignette](https://mauritsunkel.github.io/colorify/articles/colorify.html) for details and
 examples.
 
 # Contact
