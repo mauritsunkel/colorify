@@ -1,9 +1,0 @@
-pandoc: '3.4'
-pkgdown: 2.1.3
-pkgdown_sha: ~
-articles:
-  colorify: colorify.html
-last_built: 2025-11-10T13:18Z
-urls:
-  reference: https://mauritsunkel.github.io/colorify/reference
-  article: https://mauritsunkel.github.io/colorify/articles
