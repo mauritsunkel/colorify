@@ -17,7 +17,10 @@ status](https://www.r-pkg.org/badges/version/colorify)](https://CRAN.R-project.o
 [![pkgdown
 site](https://img.shields.io/badge/docs-pkgdown-green.svg)](https://mauritsunkel.github.io/colorify/)
 [![R-CMD-check](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml)
+![downloads](https://cranlogs.r-pkg.org/badges/grand-total/colorify)
 <!-- badges: end -->
+
+
 
 # coloRify <img src="vignettes/logo.png" align="right" height="139" alt="" />
 
