@@ -1,7 +1,7 @@
 Package: colorify
 Type: Package
 Title: Intuitive Color and Palette Generation and Modification
-Version: 0.1.2
+Version: 1.0.0
 Authors@R: 
     person(given = "Maurits",
 	       family = "Unkel",
