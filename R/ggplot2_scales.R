@@ -1,32 +1,32 @@
-#' coloRify scale color bindings for ggplot2 
+#' coloRify scale color bindings for ggplot2
 #'
 #' @inheritParams colorify
 #' @param aesthetics string, default: 'color', see \code{\link[ggplot2]{discrete_scale}} and \code{\link[ggplot2]{scale_color_gradientn}} for more aesthetics
 #' @param discrete boolean, default = FALSE (calls \code{\link[ggplot2]{scale_color_gradientn}}), else TRUE (calls \code{\link[ggplot2]{discrete_scale}})
 #' @param n integer, default: 2, amount of colors(/gradients) to return, only works if not discrete
-#' @param nn integer, default: Inf, length of gradients, if Inf then set to 256 
+#' @param nn integer, default: Inf, length of gradients, if Inf then set to 256
 #' @param ... additional parameters passed to \code{\link{colorify}}, \code{\link[ggplot2]{discrete_scale}} and/or \code{\link[ggplot2]{scale_color_gradientn}}
 #'
 #' @return sets colors in ggplot2 plotted object, see examples
-#' 
+#'
 #' @seealso \code{vignette("Introduction to coloRify")}
-#' 
+#'
 #' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
 #' @examples
-#' ## viridis ggplot2 examples Colorified 
-#' 
+#' ## viridis ggplot2 examples Colorified
+#'
 #' ## non-discrete
 #' if (requireNamespace("ggplot2", quietly = TRUE)) {
 #'   dsub <- subset(ggplot2::diamonds, x > 5 & x < 6 & y > 5 & y < 6)
 #'   dsub$diff <- with(dsub, sqrt(abs(x - y)) * sign(x - y))
-#' 
+#'
 #'   d <- ggplot2::ggplot(dsub, ggplot2::aes(x, y, colour = diff)) + ggplot2::geom_point()
 #'     d + scale_color_colorify(n = 4, colors = 'viridis') + ggplot2::theme_bw()
-#' 
-#' 
+#'
+#'
 #' ## discrete
-#' 
+#'
 #'   p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg))
 #'   p + ggplot2::geom_point(size = 4, ggplot2::aes(colour = factor(cyl))) +
 #'     ggplot2::theme_bw() + scale_color_colorify(discrete = TRUE, colors = c('red', 'blue', 'yellow'))
@@ -44,7 +44,7 @@ scale_color_colorify <- function(
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("Package 'ggplot2' is required for scale_fill_colorify(). Please install with: install.packages('ggplot2')")
   }
-  
+
   if (discrete) {
     ggplot2::discrete_scale(aesthetics, "colorify", colorify_pal(
       colors = colors, colors_lock = colors_lock,
@@ -69,38 +69,38 @@ scale_color_colorify <- function(
 #' @export
 scale_colour_colorify <- scale_color_colorify
 
-#' coloRify scale fill bindings for ggplot2 
+#' coloRify scale fill bindings for ggplot2
 #'
 #' @inheritParams colorify
 #' @param aesthetics string, default: 'fill', see \code{\link[ggplot2]{discrete_scale}} and \code{\link[ggplot2]{scale_fill_gradientn}} for more aesthetics
 #' @param discrete boolean, default = FALSE (calls \code{\link[ggplot2]{scale_fill_gradientn}}), else TRUE (calls \code{\link[ggplot2]{discrete_scale}})
 #' @param n integer, default: 2, amount of colors(/gradients) to return, only works if not discrete
-#' @param nn integer, default: Inf, length of gradients, if Inf then set to 256 
+#' @param nn integer, default: Inf, length of gradients, if Inf then set to 256
 #' @param ... additional parameters passed to \code{\link{colorify}}, \code{\link[ggplot2]{discrete_scale}} and/or \code{\link[ggplot2]{scale_fill_gradientn}}
 #'
 #' @return sets colors in ggplot2 plotted object, see examples
-#' 
+#'
 #' @export
-#' 
+#'
 #' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
-#' 
+#'
 #' @description for rest and default coloRify parameters see \code{\link{colorify}}
 #'
 #' @examples
 #' ## viridis ggplot2 examples Colorified
-#' 
+#'
 #' ## non-discrete
 #' dat <- data.frame(x = rnorm(10000), y = rnorm(10000))
-#' 
+#'
 #' if (requireNamespace("ggplot2", quietly = TRUE)) {
 #'   ggplot2::ggplot(dat, ggplot2::aes(x = x, y = y)) +
 #'     ggplot2::geom_hex() + ggplot2::coord_fixed() +
 #'     scale_fill_colorify(colors = 'viridis', n = 4) + ggplot2::theme_bw()
-#' 
+#'
 #' ## discrete
 #'   df <- data.frame(category = c("A", "B", "C", "D"), value = c(10, 23, 15, 8))
-#' 
-#' 
+#'
+#'
 #'   ggplot2::ggplot(df, ggplot2::aes(x = category, y = value, fill = category)) +
 #'     ggplot2::geom_bar(stat = "identity") +
 #'     scale_fill_colorify(discrete = TRUE, colors = 'viridis')
@@ -116,7 +116,7 @@ scale_fill_colorify <- function(
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("Package 'ggplot2' is required for scale_fill_colorify(). Please install with: install.packages('ggplot2')")
   }
-  
+
   if (discrete) {
     ggplot2::discrete_scale(aesthetics, "colorify", colorify_pal(
       colors = colors, colors_lock = colors_lock,

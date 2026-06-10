@@ -15,9 +15,9 @@
 #' Any numeric i_palettes over maximum amount of palettes are not displayed.
 #'
 #' Contains all Viridis palettes, including Turbo.
-#' 
+#'
 #' @seealso Browse vignettes with \code{vignette("Introduction to coloRify")}
-#' 
+#'
 #' @examples
 #' display_palettes()
 #' display_palettes(i_palettes = 50:75)
@@ -32,10 +32,10 @@
 display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
   stopifnot(
     is.numeric(n),
-    is.numeric(i_palettes) | is.character(i_palettes),
+    is.numeric(i_palettes) || is.character(i_palettes),
     is.logical(border)
   )
-  
+
   ## get base R grDevices palettes
   viridis_palette_names <- c("Viridis", "Plasma", "Inferno", "Cividis", "Rocket", "Mako", "Turbo")
   grDevices_palettes <- c("Rainbow", "Heat", "Terrain", "Topo", "Cm")
@@ -46,10 +46,10 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
   hcl_palettes <- stats::setNames(hcl_palettes, rep("hcl", length(hcl_palettes)))
   base_palettes <- stats::setNames(base_palettes, rep("pal", length(base_palettes)))
   all_palettes <- c(turbo_palette, grd_palettes, hcl_palettes, base_palettes)
-  
+
   if (is.character(i_palettes)) {
     i_palettes <- unlist(sapply(i_palettes, function(pal) {
-      if (tolower(pal) == 'rcolorbrewer') {
+      if (tolower(pal) == "rcolorbrewer") {
         brewer_palettes <- c(
           "BrBG", "PiYG", "PRGn", "PuOr", "RdBu", "RdGy", "RdYlBu", "RdYlGn", "Spectral",
           "Accent", "Dark 2", "Paired", "Pastel 1", "Pastel 2", "Set 1", "Set 2", "Set 3",
@@ -65,16 +65,16 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
         message("pass i_palettes = 'rcolorbrewer', 'viridis'(-palettes), see grDevices Palettes or numeric index/range e.g. = 1:30")
       }
     }))
-    
+
   }
   ## set index between 1 and maximum amount of palettes
   i_palettes <- i_palettes[i_palettes > 0 & i_palettes <= length(all_palettes)]
   ## select palettes by index
   all_palettes <- all_palettes[i_palettes]
-  
+
   ## initialize empty plot
   plot(NULL, xlim = c(-3, n), ylim = c(0, length(all_palettes)), xaxt = "n", yaxt = "n", xlab = "", ylab = "", bty = "n", main = "")
-  
+
   for (i in seq_along(all_palettes)) {
     ## get grDevices colors by palette name
     if (names(all_palettes[i]) == "hcl") {
@@ -94,19 +94,19 @@ display_palettes <- function(n = 10, i_palettes = 1:1000, border = FALSE) {
     } else if (all_palettes[i] == "Cm") {
       colors <- grDevices::cm.colors(n)
     }
-    
+
     ## draw rectangular palettes
     y_bottom <- i - 1
     y_top <- i - 0.1
     graphics::rect(xleft = 0:(n - 1), ybottom = y_bottom, xright = 1:n, ytop = y_top, col = colors, border = ifelse(border, TRUE, NA))
-    
+
     ## center text in palette, no falling off side of plot
     text_x <- n / 2
     text_y <- (y_bottom + y_top) / 2
     graphics::text(x = text_x, y = text_y, labels = all_palettes[i], col = "black", cex = 0.9, font = 2)
   }
-  
-  return(all_palettes)
+
+  all_palettes
 }
 
 #' Palette original name mapping
@@ -126,8 +126,7 @@ palette_name_mapping <- function(palette) {
     ## custom palettes
     "turbo" = "Turbo", "rainbow" = "Rainbow", "heat" = "Heat",
     "terrain" = "Terrain", "topo" = "Topo", "cm" = "Cm",
-    ## all RColorBrewer palettes
-    ## grDevices::palette.pals()
+    ## all RColorBrewer palettes (grDevices palette.pals)
     "r3" = "R3", "r 3" = "R3", "r4" = "R4", "r 4" = "R4", "ggplot2" = "ggplot2", "okabe-ito" = "Okabe-Ito",
     "accent" = "Accent", "dark2" = "Dark 2", "dark 2" = "Dark 2", "paired" = "Paired",
     "pastel1" = "Pastel 1", "pastel 1" = "Pastel 1", "pastel2" = "Pastel 2", "pastel 2" = "Pastel 2",
@@ -136,7 +135,7 @@ palette_name_mapping <- function(palette) {
     "classictableau" = "Classic Tableau", "classic tableau" = "Classic Tableau",
     "polychrome36" = "Polychrome 36", "polychrome 36" = "Polychrome 36",
     "alphabet" = "Alphabet",
-    ## grDevices::hcl.pals()
+    ## grDevices hcl.pals
     "dark3" = "Dark 3", "dark 3" = "Dark 3",
     "warm" = "Warm", "cold" = "Cold", "harmonic" = "Harmonic", "dynamic" = "Dynamic",
     "grays" = "Grays", "greys", "Grays", "lightgrays" = "Light Grays", "light grays" = "Light Grays",
@@ -175,7 +174,7 @@ palette_name_mapping <- function(palette) {
     "zissou1" = "Zissou 1", "zissou 1" = "Zissou 1",
     "cividis" = "Cividis", "roma" = "Roma",
     ## viridis variations (except viridisa = Magma)
-    "viridisb" = "Inferno", "viridisc" = "Plasma", "viridisd" = "Viridis", 'viridise' = 'Cividis', "viridisf" = "Rocket", "viridisg" = "Mako", 'viridish' = "Turbo"
+    "viridisb" = "Inferno", "viridisc" = "Plasma", "viridisd" = "Viridis", "viridise" = "Cividis", "viridisf" = "Rocket", "viridisg" = "Mako", "viridish" = "Turbo"
   )
   original_palette <- palette_mapping[[tolower(gsub(" ", "", palette))]]
   ifelse(is.null(original_palette), return(""), return(original_palette))

@@ -2,7 +2,7 @@
 title: "Introduction to coloRify"
 author: "Maurits Unkel"
 date: "10-15-2025"
-output: 
+output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
@@ -32,12 +32,11 @@ knitr::opts_chunk$set(
   dpi = 96         # better for screen readability
 )
 
-# BiocStyle::markdown() # for Bioconductor package 
 ```
 
 # Introduction
 
-🌈 Colorify makes color creation and modification intuitive and effortless. Colorify is lightweight and dependency-free yet combines functionality of popular color and visualization packages, including:
+ðŸŒˆ Colorify makes color creation and modification intuitive and effortless. Colorify is lightweight and dependency-free yet combines functionality of popular color and visualization packages, including:
 
 * viridis palettes, that are perceptually uniform and colorblind-friendly: Viridis, Turbo, Inferno, Cividis, Plasma, Rocket & Mako.
 * Rcolorbrewer palettes and inspired palette visualization.
@@ -47,22 +46,22 @@ knitr::opts_chunk$set(
 
 ## Why use coloRify?
 
-Colorify is dependency-free, yet offers access to all popular palettes and color functionality described above! 
+Colorify is dependency-free, yet offers access to all popular palettes and color functionality described above!
 
 If you are, like me, tired of errors complaining *you need more colors than your palette contains*? No problem!
-Colorify generates maximally different colors alongside custom palettes based on how many colors are requested.  
+Colorify generates maximally different colors alongside custom palettes based on how many colors are requested.
 
-Colorify enables effortless palette/color modification, based on the intuitive RGB and HSL color spaces. 
+Colorify enables effortless palette/color modification, based on the intuitive RGB and HSL color spaces.
 
-## How coloRify works 
+## How coloRify works
 
 See the examples below for the following functionality:
 
-* colorify(): the main function offers call parameters for most-in-one color/palette creation and modification tools, the other functions are in support of this, as will be shown in the examples and documentation below. 
+* colorify(): the main function offers call parameters for most-in-one color/palette creation and modification tools, the other functions are in support of this, as will be shown in the examples and documentation below.
 
-  * colorify_pal(): colorify() wrapper to return a color palette generator function  
+  * colorify_pal(): colorify() wrapper to return a color palette generator function
 
-* display_palettes(): view coloRify palettes that are used with colorify(colors = ...)  
+* display_palettes(): view coloRify palettes that are used with colorify(colors = ...)
 
 * ggplot2 bindings: scale_fill_colorify() & scale_color_colorify
 
@@ -74,12 +73,12 @@ See the examples below for the following functionality:
 
 To run coloRify, simply install the package from CRAN...
 ```{r install_CRAN, eval=FALSE, message=FALSE, warning=FALSE}
-install.packages('colorify')
+install.packages("colorify")
 ```
 
 ...or the development version from GitHub
 ```{r install_GitHub, eval=FALSE, message=FALSE, warning=FALSE}
-pak::pkg_install('colorify', dependencies = TRUE, upgrade = TRUE)
+pak::pkg_install("colorify", dependencies = TRUE, upgrade = TRUE)
 ```
 
 Then load the library.
@@ -87,14 +86,14 @@ Then load the library.
 library(colorify)
 ```
 
-Note that coloRify uses hexcolors (e.g.: '#FF0000FF') and includes base R colors (e.g.: 'red') from grDevices:
+Note that coloRify uses hexcolors (e.g.: "#FF0000FF") and includes base R colors (e.g.: "red") from grDevices:
 ```{r base_colors, eval=FALSE, message=FALSE, warning=FALSE}
 grDevices::colors()
 ```
 
 ## colorify()
 ### basic
-A basic call with just n(=10) colors requested. n takes an integer > 0. 
+A basic call with just n(=10) colors requested. n takes an integer > 0.
 ```{r colorify_basic, eval=TRUE, message=FALSE, warning=FALSE}
 colorify(n = 10, plot = TRUE)
 ```
@@ -109,26 +108,26 @@ c <- colorify(10, plot = TRUE, seed = 1337)
 
 ### custom colors
 
-You can give custom colors and generate the rest, *always* have enough colors for plotting calls! 
+You can give custom colors and generate the rest, *always* have enough colors for plotting calls!
 ```{r colorify_custom_colors, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("red", "white", "blue"), n = 5, plot = TRUE)
 ```
 
 ### naming
 
-Set names to the output hexcolor vector. colors_names takes a character vector of names the length of the amount of requested colors. 
+Set names to the output hexcolor vector. colors_names takes a character vector of names the length of the amount of requested colors.
 ```{r colorify_named_colors, eval=TRUE, message=FALSE, warning=FALSE}
-c <- colorify(colors = c("red", "white", "blue"), n = 5, colors_names = paste0('name', rep(1:5)), plot = TRUE)
+c <- colorify(colors = c("red", "white", "blue"), n = 5, colors_names = paste0("name", rep(1:5)), plot = TRUE)
 ```
 
 ### ordering
 
-Order the hexcolor output. Integer given as starting point for ordering, may be negative. 
+Order the hexcolor output. Integer given as starting point for ordering, may be negative.
 ```{r colorify_order_colors, eval=TRUE, message=FALSE, warning=FALSE}
 # set integer for the ordering starting position
 c <- colorify(colors = c("red", "white", "blue"), n = 5, order = 2, plot = TRUE)
 c <- colorify(colors = c("red", "white", "blue"), n = 5, order = 3, plot = TRUE)
-# negative integer inverses the order 
+# negative integer inverses the order
 c <- colorify(colors = c("red", "white", "blue"), n = 5, order = -1, plot = TRUE)
 ```
 
@@ -141,12 +140,12 @@ c <- colorify(colors = c("red", "white", "blue"), n = 5, alpha = .25, plot = TRU
 
 ### custom palettes
 
-You can supply an available palette in colors, that will be expanded up to requested n. 
+You can supply an available palette in colors, that will be expanded up to requested n.
 ```{r colorify_available_palette, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("Okabe-Ito"), plot = TRUE)
 # note the 10th color is generated
 c <- colorify(colors = c("Okabe-Ito"), plot = TRUE, n = 10)
-# note that blue and yellow are cut, as only 10 colors are requested. 
+# note that blue and yellow are cut, as only 10 colors are requested.
 c <- colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = TRUE, n = 10)
 ```
 
@@ -160,75 +159,75 @@ g2 <- colorify(colors = c("pastel2"), nn = 100, plot = TRUE)
 
 ### plotting
 
-Plot options, default is circular output, plot = include 'i' for image and 'l' to plot color index as labels. 
+Plot options, default is circular output, plot = include 'i' for image and 'l' to plot color index as labels.
 ```{r colorify_plotting, eval=TRUE, message=FALSE, warning=FALSE}
-g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = 'l')
-g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = 'i')
-g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = 'il')
+g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = "l")
+g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = "i")
+g1 <- colorify(colors = c("orange", "red", "white", "blue", "orange"), nn = 15, plot = "il")
 ```
 
 ### values and factors
 
-Values and factors, let's say you want your palette to be more or less RGB (red, green, blue)/HSL (hue, saturation, lightness), you can simply tweak their specific channels! 
-Values are intuitively ranged between [0-100] (instead of 0-255). Factors are multiplicative. 
+Values and factors, let's say you want your palette to be more or less RGB (red, green, blue)/HSL (hue, saturation, lightness), you can simply tweak their specific channels!
+Values are intuitively ranged between [0-100] (instead of 0-255). Factors are multiplicative.
 
 The order in which values and factors are called matters, play around with combinations to obtain your ideal custom palettes.
 
-Note that a gradient is made from the 'n' parameter here, as some palettes are actually called as functions internally. 
+Note that a gradient is made from the 'n' parameter here, as some palettes are actually called as functions internally.
 
 ```{r colorify_values_and_factors, eval=TRUE, message=FALSE, warning=FALSE}
-g3 <- colorify(100, colors = c("viridis"), plot = T)
-# r = red, f = factor: rf = 2 to multiply all red values 
-g4 <- colorify(100, colors = c("viridis"), rf = 2, plot = T)
+g3 <- colorify(100, colors = c("viridis"), plot = TRUE)
+# r = red, f = factor: rf = 2 to multiply all red values
+g4 <- colorify(100, colors = c("viridis"), rf = 2, plot = TRUE)
 # v = value: rv = 50 to increase all red values by 50, on a scale between 0-100
-g5 <- colorify(100, colors = c("viridis"), rv = 50, plot = T)
+g5 <- colorify(100, colors = c("viridis"), rv = 50, plot = TRUE)
 # first, multiply red values by 2, then increase red values by 50
-g6 <- colorify(100, colors = c("viridis"), rf = 2, rv = 50, plot = T)
+g6 <- colorify(100, colors = c("viridis"), rf = 2, rv = 50, plot = TRUE)
 # first, increase red values by 50, then multiply red values by 2
-g7 <- colorify(100, colors = c("viridis"), rv = 50, rf = 2, plot = T)
+g7 <- colorify(100, colors = c("viridis"), rv = 50, rf = 2, plot = TRUE)
 # float factor decrease values by multiplication
-g8 <- colorify(100, colors = c("viridis"), bf = .5, plot = T)
-# negative values work to decrease values 
-g9 <- colorify(100, colors = c("viridis"), bv = -100, gv = -50, plot = T)
+g8 <- colorify(100, colors = c("viridis"), bf = .5, plot = TRUE)
+# negative values work to decrease values
+g9 <- colorify(100, colors = c("viridis"), bv = -100, gv = -50, plot = TRUE)
 ```
 
 ### minimum and maximum values
 
 When value and factor adjustments are made, the .min and .max parameters are used to set minimum and maximum RGB/HSL values.
 ```{r colorify_min_and_max, eval=TRUE, message=FALSE, warning=FALSE}
-g3 <- colorify(100, colors = c("viridis"), plot = T)
-g8 <- colorify(100, colors = c("viridis"), bf = .5, plot = T)
+g3 <- colorify(100, colors = c("viridis"), plot = TRUE)
+g8 <- colorify(100, colors = c("viridis"), bf = .5, plot = TRUE)
 # same factor decrease, yet limited by minimum value
-g10 <- colorify(100, colors = c("viridis"), bf = .5, bmin = 40, plot = T)
-# need factor/value change to use min/max value 
-g11 <- colorify(100, colors = c("viridis"), bf = 1, bmax = 40, plot = T)
+g10 <- colorify(100, colors = c("viridis"), bf = .5, bmin = 40, plot = TRUE)
+# need factor/value change to use min/max value
+g11 <- colorify(100, colors = c("viridis"), bf = 1, bmax = 40, plot = TRUE)
 # can use them in combination
-g12 <- colorify(100, colors = c("viridis"), bf = 1, bmin = 40, bmax = 40,  plot = T)
+g12 <- colorify(100, colors = c("viridis"), bf = 1, bmin = 40, bmax = 40,  plot = TRUE)
 ```
 
 ### locking
 
-The colors_lock can be used by locking specific colors by numerical index, starting from 1. 
-colors_lock can also be used by patterning, as long as the nn % length of the boolean character == 0. 
-colors_lock can be inversed by putting a ! in front of the given vector. 
+The colors_lock can be used by locking specific colors by numerical index, starting from 1.
+colors_lock can also be used by patterning, as long as the nn % length of the boolean character == 0.
+colors_lock can be inversed by putting a ! in front of the given vector.
 ```{r colorify_color_locking, eval=TRUE, message=FALSE, warning=FALSE}
 c <- colorify(colors = c("pastel2"), nn = 30, plot = TRUE)
 # lock by index
-c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(4,5,6, 10,11,12), lf = .5, plot = T)
+c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(4, 5, 6, 10, 11, 12), lf = 0.5, plot = TRUE)
 # inverse lock by index
-c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = -c(4:12), lf = .5, plot = T)
+c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = -c(4:12), lf = 0.5, plot = TRUE)
 # lock by patterns
-c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(TRUE, FALSE), lf = .5, plot = T)
-c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(TRUE, FALSE, FALSE), lf = .5, plot = T)
+c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(TRUE, FALSE), lf = 0.5, plot = TRUE)
+c <- colorify(colors = c("pastel2"), nn = 30, colors_lock = c(TRUE, FALSE, FALSE), lf = 0.5, plot = TRUE)
 ```
 
 ### mapping
 
-colors_map takes a vector of values matching the vector of (generated) colors, returning a color_map function which can then be used to generate colors based on supplied values to it. 
+colors_map takes a vector of values matching the vector of (generated) colors, returning a color_map function which can then be used to generate colors based on supplied values to it.
 ```{r colorify_paired_gradients, eval=TRUE, message=FALSE, warning=FALSE}
-color_map <- colorify(colors = c('red', 'white', 'blue'), colors_map = c(0, 500, 1000))
+color_map <- colorify(colors = c("red", "white", "blue"), colors_map = c(0, 500, 1000))
 # note the map is then given values to map back to the given color ranges from colors_map
-m1 <- colorify(colors = color_map(0:1000), plot = T)
+m1 <- colorify(colors = color_map(0:1000), plot = TRUE)
 ```
 
 ## display_palettes()
@@ -242,7 +241,7 @@ display_palettes()
 
 ### n palettes
 
-The n parameter here is used to show the amount of colors per palette. 
+The n parameter here is used to show the amount of colors per palette.
 
 ```{r display_basic_n, eval=TRUE, message=FALSE, warning=FALSE}
 p1 <- display_palettes(10)
@@ -250,22 +249,22 @@ p1 <- display_palettes(10)
 p2 <- display_palettes(100)
 ```
 
-### palettes by index 
+### palettes by index
 
-The i_palettes parameter can also be passed numeric integers to get a more clear palette view. 
+The i_palettes parameter can also be passed numeric integers to get a more clear palette view.
 ```{r display_zoomed_view, eval=TRUE, message=FALSE, warning=FALSE}
 # display palettes by index
 display_palettes(i_palettes = 50:75)
-display_palettes(i_palettes = c(1,5,10,20,40,100,119))
+display_palettes(i_palettes = c(1, 5, 10, 20, 40, 100, 119))
 ```
 
 ### popular palettes
 
-Popular palettes from commonly used color packages are available. 
+Popular palettes from commonly used color packages are available.
 ```{r display_common, eval=TRUE, message=FALSE, warning=FALSE}
-display_palettes(10, 'rcolorbrewer')
-display_palettes(10, 'viridis')
-display_palettes(10, 'rainbow') # grDevices palettes 
+display_palettes(10, "rcolorbrewer")
+display_palettes(10, "viridis")
+display_palettes(10, "rainbow") # grDevices palettes
 ```
 
 ### bordered palettes
@@ -280,7 +279,7 @@ display_palettes(n = 10, i_palettes = 1:10, border = TRUE)
 These functions are bindings similar to the ggplot2 scale_* functions, to use them ggplot2 has to be installed and loaded.
 
 ```{r scale_colorify_ggplot2_setup, eval=FALSE, message=FALSE, warning=FALSE}
-install.packages('ggplot2')
+install.packages("ggplot2")
 library(ggplot2)
 ```
 
@@ -292,9 +291,9 @@ library(ggplot2)
 dsub <- subset(ggplot2::diamonds, x > 5 & x < 6 & y > 5 & y < 6)
 dsub$diff <- with(dsub, sqrt(abs(x - y)) * sign(x - y))
 
-ggplot2::ggplot(dsub, ggplot2::aes(x, y, colour = diff)) + 
-  ggplot2::geom_point() + 
-  scale_color_colorify(n = 4, colors = 'viridis') + 
+ggplot2::ggplot(dsub, ggplot2::aes(x, y, colour = diff)) +
+  ggplot2::geom_point() +
+  scale_color_colorify(n = 4, colors = "viridis") +
   ggplot2::theme_bw()
 ```
 
@@ -304,8 +303,8 @@ ggplot2::ggplot(dsub, ggplot2::aes(x, y, colour = diff)) +
 p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg))
 
 p + ggplot2::geom_point(size = 4, ggplot2::aes(colour = factor(cyl))) +
-  ggplot2::theme_bw() + 
-  scale_color_colorify(discrete = TRUE, colors = c('red', 'blue', 'yellow'))
+  ggplot2::theme_bw() +
+  scale_color_colorify(discrete = TRUE, colors = c("red", "blue", "yellow"))
 ```
 
 ###  scale_fill_colorify()
@@ -317,7 +316,7 @@ dat <- data.frame(x = rnorm(10000), y = rnorm(10000))
 
 ggplot2::ggplot(dat, ggplot2::aes(x = x, y = y)) +
   ggplot2::geom_hex() + ggplot2::coord_fixed() +
-  scale_fill_colorify(colors = 'viridis', n = 4) + ggplot2::theme_bw()
+  scale_fill_colorify(colors = "viridis", n = 4) + ggplot2::theme_bw()
 ```
 
 #### discrete
@@ -326,34 +325,34 @@ ggplot2::ggplot(dat, ggplot2::aes(x = x, y = y)) +
 df <- data.frame(category = c("A", "B", "C", "D"), value = c(10, 23, 15, 8))
 
 ggplot2::ggplot(df, ggplot2::aes(x = category, y = value, fill = category)) +
-  ggplot2::geom_bar(stat = "identity") + 
-  scale_fill_colorify(discrete = TRUE, colors = 'viridis')
+  ggplot2::geom_bar(stat = "identity") +
+  scale_fill_colorify(discrete = TRUE, colors = "viridis")
 
 ```
 
 ## colortistry()
 
-My colorful monstrosity I contribute to the #Rtistry community! I heartily welcome creative contributions using coloRify <3 
+My colorful monstrosity I contribute to the #Rtistry community! I heartily welcome creative contributions using coloRify <3
 
 ```{r colortistry, eval=TRUE, message=FALSE, warning=FALSE}
 colors_list <- list()
 for (i in seq(100)) {
-  colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(T,F,F,F,F), 20), hf = 25/i, lf = i/20)
-  if (i %% 3) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(F,F,T,F,F), 20), hf = 30/i, lf = i/20)
-  if (i %% 4) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(F,F,F,T,F), 20), hf = 50/i, lf = i/40)
-  if (i %% 5) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(F,T,F,F,F), 20), hf = 50/i, sf = i/50)
+  colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(TRUE, FALSE, FALSE, FALSE, FALSE), 20), hf = 25 / i, lf = i / 20)
+  if (i %% 3) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(FALSE, FALSE, TRUE, FALSE, FALSE), 20), hf = 30 / i, lf = i / 20)
+  if (i %% 4) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(FALSE, FALSE, FALSE, TRUE, FALSE), 20), hf = 50 / i, lf = i / 40)
+  if (i %% 5) colors_list[[i]] <- colorify(n = 100, colors = "rainbow", colors_lock = rep(c(FALSE, TRUE, FALSE, FALSE, FALSE), 20), hf = 50 / i, sf = i / 50)
 }
 colortistry(colors_list)
 # and with borders
-colortistry(colors_list, border_color = 'black')
+colortistry(colors_list, border_color = "black")
 ```
 
 
 # Information
 
-A thank you for your time and effort in using coloRify, I hope it may aid you in *COOLORing* your visualizations! 
+A thank you for your time and effort in using coloRify, I hope it may aid you in *COOLORing* your visualizations!
 
-## Contact 
+## Contact
 
 Colorify was developed by Maurits Unkel at the Erasmus Medical Center in the department of Psychiatry.
 Source code is available through GitHub: https://github.com/mauritsunkel/colorify
@@ -371,7 +370,7 @@ For issues and contributions, please find the coloRify Github page: https://gith
 
 Q: How can I easily test my coloRify palettes on actual visualizations?
 
-* A: I advise you to use colorspace::demoplot(colorify(5), type = "heatmap"), switching up type for specific plot types and replacing the colorify() call with your own. 
+* A: I advise you to use colorspace::demoplot(colorify(5), type = "heatmap"), switching up type for specific plot types and replacing the colorify() call with your own.
 
 
 ## Session info

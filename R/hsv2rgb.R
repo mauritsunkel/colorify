@@ -1,16 +1,16 @@
 #' hsv to rgb color space
 #'
-#' @param h numeric, vector of ‘hue’ values
-#' @param s numeric, vector of ‘saturation’ values
-#' @param v numeric, vector of ‘value’ (lightness) values
+#' @param h numeric, vector of â€˜hueâ€™ values
+#' @param s numeric, vector of â€˜saturationâ€™ values
+#' @param v numeric, vector of â€˜valueâ€™ (lightness) values
 #' @param maxColorValue numeric, default: 100, gives the maximum hsv color values range. Default corresponds to the typical 0:1 HSV coding as in `rgb2hsv()`
 #'
 #' @return unnamed dataframe with rgb colors
-#' 
+#'
 #' @description Expects hsv color values to be in range (0-100])
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' colors <- colorify(5)
 #' rgb <- grDevices::col2rgb(colors)
@@ -26,7 +26,7 @@ hsv2rgb <- function(h, s, v, maxColorValue = 100) {
   x <- c * (1 - abs((h / 60) %% 2 - 1)) # position color on rgb spectrum
   m <- v - c  # shift brightness by chroma
   ## initialize rgb channels
-  r <- g <- b <- numeric(length(h))  
+  r <- g <- b <- numeric(length(h))
   ## hue degrees sector index
   i1 <- h >= 0 & h < 60
   i2 <- h >= 60 & h < 120
@@ -35,16 +35,22 @@ hsv2rgb <- function(h, s, v, maxColorValue = 100) {
   i5 <- h >= 240 & h < 300
   i6 <- h >= 300 & h <= 360
   ## assigns values by index
-  r[i1] <- c[i1]; g[i1] <- x[i1]
-  r[i2] <- x[i2]; g[i2] <- c[i2]
-  g[i3] <- c[i3]; b[i3] <- x[i3]
-  g[i4] <- x[i4]; b[i4] <- c[i4]
-  r[i5] <- x[i5]; b[i5] <- c[i5]
-  r[i6] <- c[i6]; b[i6] <- x[i6]
+  r[i1] <- c[i1]
+  g[i1] <- x[i1]
+  r[i2] <- x[i2]
+  g[i2] <- c[i2]
+  g[i3] <- c[i3]
+  b[i3] <- x[i3]
+  g[i4] <- x[i4]
+  b[i4] <- c[i4]
+  r[i5] <- x[i5]
+  b[i5] <- c[i5]
+  r[i6] <- c[i6]
+  b[i6] <- x[i6]
   ## shift values to equate brightest
   r <- (r + m)
   g <- (g + m)
   b <- (b + m)
-  
-  return(rbind(r, g, b) * maxColorValue)
+
+  rbind(r, g, b) * maxColorValue
 }

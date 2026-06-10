@@ -4,7 +4,7 @@
 #' @param alpha numeric in range (0-1), default: NULL to use full opacity or given opacity (AA) in hex (#RRGGBBAA)
 #'
 #' @returns colors in rgba format
-#' 
+#'
 #' @export
 #'
 #' @examples
@@ -17,7 +17,7 @@
 hex2rgba <- function(hex, alpha = NULL) {
   stopifnot(
     is.character(hex),
-    is.null(alpha) | is.numeric(alpha) && alpha >= 0 && alpha <= 1
+    is.null(alpha) || is.numeric(alpha) && alpha >= 0 && alpha <= 1
   )
   ## set rgb
   hex <- gsub("#", "", hex) # strip #
@@ -27,7 +27,7 @@ hex2rgba <- function(hex, alpha = NULL) {
   ## set alpha
   if (is.null(alpha)) {
     alpha <- 1
-    if (nchar(hex)[1] == 8) alpha <- as.numeric(paste0('0x', substr(hex, 7, 8))) / 255
+    if (nchar(hex)[1] == 8) alpha <- as.numeric(paste0("0x", substr(hex, 7, 8))) / 255
   }
-  return(paste0("rgba(", r, ",", g, ",", b, ",", alpha, ")")) # convert to RGBA format
+  paste0("rgba(", r, ",", g, ",", b, ",", alpha, ")") # convert to RGBA format
 }
