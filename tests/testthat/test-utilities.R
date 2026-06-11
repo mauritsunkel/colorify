@@ -38,9 +38,9 @@ test_that("hex2rgba() errors when alpha is out of range", {
 
 test_that("hsv2rgb() converts pure red (h=0, s=100, v=100) correctly", {
   result <- hsv2rgb(0, 100, 100)
-  expect_equal(result["r", 1], 100, tolerance = 1e-6)
-  expect_equal(result["g", 1], 0,   tolerance = 1e-6)
-  expect_equal(result["b", 1], 0,   tolerance = 1e-6)
+  expect_equal(result["r", 1], 100, tolerance = 1e-6, ignore_attr = TRUE)
+  expect_equal(result["g", 1], 0,   tolerance = 1e-6, ignore_attr = TRUE)
+  expect_equal(result["b", 1], 0,   tolerance = 1e-6, ignore_attr = TRUE)
 })
 
 test_that("hsv2rgb() converts pure green (h~33.3, s=100, v=100) correctly", {
@@ -66,21 +66,21 @@ test_that("hsv2rgb() returns matrix with r, g, b row names", {
 test_that("hsv2rgb() scales output by maxColorValue", {
   result_100 <- hsv2rgb(0, 100, 100, maxColorValue = 100)
   result_255 <- hsv2rgb(0, 100, 100, maxColorValue = 255)
-  expect_equal(result_255["r", 1] / result_100["r", 1], 255 / 100, tolerance = 1e-6)
+  expect_equal(result_255["r", 1] / result_100["r", 1], 255 / 100, tolerance = 1e-6, ignore_attr = TRUE)
 })
 
 test_that("hsv2rgb() returns black when v = 0", {
   result <- hsv2rgb(0, 100, 0)
-  expect_equal(result["r", 1], 0, tolerance = 1e-6)
-  expect_equal(result["g", 1], 0, tolerance = 1e-6)
-  expect_equal(result["b", 1], 0, tolerance = 1e-6)
+  expect_equal(result["r", 1], 0, tolerance = 1e-6, ignore_attr = TRUE)
+  expect_equal(result["g", 1], 0, tolerance = 1e-6, ignore_attr = TRUE)
+  expect_equal(result["b", 1], 0, tolerance = 1e-6, ignore_attr = TRUE)
 })
 
 test_that("hsv2rgb() returns white when s = 0 and v = 100", {
   result <- hsv2rgb(0, 0, 100)
-  expect_equal(result["r", 1], 100, tolerance = 1e-6)
-  expect_equal(result["g", 1], 100, tolerance = 1e-6)
-  expect_equal(result["b", 1], 100, tolerance = 1e-6)
+  expect_equal(result["r", 1], 100, tolerance = 1e-6, ignore_attr = TRUE)
+  expect_equal(result["g", 1], 100, tolerance = 1e-6, ignore_attr = TRUE)
+  expect_equal(result["b", 1], 100, tolerance = 1e-6, ignore_attr = TRUE)
 })
 
 test_that("hsv2rgb() handles vector input", {

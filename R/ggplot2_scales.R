@@ -46,7 +46,7 @@ scale_color_colorify <- function(
   }
 
   if (discrete) {
-    ggplot2::discrete_scale(aesthetics, "colorify", colorify_pal(
+    ggplot2::discrete_scale(aesthetics, palette = colorify_pal(
       colors = colors, colors_lock = colors_lock,
       hf = hf, sf = sf, lf = lf, rf = rf, gf = gf, bf = bf,
       hv = hv, sv = sv, lv = lv, rv = rv, gv = gv, bv = bv,
@@ -118,7 +118,7 @@ scale_fill_colorify <- function(
   }
 
   if (discrete) {
-    ggplot2::discrete_scale(aesthetics, "colorify", colorify_pal(
+    ggplot2::discrete_scale(aesthetics, palette = colorify_pal(
       colors = colors, colors_lock = colors_lock,
       hf = hf, sf = sf, lf = lf, rf = rf, gf = gf, bf = bf,
       hv = hv, sv = sv, lv = lv, rv = rv, gv = gv, bv = bv,
