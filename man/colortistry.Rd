@@ -21,28 +21,28 @@ Colortistry plot from Colorified palettes
 colors_list <- list()
 for (i in seq(100)) {
   colors_list[[i]] <- colorify(
-  n = 100, 
-  colors = "rainbow", 
-  colors_lock = rep(c(TRUE,FALSE,FALSE,FALSE,FALSE), 20), 
-  hf = 25/i, 
+  n = 100,
+  colors = "rainbow",
+  colors_lock = rep(c(TRUE,FALSE,FALSE,FALSE,FALSE), 20),
+  hf = 25/i,
   lf = i/20)
   if (i \%\% 3) colors_list[[i]] <- colorify(
-  n = 100, 
-  colors = "rainbow", 
-  colors_lock = rep(c(FALSE,FALSE,TRUE,FALSE,FALSE), 20), 
-  hf = 30/i, 
+  n = 100,
+  colors = "rainbow",
+  colors_lock = rep(c(FALSE,FALSE,TRUE,FALSE,FALSE), 20),
+  hf = 30/i,
   lf = i/20)
   if (i \%\% 4) colors_list[[i]] <- colorify(
-  n = 100, 
+  n = 100,
   colors = "rainbow",
-  colors_lock = rep(c(FALSE,FALSE,FALSE,TRUE,FALSE), 20), 
-  hf = 50/i, 
+  colors_lock = rep(c(FALSE,FALSE,FALSE,TRUE,FALSE), 20),
+  hf = 50/i,
   lf = i/40)
   if (i \%\% 5) colors_list[[i]] <- colorify(
-  n = 100, 
-  colors = "rainbow", 
-  colors_lock = rep(c(FALSE,TRUE,FALSE,FALSE,FALSE), 20), 
-  hf = 50/i, 
+  n = 100,
+  colors = "rainbow",
+  colors_lock = rep(c(FALSE,TRUE,FALSE,FALSE,FALSE), 20),
+  hf = 50/i,
   sf = i/50)
 }
 colortistry(colors_list)

@@ -7,11 +7,11 @@
 hsv2rgb(h, s, v, maxColorValue = 100)
 }
 \arguments{
-\item{h}{numeric, vector of ‘hue’ values}
+\item{h}{numeric, vector of â€˜hueâ€™ values}
 
-\item{s}{numeric, vector of ‘saturation’ values}
+\item{s}{numeric, vector of â€˜saturationâ€™ values}
 
-\item{v}{numeric, vector of ‘value’ (lightness) values}
+\item{v}{numeric, vector of â€˜valueâ€™ (lightness) values}
 
 \item{maxColorValue}{numeric, default: 100, gives the maximum hsv color values range. Default corresponds to the typical 0:1 HSV coding as in \code{rgb2hsv()}}
 }

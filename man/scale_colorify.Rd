@@ -159,7 +159,7 @@ sets colors in ggplot2 plotted object, see examples
 for rest and default coloRify parameters see \code{\link{colorify}}
 }
 \examples{
-## viridis ggplot2 examples Colorified 
+## viridis ggplot2 examples Colorified
 
 ## non-discrete
 if (requireNamespace("ggplot2", quietly = TRUE)) {

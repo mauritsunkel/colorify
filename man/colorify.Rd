@@ -202,12 +202,12 @@ colorify(colors = colorify(nn = Inf, colors = c('red', 'white'))(10), plot = TRU
 colorify(colors = colorify(nn = Inf, colors = c('red', 'white', 'blue'))(10), plot = TRUE)
 colorify(colors = colorify(colors = 'viridis', nn = Inf)(50), plot = TRUE)
 
-## palette selected by name in colors[1], 
-## can add colors to selected palette, 
-## if n < length, remove colors , if greater generate 
+## palette selected by name in colors[1],
+## can add colors to selected palette,
+## if n < length, remove colors , if greater generate
 colorify(colors = c("Okabe-Ito", "red", "blue", "yellow"), plot = TRUE, n = 10)
 
-## no adjustments to locked indices 
+## no adjustments to locked indices
 colorify(colors = "Okabe-Ito", colors_lock = c(FALSE,FALSE,TRUE,TRUE), plot = TRUE, rv = -300)
 colorify(colors = "Okabe-Ito", colors_lock = c(FALSE,FALSE,TRUE,TRUE), plot = TRUE, rv = 300)
 
@@ -234,33 +234,33 @@ colorify(10, plot = TRUE, order = -3) # negative shift
 colorify(10, plot = TRUE, order = 12) # > n
 
 ## call order
-# Note that parameter call order within the function call matters, 
-# see examples and vignette: 
-# rv = 20 then rf = 1.2 can be different then 
+# Note that parameter call order within the function call matters,
+# see examples and vignette:
+# rv = 20 then rf = 1.2 can be different then
 # rf = 1.2 then rv = 20
 
 # TODO add example to vignette
 colors_map <- c(-5, 0, 10)
 colors <- c("red", "white", "blue")
-if (requireNamespace('circlize')) 
-color_bar <- 
+if (requireNamespace('circlize'))
+color_bar <-
   circlize::colorRamp2(colors_map, colors)(seq(-5, 10, length.out = 100))
 color_bar <- colorify(
-  colors = colors, 
-  colors_map = colors_map, 
+  colors = colors,
+  colors_map = colors_map,
   space = "Lab")(seq(-5, 10, length.out = 100)) # circlize::colorRamp2 style
-graphics::image(1:100, 1, as.matrix(1:100), 
-  col = color_bar, 
-  axes = FALSE, 
+graphics::image(1:100, 1, as.matrix(1:100),
+  col = color_bar,
+  axes = FALSE,
   main = "Color Mapping using circlize::colorRamp2")
 ## named base R/hexcode
-colorifunction <- colorify_pal(colors = c('red', '#FFFFFF', 'blue'))
+colorifunction <- colorify_pal(colors = c("red", "#FFFFFF", "blue"))
 colorify(colors = colorifunction(10), plot = TRUE)
 ## empty for random
 colorifunction <- colorify_pal()
 colorify(colors = colorifunction(10), plot = TRUE)
 ## named colors and palette(s)
-colorifunction <- colorify_pal(colors = c('green', 'viridis', 'rainbow', 'yellow'), plot = TRUE)
+colorifunction <- colorify_pal(colors = c("green", "viridis", "rainbow", "yellow"), plot = TRUE)
 colorify(colors = colorifunction(100), plot = TRUE)
 }
 \seealso{
