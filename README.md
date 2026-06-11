@@ -13,13 +13,12 @@ status](https://www.r-pkg.org/badges/version/colorify)](https://CRAN.R-project.o
 [![license](https://img.shields.io/github/license/mauritsunkel/colorify)](https://opensource.org/license/apache-2-0)
 ![repo size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
 -->
-![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
-[![pkgdown
-site](https://img.shields.io/badge/docs-pkgdown-green.svg)](https://mauritsunkel.github.io/colorify/)
 [![R-CMD-check](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml)
-![downloads](https://cranlogs.r-pkg.org/badges/grand-total/colorify)
 [![codecov](https://codecov.io/gh/mauritsunkel/colorify/graph/badge.svg)](https://codecov.io/gh/mauritsunkel/colorify)
 [![lint](https://github.com/mauritsunkel/colorify/actions/workflows/lint.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/lint.yaml)
+![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
+![downloads](https://cranlogs.r-pkg.org/badges/grand-total/colorify)
+[![pkgdown site](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://mauritsunkel.github.io/colorify/)
 <!-- badges: end -->
 
 
