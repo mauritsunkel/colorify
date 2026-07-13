@@ -14,7 +14,7 @@ status](https://www.r-pkg.org/badges/version/colorify)](https://CRAN.R-project.o
 ![repo size](https://img.shields.io/github/repo-size/mauritsunkel/colorify)
 -->
 [![R-CMD-check](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/mauritsunkel/colorify/graph/badge.svg)](https://codecov.io/gh/mauritsunkel/colorify)
+[![codecov](https://app.codecov.io/gh/mauritsunkel/colorify/graph/badge.svg)](https://codecov.io/gh/mauritsunkel/colorify)
 [![lint](https://github.com/mauritsunkel/colorify/actions/workflows/lint.yaml/badge.svg)](https://github.com/mauritsunkel/colorify/actions/workflows/lint.yaml)
 ![version](https://img.shields.io/github/r-package/v/mauritsunkel/colorify)
 ![downloads](https://cranlogs.r-pkg.org/badges/grand-total/colorify)
